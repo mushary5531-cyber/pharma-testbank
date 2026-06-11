@@ -1,6 +1,8 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 type ExamType = "mid1" | "mid2" | "final";
+type Filter = "all" | "mid1" | "mid2" | "final";
+type Screen = "home" | "quiz" | "score" | "review";
 
 type Question = {
   id: string;
@@ -389,8 +391,12 @@ const FINAL_QUESTIONS: Question[] = [
 ];
 const ALL_Q = [...MID1_QUESTIONS, ...MID2_QUESTIONS, ...FINAL_QUESTIONS];
 
-type Screen = "home" | "quiz" | "score" | "review";
-type Filter = "all" | "mid1" | "mid2" | "final";
+/* ── Helpers ── */
+
+/** Remove parenthetical hints from option display text */
+function stripHint(s: string): string {
+  return s.replace(/\s*\([^)]+\)\s*/g, " ").replace(/\s+/g, " ").trim();
+}
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -401,48 +407,132 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-const LABELS: Record<Filter, { en: string; ar: string }> = {
-  all:   { en: "All Questions", ar: "جميع الأسئلة" },
-  mid1:  { en: "Midterm 1",     ar: "الاختبار الأول" },
-  mid2:  { en: "Midterm 2",     ar: "الاختبار الثاني" },
-  final: { en: "Final",         ar: "الاختبار النهائي" },
+function getPool(f: Filter): Question[] {
+  if (f === "all")   return ALL_Q;
+  if (f === "mid1")  return MID1_QUESTIONS;
+  if (f === "mid2")  return MID2_QUESTIONS;
+  return FINAL_QUESTIONS;
+}
+
+function getLectures(pool: Question[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const q of pool) {
+    if (!seen.has(q.lecture)) { seen.add(q.lecture); out.push(q.lecture); }
+  }
+  return out;
+}
+
+/* ── localStorage ── */
+const LS_SEEN = "pharma_seen_ids";
+const LS_HIST = "pharma_history";
+
+function loadSeen(): Set<string> {
+  try { return new Set(JSON.parse(localStorage.getItem(LS_SEEN) || "[]")); }
+  catch { return new Set(); }
+}
+function saveSeen(s: Set<string>) {
+  try { localStorage.setItem(LS_SEEN, JSON.stringify([...s])); } catch {}
+}
+
+type HistoryEntry = {
+  date: string; score: number; total: number; pct: number; label: string;
+};
+function loadHistory(): HistoryEntry[] {
+  try { return JSON.parse(localStorage.getItem(LS_HIST) || "[]"); } catch { return []; }
+}
+function saveHistory(h: HistoryEntry[]) {
+  try { localStorage.setItem(LS_HIST, JSON.stringify(h.slice(-100))); } catch {}
+}
+
+/* ── Constants ── */
+const SECTION_LABELS: Record<Filter, { en: string; ar: string }> = {
+  all:   { en: "All Questions", ar: "الكل" },
+  mid1:  { en: "Midterm 1",     ar: "ميد ١" },
+  mid2:  { en: "Midterm 2",     ar: "ميد ٢" },
+  final: { en: "Final",         ar: "فاينل" },
 };
 
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"] as const;
 
+/* ── App ── */
 export default function App() {
+  /* Screen */
   const [screen, setScreen] = useState<Screen>("home");
-  const [filter, setFilter] = useState<Filter>("all");
+
+  /* Home config */
+  const [filter, setFilter] = useState<Filter>("mid1");
+  const [selectedLectures, setSelectedLectures] = useState<Set<string>>(new Set());
+  const [questionCount, setQuestionCount] = useState(20);
+  const [hideSeen, setHideSeen] = useState(false);
+
+  /* Quiz state */
   const [questions, setQuestions] = useState<Question[]>([]);
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [answers, setAnswers] = useState<(number | null)[]>([]);
   const [reviewIndex, setReviewIndex] = useState(0);
+  const [activeFilter, setActiveFilter] = useState<Filter>("mid1");
 
-  function startQuiz(f: Filter) {
-    const pool =
-      f === "all"   ? ALL_Q :
-      f === "mid1"  ? MID1_QUESTIONS :
-      f === "mid2"  ? MID2_QUESTIONS :
-                      FINAL_QUESTIONS;
-    if (pool.length === 0) return;
-    const qs = shuffle(pool);
-    setFilter(f);
+  /* Persistent */
+  const [seenIds, setSeenIds] = useState<Set<string>>(loadSeen);
+
+  /* Derived */
+  const allLectures = useMemo(() => getLectures(getPool(filter)), [filter]);
+
+  // Reset lecture selection when section changes
+  useEffect(() => {
+    setSelectedLectures(new Set(getLectures(getPool(filter))));
+  }, [filter]);
+
+  const filteredPool = useMemo(() => {
+    if (selectedLectures.size === 0) return [];
+    const pool = getPool(filter);
+    if (selectedLectures.size >= allLectures.length) return pool;
+    return pool.filter(q => selectedLectures.has(q.lecture));
+  }, [filter, selectedLectures, allLectures]);
+
+  const unseenPool = useMemo(
+    () => filteredPool.filter(q => !seenIds.has(q.id)),
+    [filteredPool, seenIds]
+  );
+
+  const effectivePool = useMemo(
+    () => (hideSeen && unseenPool.length > 0 ? unseenPool : filteredPool),
+    [hideSeen, unseenPool, filteredPool]
+  );
+
+  const maxCount = Math.min(effectivePool.length, 100);
+  const safeCount = Math.min(questionCount, Math.max(1, maxCount));
+
+  /* Actions */
+  function toggleLecture(lec: string) {
+    setSelectedLectures(prev => {
+      const next = new Set(prev);
+      if (next.has(lec)) next.delete(lec); else next.add(lec);
+      return next;
+    });
+  }
+
+  function startQuiz() {
+    if (effectivePool.length === 0 || selectedLectures.size === 0) return;
+    const qs = shuffle(effectivePool).slice(0, safeCount);
     setQuestions(qs);
     setAnswers(new Array(qs.length).fill(null));
     setCurrent(0);
     setSelected(null);
+    setActiveFilter(filter);
+    const newSeen = new Set(seenIds);
+    qs.forEach(q => newSeen.add(q.id));
+    setSeenIds(newSeen);
+    saveSeen(newSeen);
     setScreen("quiz");
   }
 
   function handleSelect(idx: number) {
     if (selected !== null) return;
     setSelected(idx);
-    setAnswers(prev => {
-      const next = [...prev];
-      next[current] = idx;
-      return next;
-    });
+    setAnswers(prev => { const n = [...prev]; n[current] = idx; return n; });
   }
 
   function handleNext() {
@@ -450,7 +540,7 @@ export default function App() {
       setCurrent(c => c + 1);
       setSelected(answers[current + 1] ?? null);
     } else {
-      setScreen("score");
+      endQuiz();
     }
   }
 
@@ -461,50 +551,173 @@ export default function App() {
     }
   }
 
+  function endQuiz() {
+    const sc = answers.filter((a, i) => a === questions[i]?.answer).length;
+    const pct = Math.round(sc / questions.length * 100);
+    saveHistory([...loadHistory(), {
+      date: new Date().toLocaleDateString("en-GB"),
+      score: sc, total: questions.length, pct,
+      label: SECTION_LABELS[activeFilter].en,
+    }]);
+    setScreen("score");
+  }
+
   const wrongQuestions = useMemo(
     () => questions.filter((q, i) => answers[i] !== q.answer),
     [questions, answers]
   );
 
   const score = answers.filter((a, i) => a === questions[i]?.answer).length;
-  const pct = questions.length > 0 ? Math.round((score / questions.length) * 100) : 0;
+  const pct = questions.length > 0 ? Math.round(score / questions.length * 100) : 0;
 
-  const counts: Record<Filter, number> = {
-    all:   ALL_Q.length,
-    mid1:  MID1_QUESTIONS.length,
-    mid2:  MID2_QUESTIONS.length,
-    final: FINAL_QUESTIONS.length,
-  };
+  const lectureStats = useMemo(() => {
+    const map = new Map<string, { correct: number; total: number }>();
+    questions.forEach((q, i) => {
+      const s = map.get(q.lecture) ?? { correct: 0, total: 0 };
+      s.total++;
+      if (answers[i] === q.answer) s.correct++;
+      map.set(q.lecture, s);
+    });
+    return [...map.entries()].map(([lec, s]) => ({
+      lec, ...s, pct: Math.round(s.correct / s.total * 100)
+    }));
+  }, [questions, answers]);
 
   /* ── HOME ── */
   if (screen === "home") {
+    const allSelected = selectedLectures.size >= allLectures.length;
+    const canStart = effectivePool.length > 0 && selectedLectures.size > 0;
+
     return (
       <div style={S.page}>
         <div style={S.container}>
-          <div style={{ textAlign: "center", marginBottom: 40 }}>
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: 24 }}>
             <div style={S.badge}>Pharmacology — PH45</div>
             <h1 style={S.title}>Test Bank</h1>
             <p style={S.subtitle}>بنك الأسئلة</p>
           </div>
 
-          <div style={S.grid}>
-            {(["mid1", "mid2", "final", "all"] as Filter[]).map(f => (
-              <button
-                key={f}
-                style={{
-                  ...S.sectionBtn,
-                  opacity: counts[f] === 0 ? 0.45 : 1,
-                  cursor: counts[f] === 0 ? "not-allowed" : "pointer",
-                }}
-                onClick={() => startQuiz(f)}
-                disabled={counts[f] === 0}
-              >
-                <span style={S.btnAr}>{LABELS[f].ar}</span>
-                <span style={S.btnEn}>{LABELS[f].en}</span>
-                <span style={S.btnCount}>{counts[f]} questions</span>
-              </button>
-            ))}
+          {/* Section Tabs */}
+          <div style={S.card}>
+            <div style={S.sectionLabel}>القسم / Section</div>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              {(["mid1", "mid2", "final", "all"] as Filter[]).map(f => (
+                <button
+                  key={f}
+                  style={{ ...S.tabBtn, ...(filter === f ? S.tabBtnActive : {}) }}
+                  onClick={() => setFilter(f)}
+                >
+                  <span style={{ fontWeight: 700 }}>{SECTION_LABELS[f].ar}</span>
+                  <span style={{ fontSize: 11, color: filter === f ? "#93c5fd" : "#475569" }}>
+                    {getPool(f).length}q
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
+
+          {/* Lectures */}
+          <div style={S.card}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+              <div style={S.sectionLabel}>المحاضرات / Lectures</div>
+              <button
+                style={S.smallBtn}
+                onClick={() => setSelectedLectures(
+                  allSelected ? new Set() : new Set(allLectures)
+                )}
+              >
+                {allSelected ? "Deselect All" : "Select All"}
+              </button>
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 7, maxHeight: 210, overflowY: "auto", paddingBottom: 4 }}>
+              {allLectures.map(lec => {
+                const active = selectedLectures.has(lec);
+                return (
+                  <button
+                    key={lec}
+                    style={{ ...S.lecChip, ...(active ? S.lecChipActive : {}) }}
+                    onClick={() => toggleLecture(lec)}
+                  >
+                    {active ? "✓ " : ""}{lec}
+                  </button>
+                );
+              })}
+            </div>
+            {selectedLectures.size === 0 && (
+              <div style={{ color: "#f87171", fontSize: 12, marginTop: 8 }}>
+                ⚠️ اختر محاضرة واحدة على الأقل
+              </div>
+            )}
+          </div>
+
+          {/* Settings */}
+          <div style={S.card}>
+            <div style={S.sectionLabel}>الإعدادات / Settings</div>
+
+            {/* Slider */}
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 6 }}>
+                <span style={{ color: "#94a3b8", fontSize: 14 }}>عدد الأسئلة</span>
+                <span style={{ color: "#60a5fa", fontWeight: 800, fontSize: 22 }}>{safeCount}</span>
+              </div>
+              <input
+                type="range"
+                min={1}
+                max={maxCount || 1}
+                value={safeCount}
+                onChange={e => setQuestionCount(Number(e.target.value))}
+                style={{ width: "100%", accentColor: "#3b82f6", cursor: "pointer" }}
+                disabled={maxCount === 0}
+              />
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#475569", marginTop: 4 }}>
+                <span>1</span>
+                <span style={{ color: "#64748b" }}>
+                  {effectivePool.length} متاح
+                  {hideSeen && ` (${unseenPool.length} غير مشاهد)`}
+                </span>
+                <span>{maxCount || 0}</span>
+              </div>
+            </div>
+
+            {/* Hide seen toggle */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+              <div>
+                <div style={{ color: "#e2e8f0", fontSize: 14, marginBottom: 2 }}>إخفاء الأسئلة المشاهدة</div>
+                <div style={{ color: "#475569", fontSize: 12 }}>
+                  Skip questions already seen
+                  {seenIds.size > 0 && (
+                    <span style={{ color: "#64748b" }}> ({seenIds.size} seen · </span>
+                  )}
+                  {seenIds.size > 0 && (
+                    <button
+                      style={{ background: "none", border: "none", color: "#f87171", fontSize: 12, cursor: "pointer", padding: 0 }}
+                      onClick={() => { setSeenIds(new Set()); saveSeen(new Set()); }}
+                    >reset</button>
+                  )}
+                  {seenIds.size > 0 && <span style={{ color: "#64748b" }}>)</span>}
+                </div>
+              </div>
+              <div
+                style={{ ...S.toggle, ...(hideSeen ? S.toggleOn : {}) }}
+                onClick={() => setHideSeen(v => !v)}
+              >
+                <div style={{ ...S.toggleThumb, ...(hideSeen ? S.toggleThumbOn : {}) }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Start */}
+          <button
+            style={{ ...S.startBtn, opacity: canStart ? 1 : 0.4 }}
+            onClick={startQuiz}
+            disabled={!canStart}
+          >
+            <span style={{ fontSize: 19, fontWeight: 800 }}>ابدأ الاختبار</span>
+            <span style={{ fontSize: 13, color: "#bfdbfe" }}>
+              {safeCount} questions · {selectedLectures.size} lecture{selectedLectures.size !== 1 ? "s" : ""}
+            </span>
+          </button>
         </div>
       </div>
     );
@@ -518,28 +731,18 @@ export default function App() {
     return (
       <div style={S.page}>
         <div style={S.container}>
-          {/* Header */}
           <div style={S.quizHeader}>
             <button style={S.backBtn} onClick={() => setScreen("home")}>← Home</button>
-            <span style={S.sectionTag}>{LABELS[filter].en}</span>
+            <span style={S.sectionTag}>{SECTION_LABELS[activeFilter].en}</span>
           </div>
 
-          {/* Progress */}
           <div style={S.progressWrap}>
             <div style={S.progressBar}>
-              <div
-                style={{
-                  ...S.progressFill,
-                  width: `${((current + 1) / questions.length) * 100}%`,
-                }}
-              />
+              <div style={{ ...S.progressFill, width: `${((current + 1) / questions.length) * 100}%` }} />
             </div>
-            <span style={S.progressText}>
-              {current + 1} / {questions.length}
-            </span>
+            <span style={S.progressText}>{current + 1} / {questions.length}</span>
           </div>
 
-          {/* Card */}
           <div style={S.card}>
             <div style={S.lectureBadge}>{q.lecture}</div>
             <p style={S.questionText} dir="ltr">{q.q}</p>
@@ -550,17 +753,8 @@ export default function App() {
                 let border = "1.5px solid #334155";
                 let color = "#e2e8f0";
                 if (isAnswered) {
-                  if (i === q.answer) {
-                    bg = "#14532d44";
-                    border = "1.5px solid #22c55e";
-                    color = "#86efac";
-                  } else if (i === selected && i !== q.answer) {
-                    bg = "#7f1d1d44";
-                    border = "1.5px solid #ef4444";
-                    color = "#fca5a5";
-                  }
-                } else if (false) {
-                  // hover handled via inline — skip
+                  if (i === q.answer) { bg = "#14532d44"; border = "1.5px solid #22c55e"; color = "#86efac"; }
+                  else if (i === selected && i !== q.answer) { bg = "#7f1d1d44"; border = "1.5px solid #ef4444"; color = "#fca5a5"; }
                 }
                 return (
                   <button
@@ -571,13 +765,12 @@ export default function App() {
                     dir="ltr"
                   >
                     <span style={S.optionLetter}>{OPTION_LETTERS[i]}</span>
-                    <span>{opt}</span>
+                    <span>{stripHint(opt)}</span>
                   </button>
                 );
               })}
             </div>
 
-            {/* Explanation */}
             {isAnswered && (
               <div style={S.explanationBox}>
                 <div style={S.explanationLabel}>
@@ -591,15 +784,12 @@ export default function App() {
             )}
           </div>
 
-          {/* Nav */}
           <div style={S.navRow}>
             <button
               style={{ ...S.navBtn, opacity: current === 0 ? 0.35 : 1 }}
               onClick={handlePrev}
               disabled={current === 0}
-            >
-              ← Prev
-            </button>
+            >← Prev</button>
             {isAnswered && (
               <button style={{ ...S.navBtn, ...S.navBtnPrimary }} onClick={handleNext}>
                 {current + 1 === questions.length ? "Finish ✓" : "Next →"}
@@ -614,34 +804,31 @@ export default function App() {
   /* ── SCORE ── */
   if (screen === "score") {
     const grade =
-      pct >= 90 ? { label: "Excellent!", color: "#22c55e" } :
-      pct >= 75 ? { label: "Good",       color: "#3b82f6" } :
-      pct >= 60 ? { label: "Pass",       color: "#f59e0b" } :
-                  { label: "Try Again",  color: "#ef4444" };
+      pct >= 90 ? { label: "Excellent!", emoji: "🏆", color: "#22c55e" } :
+      pct >= 75 ? { label: "Good",       emoji: "👍", color: "#3b82f6" } :
+      pct >= 60 ? { label: "Pass",       emoji: "✓",  color: "#f59e0b" } :
+                  { label: "Try Again",  emoji: "📚", color: "#ef4444" };
+
+    const weakLectures = [...lectureStats].sort((a, b) => a.pct - b.pct).filter(s => s.pct < 60).slice(0, 3);
 
     return (
       <div style={S.page}>
-        <div style={{ ...S.container, textAlign: "center" }}>
-          <div style={S.card}>
-            <div style={{ fontSize: 64, marginBottom: 8 }}>
-              {pct >= 75 ? "🎉" : pct >= 60 ? "👍" : "📚"}
-            </div>
-            <h2 style={{ margin: "0 0 4px", color: grade.color, fontSize: 28 }}>
-              {grade.label}
-            </h2>
-            <p style={{ color: "#94a3b8", margin: "0 0 24px", fontSize: 14 }}>
-              {LABELS[filter].en}
-            </p>
-
+        <div style={S.container}>
+          {/* Main score */}
+          <div style={{ ...S.card, textAlign: "center" }}>
+            <div style={{ fontSize: 52, marginBottom: 4 }}>{grade.emoji}</div>
+            <h2 style={{ margin: "0 0 2px", color: grade.color, fontSize: 26 }}>{grade.label}</h2>
+            <p style={{ color: "#64748b", margin: "0 0 18px", fontSize: 13 }}>{SECTION_LABELS[activeFilter].en}</p>
             <div style={S.scoreBig}>{pct}%</div>
-            <p style={{ color: "#94a3b8", margin: "0 0 32px" }}>
-              {score} correct out of {questions.length}
-            </p>
+            <p style={{ color: "#94a3b8", margin: "4px 0 18px" }}>{score} / {questions.length} correct</p>
 
-            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-              <button style={S.actionBtn} onClick={() => startQuiz(filter)}>
-                Retry
-              </button>
+            {/* Score bar */}
+            <div style={{ background: "#0f172a", borderRadius: 8, height: 10, marginBottom: 24, overflow: "hidden" }}>
+              <div style={{ width: `${pct}%`, height: "100%", background: grade.color, borderRadius: 8, transition: "width 0.6s ease" }} />
+            </div>
+
+            <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+              <button style={S.actionBtn} onClick={startQuiz}>Retry</button>
               {wrongQuestions.length > 0 && (
                 <button
                   style={{ ...S.actionBtn, background: "#1e40af" }}
@@ -650,11 +837,48 @@ export default function App() {
                   Review Wrong ({wrongQuestions.length})
                 </button>
               )}
-              <button style={{ ...S.actionBtn, background: "#1e293b" }} onClick={() => setScreen("home")}>
-                Home
-              </button>
+              <button style={{ ...S.actionBtn, background: "#1e293b" }} onClick={() => setScreen("home")}>Home</button>
             </div>
           </div>
+
+          {/* Lecture breakdown */}
+          {lectureStats.length > 0 && (
+            <div style={S.card}>
+              <div style={S.sectionLabel}>تفصيل المحاضرات / Lecture Breakdown</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {lectureStats.map(({ lec, correct, total, pct: lPct }) => {
+                  const barColor = lPct >= 75 ? "#22c55e" : lPct >= 50 ? "#f59e0b" : "#ef4444";
+                  return (
+                    <div key={lec}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5, gap: 8 }}>
+                        <span style={{ fontSize: 13, color: "#cbd5e1", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{lec}</span>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: barColor, flexShrink: 0 }}>
+                          {correct}/{total} · {lPct}%
+                        </span>
+                      </div>
+                      <div style={{ background: "#0f172a", borderRadius: 4, height: 6, overflow: "hidden" }}>
+                        <div style={{ width: `${lPct}%`, height: "100%", background: barColor, borderRadius: 4 }} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Weak lectures warning */}
+          {weakLectures.length > 0 && (
+            <div style={{ ...S.card, background: "#160a0a", border: "1.5px solid #7f1d1d" }}>
+              <div style={{ ...S.sectionLabel, color: "#f87171" }}>⚠️ تحتاج مراجعة / Needs Review</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {weakLectures.map(w => (
+                  <div key={w.lec} style={{ color: "#fca5a5", fontSize: 13 }}>
+                    • {w.lec} — {w.correct}/{w.total} ({w.pct}%)
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -675,17 +899,9 @@ export default function App() {
 
           <div style={S.progressWrap}>
             <div style={S.progressBar}>
-              <div
-                style={{
-                  ...S.progressFill,
-                  width: `${((reviewIndex + 1) / wrongQuestions.length) * 100}%`,
-                  background: "#ef4444",
-                }}
-              />
+              <div style={{ ...S.progressFill, width: `${((reviewIndex + 1) / wrongQuestions.length) * 100}%`, background: "#ef4444" }} />
             </div>
-            <span style={S.progressText}>
-              {reviewIndex + 1} / {wrongQuestions.length}
-            </span>
+            <span style={S.progressText}>{reviewIndex + 1} / {wrongQuestions.length}</span>
           </div>
 
           <div style={S.card}>
@@ -694,22 +910,13 @@ export default function App() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {q.options.map((opt, i) => {
-                let bg = "transparent";
-                let border = "1.5px solid #334155";
-                let color = "#e2e8f0";
-                if (i === q.answer) {
-                  bg = "#14532d44";
-                  border = "1.5px solid #22c55e";
-                  color = "#86efac";
-                } else if (i === userAnswer && i !== q.answer) {
-                  bg = "#7f1d1d44";
-                  border = "1.5px solid #ef4444";
-                  color = "#fca5a5";
-                }
+                let bg = "transparent"; let border = "1.5px solid #334155"; let color = "#e2e8f0";
+                if (i === q.answer) { bg = "#14532d44"; border = "1.5px solid #22c55e"; color = "#86efac"; }
+                else if (i === userAnswer && i !== q.answer) { bg = "#7f1d1d44"; border = "1.5px solid #ef4444"; color = "#fca5a5"; }
                 return (
                   <div key={i} style={{ ...S.optionBtn, background: bg, border, color }} dir="ltr">
                     <span style={S.optionLetter}>{OPTION_LETTERS[i]}</span>
-                    <span>{opt}</span>
+                    <span>{stripHint(opt)}</span>
                   </div>
                 );
               })}
@@ -720,9 +927,7 @@ export default function App() {
                 <span>Explanation</span>
                 <span style={{ color: "#94a3b8", fontSize: 13 }}>الشرح</span>
               </div>
-              <p style={{ margin: 0, lineHeight: 1.7, color: "#bfdbfe" }} dir="ltr">
-                {q.explanation || "—"}
-              </p>
+              <p style={{ margin: 0, lineHeight: 1.7, color: "#bfdbfe" }} dir="ltr">{q.explanation || "—"}</p>
             </div>
           </div>
 
@@ -731,16 +936,12 @@ export default function App() {
               style={{ ...S.navBtn, opacity: reviewIndex === 0 ? 0.35 : 1 }}
               onClick={() => setReviewIndex(i => i - 1)}
               disabled={reviewIndex === 0}
-            >
-              ← Prev
-            </button>
+            >← Prev</button>
             <button
               style={{ ...S.navBtn, opacity: reviewIndex + 1 >= wrongQuestions.length ? 0.35 : 1 }}
               onClick={() => setReviewIndex(i => i + 1)}
               disabled={reviewIndex + 1 >= wrongQuestions.length}
-            >
-              Next →
-            </button>
+            >Next →</button>
           </div>
         </div>
       </div>
@@ -757,213 +958,129 @@ const S: Record<string, React.CSSProperties> = {
     background: "#0f172a",
     color: "#e2e8f0",
     fontFamily: "'Segoe UI', system-ui, sans-serif",
-    padding: "24px 16px",
+    padding: "24px 16px 48px",
   },
-  container: {
-    maxWidth: 720,
-    margin: "0 auto",
-  },
+  container: { maxWidth: 720, margin: "0 auto" },
   badge: {
     display: "inline-block",
-    background: "#1e3a5f",
-    color: "#60a5fa",
-    borderRadius: 999,
-    padding: "4px 14px",
-    fontSize: 13,
-    fontWeight: 600,
-    letterSpacing: 0.5,
-    marginBottom: 12,
+    background: "#1e3a5f", color: "#60a5fa",
+    borderRadius: 999, padding: "4px 14px",
+    fontSize: 13, fontWeight: 600, letterSpacing: 0.5, marginBottom: 12,
   },
-  title: {
-    margin: 0,
-    fontSize: 36,
-    fontWeight: 800,
-    color: "#f1f5f9",
+  title: { margin: 0, fontSize: 36, fontWeight: 800, color: "#f1f5f9" },
+  subtitle: { margin: "6px 0 0", fontSize: 16, color: "#94a3b8" },
+  card: {
+    background: "#1e293b", borderRadius: 16, padding: "18px 20px", marginBottom: 14,
   },
-  subtitle: {
-    margin: "6px 0 0",
-    fontSize: 16,
-    color: "#94a3b8",
+  sectionLabel: {
+    fontSize: 12, fontWeight: 700, color: "#64748b",
+    textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 12,
   },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-    gap: 14,
+  /* Section tabs */
+  tabBtn: {
+    background: "#0f172a", border: "1.5px solid #334155",
+    borderRadius: 10, padding: "10px 14px",
+    display: "flex", flexDirection: "column", alignItems: "center",
+    gap: 2, color: "#94a3b8", cursor: "pointer", flex: 1, minWidth: 60,
+    fontSize: 15,
   },
-  sectionBtn: {
-    background: "#1e293b",
-    border: "1.5px solid #334155",
-    borderRadius: 14,
-    padding: "20px 16px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: 4,
-    color: "#e2e8f0",
-    transition: "border-color 0.15s",
+  tabBtnActive: {
+    background: "#172554", border: "1.5px solid #3b82f6", color: "#93c5fd",
   },
-  btnAr: {
-    fontSize: 17,
-    fontWeight: 700,
-    color: "#f1f5f9",
+  /* Lecture chips */
+  lecChip: {
+    background: "#0f172a", border: "1.5px solid #334155",
+    borderRadius: 8, padding: "6px 11px",
+    fontSize: 12, color: "#64748b", cursor: "pointer",
+    whiteSpace: "nowrap" as const,
   },
-  btnEn: {
-    fontSize: 13,
-    color: "#94a3b8",
+  lecChipActive: {
+    background: "#172554", border: "1.5px solid #3b82f6", color: "#93c5fd",
   },
-  btnCount: {
-    marginTop: 6,
-    fontSize: 12,
-    color: "#60a5fa",
-    background: "#172554",
-    borderRadius: 999,
-    padding: "2px 10px",
+  smallBtn: {
+    background: "transparent", border: "1px solid #334155",
+    borderRadius: 6, padding: "4px 10px",
+    fontSize: 12, color: "#94a3b8", cursor: "pointer",
   },
+  /* Toggle */
+  toggle: {
+    width: 44, height: 24, borderRadius: 12,
+    background: "#334155", cursor: "pointer",
+    position: "relative" as const, transition: "background 0.2s",
+    display: "inline-block" as const, flexShrink: 0,
+  },
+  toggleOn: { background: "#2563eb" },
+  toggleThumb: {
+    position: "absolute" as const, top: 3, left: 3,
+    width: 18, height: 18, borderRadius: 9,
+    background: "#64748b", transition: "left 0.2s, background 0.2s",
+  },
+  toggleThumbOn: { left: 23, background: "#fff" },
+  /* Start button */
+  startBtn: {
+    width: "100%", background: "linear-gradient(135deg, #1d4ed8, #2563eb)",
+    border: "none", borderRadius: 14,
+    padding: "18px 24px", color: "#fff",
+    cursor: "pointer", display: "flex",
+    flexDirection: "column" as const, alignItems: "center", gap: 5,
+    marginTop: 4, transition: "opacity 0.15s",
+  },
+  /* Quiz */
   quizHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 16,
+    display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,
   },
   backBtn: {
-    background: "transparent",
-    border: "1px solid #334155",
-    color: "#94a3b8",
-    borderRadius: 8,
-    padding: "6px 14px",
-    cursor: "pointer",
-    fontSize: 13,
+    background: "transparent", border: "1px solid #334155",
+    color: "#94a3b8", borderRadius: 8, padding: "6px 14px",
+    cursor: "pointer", fontSize: 13,
   },
   sectionTag: {
-    fontSize: 13,
-    color: "#60a5fa",
-    background: "#172554",
-    padding: "4px 12px",
-    borderRadius: 999,
+    fontSize: 13, color: "#60a5fa",
+    background: "#172554", padding: "4px 12px", borderRadius: 999,
   },
-  progressWrap: {
-    display: "flex",
-    alignItems: "center",
-    gap: 10,
-    marginBottom: 18,
-  },
-  progressBar: {
-    flex: 1,
-    height: 6,
-    background: "#1e293b",
-    borderRadius: 999,
-    overflow: "hidden",
-  },
-  progressFill: {
-    height: "100%",
-    background: "#3b82f6",
-    borderRadius: 999,
-    transition: "width 0.3s ease",
-  },
-  progressText: {
-    fontSize: 13,
-    color: "#64748b",
-    whiteSpace: "nowrap",
-  },
-  card: {
-    background: "#1e293b",
-    borderRadius: 16,
-    padding: 24,
-    marginBottom: 16,
-  },
+  progressWrap: { display: "flex", alignItems: "center", gap: 10, marginBottom: 18 },
+  progressBar: { flex: 1, height: 6, background: "#1e293b", borderRadius: 999, overflow: "hidden" },
+  progressFill: { height: "100%", background: "#3b82f6", borderRadius: 999, transition: "width 0.3s ease" },
+  progressText: { fontSize: 13, color: "#64748b", whiteSpace: "nowrap" as const },
   lectureBadge: {
-    display: "inline-block",
-    fontSize: 11,
-    background: "#0f172a",
-    color: "#7dd3fc",
-    borderRadius: 6,
-    padding: "3px 10px",
-    marginBottom: 14,
-    fontWeight: 600,
-    letterSpacing: 0.3,
+    display: "inline-block", fontSize: 11,
+    background: "#0f172a", color: "#7dd3fc",
+    borderRadius: 6, padding: "3px 10px", marginBottom: 14,
+    fontWeight: 600, letterSpacing: 0.3,
   },
-  questionText: {
-    fontSize: 17,
-    lineHeight: 1.65,
-    marginBottom: 20,
-    color: "#f1f5f9",
-    margin: "0 0 20px",
-  },
+  questionText: { fontSize: 17, lineHeight: 1.65, color: "#f1f5f9", margin: "0 0 20px" },
   optionBtn: {
-    display: "flex",
-    alignItems: "center",
-    gap: 12,
-    padding: "12px 16px",
-    borderRadius: 10,
-    cursor: "pointer",
-    fontSize: 15,
-    textAlign: "left",
-    width: "100%",
-    transition: "background 0.15s",
+    display: "flex", alignItems: "center", gap: 12,
+    padding: "12px 16px", borderRadius: 10,
+    cursor: "pointer", fontSize: 15, textAlign: "left" as const,
+    width: "100%", transition: "background 0.15s",
   },
   optionLetter: {
-    minWidth: 28,
-    height: 28,
-    background: "#0f172a",
-    borderRadius: 6,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontWeight: 700,
-    fontSize: 13,
-    color: "#94a3b8",
-    flexShrink: 0,
+    minWidth: 28, height: 28, background: "#0f172a",
+    borderRadius: 6, display: "flex", alignItems: "center",
+    justifyContent: "center", fontWeight: 700, fontSize: 13,
+    color: "#94a3b8", flexShrink: 0,
   },
   explanationBox: {
-    marginTop: 20,
-    background: "#172554",
-    border: "1.5px solid #1d4ed8",
-    borderRadius: 12,
-    padding: "14px 18px",
+    marginTop: 20, background: "#172554",
+    border: "1.5px solid #1d4ed8", borderRadius: 12, padding: "14px 18px",
   },
   explanationLabel: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: 8,
-    fontWeight: 700,
-    fontSize: 14,
-    color: "#93c5fd",
+    display: "flex", justifyContent: "space-between",
+    marginBottom: 8, fontWeight: 700, fontSize: 14, color: "#93c5fd",
   },
-  navRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: 10,
-  },
+  navRow: { display: "flex", justifyContent: "space-between", gap: 10 },
   navBtn: {
-    background: "#1e293b",
-    border: "1px solid #334155",
-    color: "#e2e8f0",
-    borderRadius: 10,
-    padding: "10px 22px",
-    cursor: "pointer",
-    fontSize: 14,
-    fontWeight: 600,
+    background: "#1e293b", border: "1px solid #334155",
+    color: "#e2e8f0", borderRadius: 10, padding: "10px 22px",
+    cursor: "pointer", fontSize: 14, fontWeight: 600,
   },
-  navBtnPrimary: {
-    background: "#1d4ed8",
-    border: "1px solid #2563eb",
-    color: "#fff",
-  },
-  scoreBig: {
-    fontSize: 72,
-    fontWeight: 900,
-    color: "#f1f5f9",
-    lineHeight: 1,
-    marginBottom: 8,
-  },
+  navBtnPrimary: { background: "#1d4ed8", border: "1px solid #2563eb", color: "#fff" },
+  /* Score */
+  scoreBig: { fontSize: 72, fontWeight: 900, color: "#f1f5f9", lineHeight: 1, marginBottom: 4 },
   actionBtn: {
-    background: "#1d4ed8",
-    border: "none",
-    color: "#fff",
-    borderRadius: 10,
-    padding: "11px 24px",
-    cursor: "pointer",
-    fontSize: 15,
-    fontWeight: 600,
+    background: "#1d4ed8", border: "none", color: "#fff",
+    borderRadius: 10, padding: "11px 24px",
+    cursor: "pointer", fontSize: 15, fontWeight: 600,
   },
 };
