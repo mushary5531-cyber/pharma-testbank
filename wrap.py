@@ -16,4 +16,4 @@ button{{font-family:inherit}}
 <script>{bundle}</script>
 </body></html>"""
 open('index.html', 'w', encoding='utf-8').write(html)
-print(f"Done — {{len(html):,}} bytes")
+print(f"Done — {len(html):,} bytes")
