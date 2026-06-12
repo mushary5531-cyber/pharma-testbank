@@ -598,6 +598,15 @@ export default function App() {
             <p style={S.subtitle}>بنك الأسئلة</p>
           </div>
 
+          {/* About note */}
+          <div style={S.aboutBox}>
+            <p style={{ margin: 0, lineHeight: 1.75, color: "#94a3b8", fontSize: 13 }} dir="rtl">
+              الموقع هو النسخة الإلكترونية من بنك أسئلة الفارماكولوجي —
+              الأسئلة والخيارات والإجابات والشروحات منقولة حرفياً من الملف الأصلي بدون أي تعديل على المحتوى العلمي،
+              فهو يغني عن الملف بشكل كامل ويعتبر نفسه ١٠٠٪.
+            </p>
+          </div>
+
           {/* Section Tabs */}
           <div style={S.card}>
             <div style={S.sectionLabel}>القسم / Section</div>
@@ -969,6 +978,11 @@ const S: Record<string, React.CSSProperties> = {
   },
   title: { margin: 0, fontSize: 36, fontWeight: 800, color: "#f1f5f9" },
   subtitle: { margin: "6px 0 0", fontSize: 16, color: "#94a3b8" },
+  aboutBox: {
+    background: "#1e293b", borderRadius: 12,
+    padding: "12px 16px", marginBottom: 14,
+    border: "1px solid #334155",
+  },
   card: {
     background: "#1e293b", borderRadius: 16, padding: "18px 20px", marginBottom: 14,
   },
