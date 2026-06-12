@@ -22187,6 +22187,7 @@ button{font-family:inherit}
     const [selectedLectures, setSelectedLectures] = (0, import_react.useState)(/* @__PURE__ */ new Set());
     const [questionCount, setQuestionCount] = (0, import_react.useState)(20);
     const [hideSeen, setHideSeen] = (0, import_react.useState)(false);
+    const [aboutOpen, setAboutOpen] = (0, import_react.useState)(false);
     const [questions, setQuestions] = (0, import_react.useState)([]);
     const [current, setCurrent] = (0, import_react.useState)(0);
     const [selected, setSelected] = (0, import_react.useState)(null);
@@ -22300,7 +22301,32 @@ button{font-family:inherit}
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { style: S.title, children: "Test Bank" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: S.subtitle, children: "\u0628\u0646\u0643 \u0627\u0644\u0623\u0633\u0626\u0644\u0629" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.aboutBox, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { margin: 0, lineHeight: 1.75, color: "#94a3b8", fontSize: 13 }, dir: "rtl", children: "\u0627\u0644\u0645\u0648\u0642\u0639 \u0647\u0648 \u0627\u0644\u0646\u0633\u062E\u0629 \u0627\u0644\u0625\u0644\u0643\u062A\u0631\u0648\u0646\u064A\u0629 \u0645\u0646 \u0628\u0646\u0643 \u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0641\u0627\u0631\u0645\u0627\u0643\u0648\u0644\u0648\u062C\u064A \u2014 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0648\u0627\u0644\u062E\u064A\u0627\u0631\u0627\u062A \u0648\u0627\u0644\u0625\u062C\u0627\u0628\u0627\u062A \u0648\u0627\u0644\u0634\u0631\u0648\u062D\u0627\u062A \u0645\u0646\u0642\u0648\u0644\u0629 \u062D\u0631\u0641\u064A\u0627\u064B \u0645\u0646 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0623\u0635\u0644\u064A \u0628\u062F\u0648\u0646 \u0623\u064A \u062A\u0639\u062F\u064A\u0644 \u0639\u0644\u0649 \u0627\u0644\u0645\u062D\u062A\u0648\u0649 \u0627\u0644\u0639\u0644\u0645\u064A\u060C \u0641\u0647\u0648 \u064A\u063A\u0646\u064A \u0639\u0646 \u0627\u0644\u0645\u0644\u0641 \u0628\u0634\u0643\u0644 \u0643\u0627\u0645\u0644 \u0648\u064A\u0639\u062A\u0628\u0631 \u0646\u0641\u0633\u0647 \u0661\u0660\u0660\u066A." }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.aboutBox, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
+            "button",
+            {
+              style: S.aboutToggle,
+              onClick: () => setAboutOpen((v) => !v),
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "\u2139\uFE0F \u0639\u0646 \u0627\u0644\u0645\u0648\u0642\u0639" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontSize: 12, color: "#475569", transition: "transform 0.2s", display: "inline-block", transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)" }, children: "\u25BC" })
+              ]
+            }
+          ),
+          aboutOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { marginTop: 12, borderTop: "1px solid #334155", paddingTop: 12 }, dir: "rtl", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { margin: "0 0 10px", lineHeight: 1.8, color: "#94a3b8", fontSize: 13 }, children: "\u0627\u0644\u0645\u0648\u0642\u0639 \u0647\u0648 \u0627\u0644\u0646\u0633\u062E\u0629 \u0627\u0644\u0625\u0644\u0643\u062A\u0631\u0648\u0646\u064A\u0629 \u0645\u0646 \u0628\u0646\u0643 \u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0641\u0627\u0631\u0645\u0627\u0643\u0648\u0644\u0648\u062C\u064A PH45 \u2014 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0648\u0627\u0644\u062E\u064A\u0627\u0631\u0627\u062A \u0648\u0627\u0644\u0625\u062C\u0627\u0628\u0627\u062A \u0645\u0646\u0642\u0648\u0644\u0629 \u0645\u0646 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0623\u0635\u0644\u064A \u0645\u0639 \u062A\u0646\u0642\u064A\u062D \u0644\u0644\u0623\u062E\u0637\u0627\u0621 \u0627\u0644\u0645\u0637\u0628\u0639\u064A\u0629\u060C \u0625\u0636\u0627\u0641\u0629 \u0634\u0631\u0648\u062D\u0627\u062A \u0645\u0641\u0635\u0651\u0644\u0629 \u0645\u0646 \u0627\u0644\u0633\u0644\u0627\u064A\u062F\u0627\u062A \u0644\u0643\u0644 \u0633\u0624\u0627\u0644\u060C \u0648\u062A\u0646\u0638\u064A\u0645 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u062D\u0633\u0628 \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0629. \u0627\u0644\u0645\u0648\u0642\u0639 \u064A\u063A\u0646\u064A \u0639\u0646 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0623\u0635\u0644\u064A \u0628\u0634\u0643\u0644 \u0643\u0627\u0645\u0644 \u0648\u064A\u0639\u062A\u0628\u0631 \u0646\u0641\u0633\u0647 \u0661\u0660\u0660\u066A." }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: [
+              "\u0663\u0666\u0669 \u0633\u0624\u0627\u0644 \u2014 \u0645\u064A\u062F \u0661 \xB7 \u0645\u064A\u062F \u0662 \xB7 \u0641\u0627\u064A\u0646\u0644",
+              "\u0634\u0631\u062D \u0645\u0641\u0635\u0651\u0644 \u0644\u0643\u0644 \u0633\u0624\u0627\u0644 \u0645\u0646 \u0627\u0644\u0633\u0644\u0627\u064A\u062F\u0627\u062A",
+              "\u0627\u062E\u062A\u0628\u0627\u0631 \u0628\u0645\u062D\u0627\u0636\u0631\u0629 \u0648\u0627\u062D\u062F\u0629 \u0623\u0648 \u0623\u0643\u062B\u0631 \u0645\u0639 \u062A\u062D\u062F\u064A\u062F \u0639\u062F\u062F \u0627\u0644\u0623\u0633\u0626\u0644\u0629",
+              "\u062A\u0642\u064A\u064A\u0645 \u0627\u0644\u0623\u062F\u0627\u0621 \u0628\u0639\u062F \u0643\u0644 \u0627\u062E\u062A\u0628\u0627\u0631 \u0645\u0639 \u062A\u0641\u0635\u064A\u0644 \u0644\u0643\u0644 \u0645\u062D\u0627\u0636\u0631\u0629",
+              "\u062D\u0641\u0638 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0645\u0634\u0627\u0647\u062F\u0629 \u0644\u062A\u062C\u0646\u0628 \u0627\u0644\u062A\u0643\u0631\u0627\u0631"
+            ].map((f, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 8, alignItems: "flex-start" }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#3b82f6", flexShrink: 0, fontSize: 13 }, children: "\u2713" }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#64748b", fontSize: 13, lineHeight: 1.6 }, children: f })
+            ] }, i)) })
+          ] })
+        ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.card, children: [
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.sectionLabel, children: "\u0627\u0644\u0642\u0633\u0645 / Section" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", gap: 8, flexWrap: "wrap" }, children: ["mid1", "mid2", "final", "all"].map((f) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
@@ -22676,6 +22702,19 @@ button{font-family:inherit}
       padding: "12px 16px",
       marginBottom: 14,
       border: "1px solid #334155"
+    },
+    aboutToggle: {
+      background: "none",
+      border: "none",
+      color: "#64748b",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      width: "100%",
+      padding: 0,
+      fontSize: 14,
+      fontWeight: 600
     },
     card: {
       background: "#1e293b",
