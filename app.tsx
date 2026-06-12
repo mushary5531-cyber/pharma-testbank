@@ -939,6 +939,16 @@ export default function App() {
           <div style={S.badge}>💊 Pharmacology — PH45</div>
           <h1 className="shimmer-title" style={S.title}>Test Bank</h1>
           <p style={S.subtitle}>بنك الأسئلة</p>
+          <a
+            href="https://t.me/liouq"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "inline-block", marginTop: 8, fontSize: 12.5, color: "var(--faint)", textDecoration: "none", letterSpacing: 0.3, transition: "color 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "var(--accent2)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "var(--faint)")}
+          >
+            Made by Mu · @liouq
+          </a>
         </div>
 
         {/* About — collapsible */}
