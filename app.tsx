@@ -465,6 +465,7 @@ export default function App() {
   const [selectedLectures, setSelectedLectures] = useState<Set<string>>(new Set());
   const [questionCount, setQuestionCount] = useState(20);
   const [hideSeen, setHideSeen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   /* Quiz state */
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -598,13 +599,40 @@ export default function App() {
             <p style={S.subtitle}>بنك الأسئلة</p>
           </div>
 
-          {/* About note */}
+          {/* About — collapsible */}
           <div style={S.aboutBox}>
-            <p style={{ margin: 0, lineHeight: 1.75, color: "#94a3b8", fontSize: 13 }} dir="rtl">
-              الموقع هو النسخة الإلكترونية من بنك أسئلة الفارماكولوجي —
-              الأسئلة والخيارات والإجابات والشروحات منقولة حرفياً من الملف الأصلي بدون أي تعديل على المحتوى العلمي،
-              فهو يغني عن الملف بشكل كامل ويعتبر نفسه ١٠٠٪.
-            </p>
+            <button
+              style={S.aboutToggle}
+              onClick={() => setAboutOpen(v => !v)}
+            >
+              <span>ℹ️ عن الموقع</span>
+              <span style={{ fontSize: 12, color: "#475569", transition: "transform 0.2s", display: "inline-block", transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>
+            </button>
+            {aboutOpen && (
+              <div style={{ marginTop: 12, borderTop: "1px solid #334155", paddingTop: 12 }} dir="rtl">
+                <p style={{ margin: "0 0 10px", lineHeight: 1.8, color: "#94a3b8", fontSize: 13 }}>
+                  الموقع هو النسخة الإلكترونية من بنك أسئلة الفارماكولوجي PH45 —
+                  الأسئلة والخيارات والإجابات منقولة من الملف الأصلي مع تنقيح للأخطاء المطبعية،
+                  إضافة شروحات مفصّلة من السلايدات لكل سؤال،
+                  وتنظيم الأسئلة حسب المحاضرة.
+                  الموقع يغني عن الملف الأصلي بشكل كامل ويعتبر نفسه ١٠٠٪.
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  {[
+                    "٣٦٩ سؤال — ميد ١ · ميد ٢ · فاينل",
+                    "شرح مفصّل لكل سؤال من السلايدات",
+                    "اختبار بمحاضرة واحدة أو أكثر مع تحديد عدد الأسئلة",
+                    "تقييم الأداء بعد كل اختبار مع تفصيل لكل محاضرة",
+                    "حفظ الأسئلة المشاهدة لتجنب التكرار",
+                  ].map((f, i) => (
+                    <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+                      <span style={{ color: "#3b82f6", flexShrink: 0, fontSize: 13 }}>✓</span>
+                      <span style={{ color: "#64748b", fontSize: 13, lineHeight: 1.6 }}>{f}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Section Tabs */}
@@ -982,6 +1010,14 @@ const S: Record<string, React.CSSProperties> = {
     background: "#1e293b", borderRadius: 12,
     padding: "12px 16px", marginBottom: 14,
     border: "1px solid #334155",
+  },
+  aboutToggle: {
+    background: "none", border: "none",
+    color: "#64748b", cursor: "pointer",
+    display: "flex", alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%", padding: 0,
+    fontSize: 14, fontWeight: 600,
   },
   card: {
     background: "#1e293b", borderRadius: 16, padding: "18px 20px", marginBottom: 14,
