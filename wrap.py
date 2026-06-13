@@ -7,11 +7,11 @@ html = f"""<!DOCTYPE html>
 <title>Pharmacology PH45 — Test Bank</title>
 <style>
 *,*::before,*::after{{box-sizing:border-box}}
-body{{margin:0;padding:0;background:#0f172a;}}
+body{{margin:0;padding:0;background:#060913;}}
 button{{font-family:inherit}}
 </style>
 </head>
-<body style="margin:0;padding:0;background:#0f172a;">
+<body style="margin:0;padding:0;background:#060913;">
 <div id="root"></div>
 <script>{bundle}</script>
 </body></html>"""

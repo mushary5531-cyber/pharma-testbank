@@ -42,7 +42,7 @@ const MID1_QUESTIONS: Question[] = [
   {id:"mid125",exam:"mid1",lecture:"Routes of Drug Administration",q:"An addict with tachycardia and tremor took one tablet of amphetamine. Amphetamine readily enters CNS and 50% is excreted unchanged. What explains the presentation?",options:["Reduced metabolism","Enhanced bioavailability","Enhanced penetration to CNS (lipophilicity)","Reduced elimination by kidney"],answer:2,explanation:"Amphetamine is highly lipophilic, allowing it to readily cross the BBB and enter the CNS. The CNS stimulation (dopamine/norepinephrine release) causes tachycardia, tremor, and agitation. The explanation is its lipophilic nature enabling enhanced CNS penetration."},
   {id:"mid126",exam:"mid1",lecture:"Pharmacodynamics",q:"Two drugs acting on the same receptor — Drug A has lower EC50 than Drug B, same Emax. Which is more potent?",options:["Drug B","Drug B","Drug A is more potent","Equal potency"],answer:2,explanation:"Potency is measured by the EC50 (the concentration producing 50% of the maximum effect). A lower EC50 = higher potency (you need less drug to produce the same effect). Both drugs have the same Emax (same efficacy). Drug A with lower EC50 is more potent."},
   {id:"mid127",exam:"mid1",lecture:"Pharmacodynamics",q:"ED50 — the dose producing 50% of the maximum effect — is a measure of:",options:["Mechanism of action","Therapeutic index","Potency","Efficacy"],answer:2,explanation:"ED50 (effective dose 50%) is the standard measure of potency. Lower ED50 = higher potency. Efficacy is measured by the Emax (maximum possible effect). The therapeutic index = TD50/ED50."},
-  {id:"mid128",exam:"mid1",lecture:"Pharmacodynamics",q:"Drug A given at 5 mg decreases blood pressure the same as Drug B at 500 mg. What does this indicate?",options:["Drug A is more potent than Drug B by 100 times","Drug A is more efficacious","Drug A is less toxic"],answer:0,explanation:"Both drugs produce the same effect (same blood pressure reduction) but Drug A needs only 5 mg while Drug B needs 500 mg. Ratio = 500/5 = 100. Drug A is 100 times more potent. This says nothing about efficacy (Emax) or toxicity."},
+  {id:"mid128",exam:"mid1",lecture:"Pharmacodynamics",q:"Drug A given at 5 mg decreases blood pressure the same as Drug B at 500 mg. What does this indicate?",options:["Drug A is more potent than Drug B by 100 times","Drug A produces a greater maximum effect than Drug B","Drug A has a higher therapeutic index than Drug B","Drug A is eliminated faster than Drug B"],answer:0,explanation:"Potency = dose needed to produce a given effect. Drug A needs 100× less drug → 100× more potent. This tells us nothing about maximum effect (efficacy) or safety margin."},
   {id:"mid129",exam:"mid1",lecture:"Pharmacodynamics",q:"2 mg of Drug A gives the same therapeutic effect as 200 mg of Drug B. Regarding potency:",options:["Information is not enough","Drug A is more potent than Drug B","Drug B is more potent than Drug A","Same potency"],answer:1,explanation:"Drug A requires 2 mg vs Drug B's 200 mg for the same effect → Drug A is 100× more potent. The therapeutic index is not relevant here — the question specifically asks about potency based on dose required for effect."},
   {id:"mid130",exam:"mid1",lecture:"Pharmacodynamics",q:"If an agonist can produce maximal effects and has high efficacy, it is called:",options:["Antagonist","Full agonist","Competitive antagonist","Partial agonist"],answer:1,explanation:"Drug classification by receptor interaction: - Full agonist: High affinity + high intrinsic activity/efficacy → produces MAXIMUM response (Emax) - Partial agonist: Affinity + INCOMPLETE intrinsic activity → cannot produce full Emax even at maximum doses - Antagonist: Affinity + NO intrinsic activity (efficacy = 0) → blocks without activating"},
   {id:"mid131",exam:"mid1",lecture:"Pharmacodynamics",q:"A partial agonist, when given alone, acts as an agonist. When given with a full agonist, what happens?",options:["Increases the effect of the full agonist","No change","Reduces the effect (acts as partial antagonist)","Doubles the effect"],answer:2,explanation:"Partial agonists have intermediate intrinsic activity. When given alone, they produce a submaximal response (agonist effect). When given together with a full agonist, they compete for the same receptor, displacing the full agonist and reducing the net response — this is why they act as functional antagonists in the presence of a full agonist."},
@@ -66,7 +66,7 @@ const MID1_QUESTIONS: Question[] = [
   {id:"mid149",exam:"mid1",lecture:"Pharmacodynamics",q:"What letter on the DRC graph represents PARTIAL AGONIST activity when given alone?",options:["A","B","C","D"],answer:1,explanation:"A partial agonist produces a submaximal response even at maximum concentrations — it cannot achieve the full Emax of a full agonist. On a DRC, it appears as a curve that plateaus at a lower maximum than the full agonist. Curve B reaching an intermediate plateau represents partial agonist behavior."},
   {id:"mid150",exam:"mid1",lecture:"Pharmacodynamics",q:"When two drugs bind to the same PLASMA PROTEIN binding site, what happens?",options:["Plasma concentration of displaced drug INCREASES → toxicity","Plasma concentration decreases → treatment failure","Plasma concentration increases → treatment failure","Plasma concentration decreases → toxic"],answer:0,explanation:"When two drugs compete for the same plasma protein binding site (e.g., albumin), the drug with higher affinity displaces the other. The displaced drug's free (unbound) plasma concentration suddenly increases → more drug available to act → risk of toxicity. Classic example: aspirin displaces warfarin from albumin → ↑ free warfarin → bleeding risk."},
   {id:"mid151",exam:"mid1",lecture:"Pharmacokinetics",q:"Bioavailability of a drug refers to:",options:["Ratio of oral to parenteral dose","Ratio of orally administered drug to that excreted in feces","Percentage of administered dose that reaches systemic circulation in unchanged form","Ratio of drug excreted unchanged to metabolites"],answer:2,explanation:"Bioavailability (F) = the fraction/percentage of an administered dose that reaches the systemic circulation in an unchanged (active) form. IV = 100% bioavailability. Oral bioavailability is <100% due to: incomplete absorption + first-pass metabolism."},
-  {id:"mid152",exam:"mid1",lecture:"Pharmacokinetics",q:"What is the definition of bioavailability?",options:["Fraction of unchanged drug reaching systemic circulation","Proportion of drug reaching circulation in inactive form"],answer:0,explanation:"Bioavailability is specifically the fraction of unchanged (active) drug that reaches the systemic circulation. It accounts for both absorption and pre-systemic (first-pass) metabolism."},
+  {id:"mid152",exam:"mid1",lecture:"Pharmacokinetics",q:"What is the definition of bioavailability?",options:["Fraction of unchanged drug reaching systemic circulation","Proportion of drug reaching circulation in inactive form","Rate of drug absorption into the bloodstream","Volume in which the drug is distributed in the body"],answer:0,explanation:"Bioavailability is the fraction of unchanged (active) drug reaching systemic circulation, accounting for absorption and first-pass metabolism."},
   {id:"mid153",exam:"mid1",lecture:"Pharmacokinetics",q:"What is the expected effect of FIRST-PASS METABOLISM on bioavailability of an orally taken drug?",options:["Low bioavailability","High bioavailability","No effect","Variable"],answer:0,explanation:"After oral administration, drugs absorbed from the GI tract pass through the portal vein to the liver before reaching systemic circulation. The liver (and intestinal wall) metabolize a portion of the drug before it reaches its target — this is first-pass (presystemic) metabolism. The result is reduced bioavailability. Examples: morphine (first-pass >70%), nitroglycerin (>90%), propranolol."},
   {id:"mid154",exam:"mid1",lecture:"Pharmacokinetics",q:"A male patient with chronic liver AND renal disease is prescribed propranolol. What is the most appropriate dosing consideration?",options:["Extensive first-pass metabolism (dose must account for reduced metabolism)","Excreted by kidney — dose adjusted for kidney disease","Short half-life requiring once-daily dosing","Secreted in bile"],answer:0,explanation:"Propranolol is a drug with extensive first-pass metabolism in the liver. In a patient with chronic liver disease, first-pass metabolism is impaired → more drug reaches systemic circulation → risk of toxicity with usual oral doses. Additionally, reduced hepatic clearance prolongs its half-life. Dose reduction is required."},
   {id:"mid155",exam:"mid1",lecture:"Pharmacokinetics",q:"Majority of drugs cross biological membranes primarily by:",options:["Pinocytosis","Passive diffusion","Facilitated diffusion","Active transport"],answer:1,explanation:"Passive diffusion is the primary mechanism for most drugs to cross biological membranes. It follows a concentration gradient (high → low), requires no energy, and favors lipophilic, unionized, small molecular weight drugs. Active transport, facilitated diffusion, and pinocytosis account for a minority of drugs."},
@@ -78,16 +78,16 @@ const MID1_QUESTIONS: Question[] = [
   {id:"mid161",exam:"mid1",lecture:"Pharmacokinetics",q:"Drug A displaces Drug B from plasma proteins. What happens?",options:["Decreases effect of Drug B","Increases free fraction of Drug B → increases effect/risk of toxicity","No change","Increases protein binding of Drug B"],answer:1,explanation:"When Drug A displaces Drug B from plasma protein binding sites: - Drug B's free (unbound) fraction increases suddenly - Free drug = active drug - This can cause unexpected toxicity (e.g., aspirin displacing warfarin → ↑ free warfarin → ↑ bleeding risk)"},
   {id:"mid162",exam:"mid1",lecture:"Pharmacokinetics",q:"Which of the following is expected when warfarin (strongly protein-bound) is administered to a patient with SEVERE RENAL IMPAIRMENT?",options:["No significant change","Reduced efficacy of warfarin","Increased warfarin free level","Decreased warfarin free level"],answer:2,explanation:"In severe renal impairment: - Uremic toxins (retained waste products) accumulate in blood - These uremic compounds compete with warfarin for albumin binding sites - Warfarin is displaced from albumin → increased free (unbound) warfarin level → increased anticoagulant effect → bleeding risk"},
   {id:"mid163",exam:"mid1",lecture:"Pharmacokinetics",q:"Phase I metabolism involves:",options:["Oxidation, reduction, hydrolysis (non-synthetic reactions)","Conjugation only","Glucuronidation only","Synthesis reactions"],answer:0,explanation:"Drug metabolism occurs in two phases: - Phase I (non-synthetic): Oxidation, reduction, hydrolysis — primarily via CYP450 enzymes in the liver → makes drug more polar (water-soluble), often produces active or toxic metabolites - Phase II (synthetic): Conjugation reactions (glucuronidation, sulfation, acetylation) → produces highly polar, water-soluble, inactive metabolites ready for excretion"},
-  {id:"mid164",exam:"mid1",lecture:"Pharmacokinetics",q:"What best describes BIOTRANSFORMATION?",options:["Converts lipid-soluble drug to a non-lipid-soluble (polar) metabolite — usually inactive","Converts drug to more lipid-soluble form"],answer:0,explanation:"The primary goal of biotransformation (drug metabolism) is to convert lipophilic drugs into more polar (hydrophilic) metabolites that can be renally excreted. Without this, lipophilic drugs would be reabsorbed by renal tubules endlessly and never eliminated."},
+  {id:"mid164",exam:"mid1",lecture:"Pharmacokinetics",q:"What best describes BIOTRANSFORMATION?",options:["Converts lipid-soluble drug to a non-lipid-soluble metabolite","Converts the drug to a more lipid-soluble form","Increases drug binding affinity to its receptor","Prolongs drug half-life by reducing renal clearance"],answer:0,explanation:"Biotransformation converts lipophilic drugs to more polar (water-soluble) metabolites for renal excretion. Without this, lipophilic drugs would be reabsorbed endlessly in the renal tubule."},
   {id:"mid165",exam:"mid1",lecture:"Pharmacokinetics",q:"Regarding drug metabolism, which statement is CORRECT?",options:["Metabolism does not occur in plasma or kidneys","Prodrugs don't become active until they are metabolized","Enzyme induction increases drug toxicity potential","Most drugs are metabolized into active metabolites"],answer:1,explanation:"Prodrugs are pharmacologically inactive compounds that must undergo metabolic conversion to become active. Examples: codeine → morphine; enalapril → enalaprilat. This is a deliberate pharmaceutical strategy to improve bioavailability or targeting."},
   {id:"mid166",exam:"mid1",lecture:"Pharmacokinetics",q:"Rifampin induces CYP450 enzymes. What is the clinical consequence for a patient taking ORAL CONTRACEPTIVES?",options:["Increased estrogen levels","Contraceptive failure","No effect","Toxicity"],answer:1,explanation:"Rifampin is a potent CYP450 inducer — it increases the production of metabolizing enzymes. This leads to: - Faster metabolism of oral contraceptives - Reduced plasma levels of estrogen/progestin - Contraceptive failure (unintended pregnancy) This is Type F ADR (Failure of efficacy). Other CYP inducers: carbamazepine, phenytoin, tobacco."},
-  {id:"mid167",exam:"mid1",lecture:"Pharmacokinetics",q:"In liver failure, which change is observed?",options:["Reduced drug half-life","Reduced drug metabolism","Increased plasma protein binding","Increased microsomal enzyme activity"],answer:1,explanation:"In liver failure/cirrhosis: - Hepatic metabolism is reduced → drugs accumulate → prolonged half-life - Albumin synthesis decreases → reduced plasma protein binding → more free drug - Microsomal enzyme activity is reduced (not increased) - Hepatic blood flow may be reduced → reduced first-pass metabolism"},
+  {id:"mid167",exam:"mid1",lecture:"Pharmacokinetics",q:"In liver failure, which change is observed?",options:["Decreased drug half-life due to faster metabolism","Increased drug elimination via the kidney","Increased drug half-life and plasma accumulation","Decreased plasma drug concentration"],answer:2,explanation:"In liver failure: ↓ hepatic metabolism → ↑ half-life → drug accumulates in plasma. Also ↓ albumin synthesis → ↑ free drug fraction. Dosage reduction and monitoring are essential."},
   {id:"mid168",exam:"mid1",lecture:"Pharmacokinetics",q:"In liver failure, one of the following changes is observed: (Blackboard version)",options:["Microsomal enzyme activity is increased","Half-life of drug is reduced","Metabolism of drug is reduced","Increase in plasma protein binding"],answer:2,explanation:"Same as above — liver failure reduces the liver's ability to metabolize drugs → drug metabolism is reduced → drugs accumulate → toxicity risk. Half-life INCREASES (not decreases)."},
-  {id:"mid169",exam:"mid1",lecture:"Pharmacokinetics",q:"Patient has hepatitis, cirrhosis, ascites — which drug must be carefully monitored?",options:["Erythromycin (hepatically metabolized)","Tobramycin (renally excreted)","Penicillin G (renally excreted)"],answer:0,explanation:"In liver disease (hepatitis + cirrhosis), hepatically metabolized drugs accumulate due to impaired hepatic clearance. Erythromycin is primarily metabolized by the liver (CYP3A4). Tobramycin and penicillin G are primarily renally excreted and don't require hepatic dose adjustment."},
+  {id:"mid169",exam:"mid1",lecture:"Pharmacokinetics",q:"Patient has hepatitis, cirrhosis, ascites — which drug must be carefully monitored?",options:["Erythromycin","Tobramycin","Penicillin G","Gentamicin"],answer:0,explanation:"Erythromycin is primarily metabolized by the liver (CYP3A4). In liver disease, its clearance is impaired → accumulation. Tobramycin, penicillin G, and gentamicin are renally excreted and do not require hepatic dose adjustment."},
   {id:"mid170",exam:"mid1",lecture:"Pharmacokinetics",q:"Zero-order kinetics:",options:["Constant AMOUNT of drug is eliminated per unit time (not dependent on concentration)","Constant fraction eliminated","Drug follows first-order kinetics","Half-life is constant"],answer:0,explanation:"Zero-order (saturation) kinetics: The elimination rate is constant regardless of concentration (enzymes are saturated). No constant t½. Drug accumulates non-linearly. Examples: phenytoin, ethanol, aspirin at high doses. First-order kinetics: Constant fraction eliminated per unit time → constant t½ → most drugs follow this."},
   {id:"mid171",exam:"mid1",lecture:"Pharmacokinetics",q:"Drug half-life increases in renal failure. What happens to renally excreted drugs?",options:["Faster elimination","No change","Renally excreted drugs accumulate → toxicity risk","Increased metabolism"],answer:2,explanation:"Renally excreted drugs depend on glomerular filtration and tubular secretion for elimination. In renal failure, filtration is impaired → reduced drug clearance → longer half-life → drug accumulation. This is especially important for drugs like digoxin, aminoglycosides, metformin (require dose reduction in renal failure)."},
-  {id:"mid172",exam:"mid1",lecture:"Pharmacokinetics",q:"Which pathway is primarily used for drug elimination?",options:["Urine (renal excretion)","Sweat","Bile","Saliva"],answer:0,explanation:"The kidneys (urine) are the primary route of drug elimination. Polar/water-soluble drugs and metabolites are excreted renally. Bile excretion (fecal route) is secondary. Sweat and saliva are minor routes."},
-  {id:"mid173",exam:"mid1",lecture:"Pharmacokinetics",q:"A highly polar drug given to a patient with renal failure would have:",options:["Reduced clearance","Accumulation of metabolites"],answer:0,explanation:"Polar (hydrophilic) drugs are excreted by the kidneys via glomerular filtration without significant reabsorption. In renal failure, GFR is reduced → reduced clearance of polar drugs → drug accumulates → increased risk of toxicity."},
+  {id:"mid172",exam:"mid1",lecture:"Pharmacokinetics",q:"Which pathway is primarily used for drug elimination?",options:["Normal saline (0.9% NaCl)","Ringer's Lactate solution","5% Dextrose in water","3% Hypertonic saline"],answer:1,explanation:"Ringer's Lactate (Hartmann's) is the most physiologically balanced crystalloid — contains Na⁺, Cl⁻, K⁺, Ca²⁺, and lactate. Preferred for burns, trauma, and intraoperative replacement. 5% Dextrose provides no electrolytes. Hypertonic saline is for specific indications (severe hyponatremia, cerebral edema)."},
+  {id:"mid173",exam:"mid1",lecture:"Pharmacokinetics",q:"A highly polar drug given to a patient with renal failure would have:",options:["Reduced drug clearance","Accumulation of toxic metabolites only","Enhanced hepatic first-pass metabolism","Increased volume of distribution"],answer:0,explanation:"Polar drugs are renally excreted without significant reabsorption. In renal failure, GFR drops → reduced clearance → drug accumulates → increased toxicity risk."},
   {id:"mid174",exam:"mid1",lecture:"Pharmacokinetics",q:"Factors modifying drug ABSORPTION do NOT include:",options:["Rate of general circulation","Hepatic metabolism","Route of administration","Dissolution rate"],answer:1,explanation:"Hepatic metabolism is a factor affecting bioavailability (first-pass effect), but it occurs AFTER absorption — it does NOT modify the absorption process itself. Factors that modify absorption include: route of administration, drug solubility/dissolution, blood flow to absorption site, surface area, GI motility, pH."},
   {id:"mid175",exam:"mid1",lecture:"Pharmacokinetics",q:"Which patient-related factor affects DISTRIBUTION?",options:["Organ size and perfusion rate","Particle size","Dissolution","Formulation"],answer:0,explanation:"Distribution of a drug to tissues depends on patient factors including: - Organ size and blood perfusion (highly perfused organs like liver, kidney, brain receive drug first) - Plasma protein binding (patient-related — albumin levels) - Body composition (fat vs. lean mass) Particle size, dissolution, and formulation are drug-related factors affecting absorption, not distribution."},
   {id:"mid176",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"ADR Type A (Augmented) is best described as:",options:["Dose-independent, unpredictable","Dose-dependent, predictable, extension of pharmacological effect","Due to immune mechanism","Occurs only after long-term use"],answer:1,explanation:"Type A (Augmented) ADR: - Dose-dependent and predictable (an exaggeration of the drug's known pharmacological effect) - Most common type (>80% of all ADRs) - Preventable by dose reduction - Examples: Warfarin → bleeding, Beta-blockers → bradycardia, Insulin → hypoglycemia"},
@@ -98,29 +98,29 @@ const MID1_QUESTIONS: Question[] = [
   {id:"mid181",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"Patient takes NSAIDs and gets gastric ulcer. Type of ADR?",options:["Type C","Type B","Type D","Type A"],answer:0,explanation:"Same as above — NSAID-induced gastric ulcer is Type C (Chronic) — develops with prolonged use, dose and time dependent."},
   {id:"mid182",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"A patient takes an antibiotic for surgery. After succinylcholine (muscle relaxant) administration, the patient has temporary/prolonged paralysis. Type of ADR?",options:["Idiosyncratic (Type B)","Pseudoallergic","Allergic","Augmented"],answer:0,explanation:"Succinylcholine-induced prolonged paralysis is a Type B (Bizarre) ADR — specifically an idiosyncratic reaction due to a genetic variation in pseudocholinesterase (butyrylcholinesterase) enzyme. Normal individuals metabolize succinylcholine rapidly; patients with pseudocholinesterase deficiency (genetic) cannot → prolonged paralysis. It is not dose-dependent, not predictable in normal population."},
   {id:"mid183",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"A newborn has a birth defect of the upper limb; the mother was taking thalidomide during pregnancy. Type of ADR?",options:["Type D (Delayed — teratogenesis)","Type C","Type B","Type F"],answer:0,explanation:"Type D (Delayed) ADR: Adverse effects that occur after treatment has ended, including: - Teratogenesis (birth defects — manifest after gestation) - Carcinogenesis - Other delayed effects Thalidomide caused phocomelia (limb defects) in infants whose mothers took it in the first trimester → classic Type D (teratogen)."},
-  {id:"mid184",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"What is the cause of the thalidomide-phocomelia syndrome?",options:["Teratogenicity","Pharmacological interaction","Allergic reaction","Enzyme inhibition"],answer:0,explanation:"Thalidomide interferes with limb bud development during the critical embryonic period (weeks 4-8 of gestation) via inhibition of angiogenesis and other mechanisms → teratogenicity (Category X drug). This is the reason for the strict pregnancy prevention programs with thalidomide."},
+  {id:"mid184",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"What is the cause of the thalidomide-phocomelia syndrome?",options:["Inhibiting two sequential steps in the bacterial folate synthesis pathway","Inhibiting bacterial RNA polymerase","Inhibiting bacterial cell wall crosslinking","Inhibiting the 30S ribosomal subunit"],answer:0,explanation:"Double sequential blockade: sulfamethoxazole inhibits dihydropteroate synthase (step 1); trimethoprim inhibits dihydrofolate reductase (step 2) → synergistic inhibition of folate → ↓ DNA synthesis. Human cells use dietary folate and are spared."},
   {id:"mid185",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"A drug taken in the first trimester causes limb defects. It is classified as:",options:["Category A","Category B","Teratogen (Category D or X)","Category C only"],answer:2,explanation:"A drug causing limb defects in the 1st trimester is a teratogen. Category D has evidence of fetal risk but benefits may outweigh risks in severe disease. Category X is absolutely contraindicated (risks always outweigh benefits). Either way, such a drug is a teratogen."},
-  {id:"mid186",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"A 27-year-old becomes pregnant. She was taking warfarin (FDA Category D) and amoxicillin (FDA Category B). As her physician, what should you do?",options:["Keep warfarin, change amoxicillin","Keep amoxicillin, change warfarin to a safer anticoagulant","Keep both drugs"],answer:1,explanation:"- Warfarin (Category D): Evidence of fetal risk — causes warfarin embryopathy (nasal hypoplasia, bone abnormalities) and fetal hemorrhage. Should be replaced with LMWH (heparin, which doesn't cross the placenta) in pregnancy. - Amoxicillin (Category B): No fetal risk in animal studies — safe to continue."},
+  {id:"mid186",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"A 27-year-old becomes pregnant. She was taking warfarin (FDA Category D) and amoxicillin (FDA Category B). As her physician, what should you do?",options:["Keep warfarin, change amoxicillin to a different antibiotic","Keep amoxicillin, switch warfarin to a safer anticoagulant","Continue both drugs unchanged throughout pregnancy","Discontinue both drugs immediately without replacement"],answer:1,explanation:"Warfarin (Category D) causes embryopathy and fetal hemorrhage — must be replaced with LMWH heparin (does not cross placenta). Amoxicillin (Category B) is safe in pregnancy."},
   {id:"mid187",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"IDIOSYNCRASY is:",options:["A type of antagonism","A type B adverse effect (genetic/unusual reaction)","Normal pharmacological response","Tolerance"],answer:1,explanation:"Idiosyncrasy = a genetically-determined abnormal/unusual response to a drug. It is classified as a Type B (Bizarre) ADR. It is not dose-related, not predictable from pharmacology, and occurs in individuals with specific genetic variations (e.g., G6PD deficiency → hemolysis with primaquine; pseudocholinesterase deficiency → prolonged succinylcholine paralysis)."},
   {id:"mid188",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"An asthmatic patient is given a non-selective β-agonist to relieve bronchoconstriction. What adverse effect would you expect?",options:["Tachycardia","Bradycardia","Hypotension","Bronchoconstriction"],answer:0,explanation:"A non-selective β-agonist stimulates both: - β1 receptors (cardiac) → tachycardia and palpitations (unwanted) - β2 receptors (bronchial) → bronchodilation (desired effect) Selective β2-agonists (salbutamol) are preferred in asthma to avoid cardiac side effects."},
   {id:"mid189",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"Which of the following is a common adverse effect of AMPHETAMINES?",options:["Bradycardia","Somnolence","Constipation","Hypertension"],answer:3,explanation:"Amphetamines are sympathomimetics that release norepinephrine and dopamine. Their typical adverse effects reflect sympathetic stimulation: hypertension, tachycardia, hyperthermia, tremor, insomnia, agitation. NOT bradycardia or somnolence."},
-  {id:"mid190",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"A patient with succinylcholine prolonged apnea in surgery — type of adverse reaction?",options:["Idiosyncratic (Type B)","Pseudoallergic","Allergic"],answer:0,explanation:"Same mechanism as Q82 above — pseudocholinesterase deficiency prevents succinylcholine metabolism → prolonged neuromuscular blockade/apnea. This is an idiosyncratic Type B reaction due to genetic enzyme deficiency."},
+  {id:"mid190",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"A patient with succinylcholine prolonged apnea in surgery — type of adverse reaction?",options:["Idiosyncratic (Type B)","Pseudoallergic reaction","IgE-mediated allergic reaction","Augmented pharmacological effect (Type A)"],answer:0,explanation:"Pseudocholinesterase deficiency prevents succinylcholine metabolism → prolonged neuromuscular blockade. This is an idiosyncratic (Type B) reaction — unpredictable, genetically determined, not dose-related."},
   {id:"mid191",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"Which of the following is LEAST likely to pass through the placenta and harm the fetus?",options:["Hydrophilic and high molecular weight","Hydrophilic and low molecular weight","Lipophilic and high molecular weight","Lipophilic and low molecular weight"],answer:0,explanation:"The placental barrier behaves like a lipid membrane. Drugs that cross most easily are: lipophilic, low molecular weight, un-ionized, not highly protein-bound. Conversely, hydrophilic + high molecular weight = LEAST likely to cross the placenta and harm the fetus."},
   {id:"mid192",exam:"mid1",lecture:"Factors Affecting Drug Response & Adverse Drug Reactions (ADR)",q:"Which of the following is a patient-related factor affecting distribution? (2nd version)",options:["Organ size and perfusion rate","Particle size","Dissolution","Formulation"],answer:0,explanation:"Already explained in Q75."},
   {id:"mid193",exam:"mid1",lecture:"Drug-Drug Interactions",q:"Warfarin taken with CIPROFLOXACIN causes:",options:["Hypoglycemia","No interaction","Reduced bleeding","Increased bleeding risk"],answer:3,explanation:"Ciprofloxacin is a CYP450 inhibitor (specifically CYP1A2 and partially CYP2C9). It inhibits the metabolism of warfarin → increased warfarin plasma levels → increased anticoagulant effect → bleeding risk. This is a pharmacokinetic (enzyme inhibition) drug interaction."},
   {id:"mid194",exam:"mid1",lecture:"Drug-Drug Interactions",q:"RIFAMPIN taken with ORAL CONTRACEPTIVES leads to:",options:["Increased estrogen levels","Contraceptive failure","No effect","Toxicity"],answer:1,explanation:"Already explained in Q66. Rifampin induces CYP3A4 → faster metabolism of estrogens/progestins → reduced plasma levels → contraceptive failure. This is Type F ADR (Failure of Efficacy)."},
   {id:"mid195",exam:"mid1",lecture:"Drug-Drug Interactions",q:"Patient in surgery has PROLONGED APNEA after succinylcholine. What type of reaction?",options:["Idiosyncratic (Type B)","Pseudoallergic","Allergic","Augmented"],answer:0,explanation:"Same as Q82/Q90. Genetic pseudocholinesterase deficiency → idiosyncratic Type B."},
   {id:"mid196",exam:"mid1",lecture:"Drug-Drug Interactions",q:"ANTACIDS reduce the absorption of:",options:["Insulin","Warfarin","Tetracycline","Heparin"],answer:2,explanation:"Antacids (containing Al³⁺, Mg²⁺, Ca²⁺) form insoluble chelate complexes with tetracycline, preventing its absorption from the GI tract. Tetracycline should be taken 2 hours before or 4-6 hours after antacids. This is a pharmaceutical/pharmacokinetic interaction."},
-  {id:"mid197",exam:"mid1",lecture:"Drug-Drug Interactions",q:"A patient with cutaneous anthrax is prescribed ciprofloxacin. Which should he AVOID taking with ciprofloxacin?",options:["Alcohol","Grapefruit juice","Antacid"],answer:2,explanation:"Same mechanism as Q96 — antacids chelate quinolone antibiotics (ciprofloxacin) via their divalent/trivalent metal ions (Mg²⁺, Al³⁺, Ca²⁺), significantly reducing ciprofloxacin absorption. Antacids must be avoided or separated by at least 2 hours."},
+  {id:"mid197",exam:"mid1",lecture:"Drug-Drug Interactions",q:"A patient with cutaneous anthrax is prescribed ciprofloxacin. Which should he AVOID taking with ciprofloxacin?",options:["Alcohol","Grapefruit juice","Antacids","High-fat meals"],answer:2,explanation:"Antacids containing Al³⁺, Mg²⁺, or Ca²⁺ form insoluble chelates with ciprofloxacin → dramatically reduce absorption. They must be taken at least 2 hours apart. Ciprofloxacin is the drug of choice for anthrax."},
   {id:"mid198",exam:"mid1",lecture:"Drug-Drug Interactions",q:"A farmer develops excessive sweating, vomiting, and salivation after work. What is the antidote?",options:["PAM (pralidoxime) and atropine","Naloxone","N-acetylcysteine","Deferoxamine"],answer:0,explanation:"The symptoms (excessive secretions, vomiting, salivation = SLUDGE) are consistent with organophosphate (cholinergic) toxidrome from pesticide exposure. Organophosphates inhibit acetylcholinesterase → ACh accumulation. Treatment: - Atropine (muscarinic antagonist) — controls hypersecretions, bradycardia - Pralidoxime (2-PAM) — reactivates AChE if given early"},
-  {id:"mid199",exam:"mid1",lecture:"Drug-Drug Interactions",q:"What is the drug that has to be reduced (dose-adjusted) with allopurinol?",options:["Mercaptopurine (6-MP)"],answer:0,explanation:"Allopurinol inhibits xanthine oxidase, the enzyme responsible for metabolizing mercaptopurine (6-MP) and azathioprine. When given together, 6-MP is not metabolized → toxic accumulation → bone marrow suppression. Dose of 6-MP must be reduced to 25-33% when co-administered with allopurinol."},
+  {id:"mid199",exam:"mid1",lecture:"Drug-Drug Interactions",q:"What is the drug that has to be reduced (dose-adjusted) with allopurinol?",options:["Mercaptopurine (6-MP)","Methotrexate","Cyclophosphamide","5-Fluorouracil"],answer:0,explanation:"Allopurinol inhibits xanthine oxidase, the enzyme responsible for metabolizing mercaptopurine (6-MP) and azathioprine. When given together, 6-MP is not metabolized → toxic accumulation → bone marrow suppression. Dose of 6-MP must be reduced to 25-33% when co-administered with allopurinol."},
   {id:"mid1100",exam:"mid1",lecture:"Drug-Drug Interactions",q:"Prolonged use of phenylephrine as a nasal decongestant results in:",options:["Epistaxis","Atrophic rhinitis (rhinitis medicamentosa)","Chronic cough","Hypertrophy of nasal mucosa"],answer:1,explanation:"Prolonged use of vasoconstrictive nasal decongestants (phenylephrine, oxymetazoline) causes rebound congestion (rhinitis medicamentosa) and with long-term use → atrophic rhinitis (thinning and atrophy of nasal mucosa). This is a Type C (chronic use) ADR."},
   {id:"mid1101",exam:"mid1",lecture:"Drug-Drug Interactions",q:"Patient has hepatitis, cirrhosis — what change related to sulfonamide use?",options:["Decreased fluid intake","Folinic acid supplement","Alkalization of urine","Increase drug concentration"],answer:2,explanation:"Sulfonamides can crystallize in urine (crystalluria) → renal tubular obstruction. Prevention: - Alkalinize the urine (sodium bicarbonate) — sulfonamides are more soluble at alkaline pH - Adequate fluid intake (hydration)"},
-  {id:"mid1102",exam:"mid1",lecture:"Drug-Drug Interactions",q:"A pregnant woman is taking sulfonamide. What is the contraindication?",options:["Kernicterus"],answer:0,explanation:"Sulfonamides in pregnancy (especially near term) can cause kernicterus — sulfonamides displace bilirubin from plasma protein binding in the neonate → unconjugated bilirubin enters the brain → neurotoxicity. Sulfonamides are contraindicated in the 3rd trimester and near delivery."},
-  {id:"mid1103",exam:"mid1",lecture:"Drug-Drug Interactions",q:"Doctor wants to give chloramphenicol to a neonate but is worried about gray baby syndrome. What would INCREASE the baby's risk?",options:["Decreasing conjugation in the liver","Decreasing excretion"],answer:0,explanation:"Gray baby syndrome occurs because neonates have immature hepatic glucuronyl transferase — they cannot conjugate (glucuronidate) chloramphenicol effectively. Chloramphenicol accumulates → cardiovascular collapse (gray, cyanotic, floppy baby). Decreasing conjugation (as in neonates with immature liver) further increases the risk."},
+  {id:"mid1102",exam:"mid1",lecture:"Drug-Drug Interactions",q:"A pregnant woman is taking sulfonamide. What is the contraindication?",options:["Kernicterus in the neonate","Gray baby syndrome","Ototoxicity in the fetus","Nephrotoxicity in the mother"],answer:0,explanation:"Sulfonamides displace bilirubin from plasma proteins in the neonate → free unconjugated bilirubin crosses the immature BBB → kernicterus. Contraindicated in the 3rd trimester and neonates < 2 months."},
+  {id:"mid1103",exam:"mid1",lecture:"Drug-Drug Interactions",q:"Doctor wants to give chloramphenicol to a neonate but is worried about gray baby syndrome. What would INCREASE the baby's risk?",options:["Decreased hepatic glucuronyl transferase activity","Decreased renal excretion of the drug","Increased renal glomerular filtration rate","Enhanced plasma protein binding of the drug"],answer:0,explanation:"Neonates have immature glucuronyl transferase (UGT) → cannot conjugate chloramphenicol → drug accumulates → bone marrow suppression, cardiovascular collapse, ashen-gray cyanosis."},
   {id:"mid1104",exam:"mid1",lecture:"Introduction to Toxicology",q:"A child swallowed iron tablets. The appropriate treatment is:",options:["Naloxone","Atropine","N-acetylcysteine","Deferoxamine (desferrioxamine) IV"],answer:3,explanation:"Antidotes by toxin: - Iron overdose → Deferoxamine (chelates free iron) - Opioids → Naloxone - Organophosphates → Atropine + Pralidoxime - Acetaminophen (paracetamol) → N-acetylcysteine - Cyanide → Hydroxocobalamin - Digoxin → Digoxin Fab antibodies - Benzodiazepines → Flumazenil"},
-  {id:"mid1105",exam:"mid1",lecture:"Introduction to Toxicology",q:"A patient comes to hospital with swelling, low blood pressure, and wheezing after taking an antibiotic. What mediator is responsible?",options:["Norepinephrine","Epinephrine (this is the TREATMENT) / Histamine (the mediator)"],answer:1,explanation:"The clinical picture (urticaria/swelling, hypotension, bronchospasm/wheezing) after antibiotic = anaphylaxis (Type B ADR — allergic). Mediator responsible: histamine (and other mast cell mediators). Treatment of anaphylaxis: epinephrine (adrenaline) IM. *The question asks what is \"responsible\" — histamine is the mediator; epinephrine is the treatment.*"},
-  {id:"mid1106",exam:"mid1",lecture:"Introduction to Toxicology",q:"A patient commits suicide by drinking eye drops for acute glaucoma and also administers the drug IV — excessive vomiting occurs. What is the adverse effect?",options:["Xerostomia","Salivation (excessive secretions — cholinergic toxidrome)"],answer:1,explanation:"Eye drops for acute glaucoma (closed-angle) include cholinergic drugs (pilocarpine — muscarinic agonist) that contract the ciliary muscle and open the drainage angle. Systemic absorption/overdose causes a cholinergic toxidrome: excessive salivation, lacrimation, sweating, vomiting, diarrhea (SLUDGE), bradycardia, miosis."},
+  {id:"mid1105",exam:"mid1",lecture:"Introduction to Toxicology",q:"A patient comes to hospital with swelling, low blood pressure, and wheezing after taking an antibiotic. What mediator is responsible?",options:["Norepinephrine","Histamine","Serotonin","Bradykinin"],answer:1,explanation:"Anaphylaxis (Type B IgE-mediated ADR): mast cell degranulation releases histamine → urticaria/angioedema, hypotension, bronchospasm. Treatment: epinephrine IM (not the mediator — the antidote)."},
+  {id:"mid1106",exam:"mid1",lecture:"Introduction to Toxicology",q:"A patient commits suicide by drinking eye drops for acute glaucoma and also administers the drug IV — excessive vomiting occurs. What is the adverse effect?",options:["Dry mouth","Excessive salivation","Pupillary dilation","Tachycardia"],answer:1,explanation:"Glaucoma drops contain cholinergic agents (pilocarpine — muscarinic agonist). Systemic overdose → cholinergic toxidrome: SLUDGE (Salivation, Lacrimation, Urination, Defecation, GI cramps, Emesis) + bradycardia, miosis, bronchospasm."},
   {id:"mid1107",exam:"mid1",lecture:"Introduction to Toxicology",q:"Mechanism of action of Sulfamethoxazole + Trimethoprim (Co-trimoxazole):",options:["Inhibiting folate synthesis and reduction (two sequential steps in nucleic acid synthesis)","Inhibiting RNA polymerase"],answer:0,explanation:"Co-trimoxazole works by double sequential blockade of folate pathway: - Sulfamethoxazole inhibits dihydropteroate synthase (blocks folate synthesis) - Trimethoprim inhibits dihydrofolate reductase (blocks folate reduction to active THF) Together: synergistic inhibition of bacterial nucleic acid synthesis. Humans can obtain folate from diet, bacteria must synthesize it."},
   {id:"mid1108",exam:"mid1",lecture:"IV Fluid Therapy",q:"For a patient with dehydration AND caloric requirement (NPO patient), the most appropriate IV fluid is:",options:["5% Dextrose in Water (D5W)","Normal saline","Ringer's lactate","3% NaCl"],answer:0,explanation:"D5W (5% Dextrose in Water): - Isotonic in the bag, becomes hypotonic after dextrose is metabolized - Provides 170 cal/L (caloric support for NPO patients) - Used for: dehydration, NPO maintenance, diluting drugs - NOT for: resuscitation, infants (risk of cerebral edema), patients with ↑ICP, mixing with blood"},
   {id:"mid1109",exam:"mid1",lecture:"IV Fluid Therapy",q:"Large volumes of NORMAL SALINE (0.9% NaCl) may cause:",options:["Hyponatremia","Hyperchloremic metabolic acidosis","Hypokalemia","Hypocalcemia"],answer:1,explanation:"Normal saline contains 154 mEq/L of Na⁺ AND 154 mEq/L of Cl⁻ — this is MORE chloride than plasma (104 mEq/L). Large volumes → hyperchloremic metabolic acidosis (dilutional acidosis — excess chloride drives bicarbonate down). Other complications: fluid overload."},
@@ -131,25 +131,25 @@ const MID1_QUESTIONS: Question[] = [
   {id:"mid1114",exam:"mid1",lecture:"IV Fluid Therapy",q:"A patient takes MORPHINE overdose and is administered NALOXONE. Respiratory depression is reversed. What is the pharmacological effect of naloxone?",options:["Competitive antagonist (at opioid receptors)","Non-pharmacological effect","Partial agonist","Agonistic effect"],answer:0,explanation:"Naloxone is a pure competitive antagonist at opioid receptors (μ, κ, δ). It displaces morphine from opioid receptors → reverses all opioid effects (respiratory depression, sedation, miosis, analgesia). It has high affinity for opioid receptors but NO intrinsic activity."},
   {id:"mid1115",exam:"mid1",lecture:"IV Fluid Therapy",q:"Biotransformation of a drug is primarily directed to:",options:["Inactivate a drug","Activate a drug","Convert lipid-soluble drug to non-lipid-soluble metabolite","Convert non-lipid-soluble drug to lipid-soluble metabolite"],answer:2,explanation:"The primary goal of drug biotransformation is to convert lipophilic (lipid-soluble) drugs into more hydrophilic (non-lipid-soluble) metabolites that can be renally excreted. This may inactivate, activate (prodrug), or create toxic metabolites — but the DIRECTION is always toward increased water solubility."},
   {id:"mid1116",exam:"mid1",lecture:"IV Fluid Therapy",q:"Which property facilitates a drug's ability to cross the blood-brain barrier?",options:["Lipophilic","Hydrophilic","High molecular weight","High plasma protein binding"],answer:0,explanation:""},
-  {id:"mid1117",exam:"mid1",lecture:"IV Fluid Therapy",q:"The fraction of drug that reaches systemic circulation is:",options:["Bioavailability","First-pass metabolism","Volume of distribution"],answer:0,explanation:""},
-  {id:"mid1118",exam:"mid1",lecture:"IV Fluid Therapy",q:"What does the therapeutic index INDICATE?",options:["Safety margin of a drug","Potency","Efficacy"],answer:0,explanation:""}
+  {id:"mid1117",exam:"mid1",lecture:"IV Fluid Therapy",q:"The fraction of drug that reaches systemic circulation is:",options:["Bioavailability","First-pass metabolism","Volume of distribution","Drug clearance"],answer:0,explanation:"Bioavailability (F) is the fraction of administered drug reaching systemic circulation unchanged. IV administration gives F = 100%."},
+  {id:"mid1118",exam:"mid1",lecture:"IV Fluid Therapy",q:"What does the therapeutic index INDICATE?",options:["Safety margin of a drug","Potency of the drug at its receptor","Maximum achievable effect of the drug","Rate of drug absorption from the GI tract"],answer:0,explanation:"Therapeutic index (TI = TD50/ED50) reflects the safety margin — the wider it is, the safer the drug. It says nothing about potency or efficacy."}
 ];
 const MID2_QUESTIONS: Question[] = [
   {id:"mid21",exam:"mid2",lecture:"Cholinergic Agonists",q:"A 10-year-old boy accidentally ingested a medication. He presents with signs of excessive nicotinic AND muscarinic stimulation WITHOUT central nervous system effects. Which drug is most likely?",options:["Pilocarpine","Rivastigmine","Pyridostigmine","Physostigmine"],answer:2,explanation:"Pyridostigmine is a quaternary amine AChE inhibitor — does not cross BBB (no CNS effects), stimulates both nicotinic and muscarinic receptors peripherally."},
   {id:"mid22",exam:"mid2",lecture:"Cholinergic Agonists",q:"A girl from the countryside is brought to the ER with pale face, cool & wet skin. What is the most appropriate treatment?",options:["Atropine + pralidoxime","Pralidoxime + physostigmine","Atropine + physostigmine","Pralidoxime + physostigmine"],answer:0,explanation:"Classic organophosphate poisoning (cholinergic crisis). Atropine blocks muscarinic effects; pralidoxime (PAM) regenerates AChE if given early."},
   {id:"mid23",exam:"mid2",lecture:"Cholinergic Agonists",q:"If a person is exposed to organophosphorus compounds and is not treated, what is the most likely cause of death?",options:["Respiratory failure","Cardiac arrest","Glaucoma","Hypertension"],answer:0,explanation:"Organophosphates cause irreversible AChE inhibition → excess ACh → bronchoconstriction + bronchospasm + respiratory muscle paralysis → respiratory failure."},
-  {id:"mid24",exam:"mid2",lecture:"Cholinergic Agonists",q:"A farmer develops excessive sweating, vomiting, and salivation after work. Which of the following is the antidote?",options:["Pralidoxime (PAM) and atropine"],answer:0,explanation:"Organophosphate (pesticide) poisoning. Treat with atropine (muscarinic blocker) + pralidoxime (reactivates AChE before aging occurs)."},
-  {id:"mid25",exam:"mid2",lecture:"Cholinergic Agonists",q:"A 40-year-old male with myasthenia gravis is treated with neostigmine. He develops bradycardia and diarrhea. Which drug manages these symptoms?",options:["Atropine sulfate","Vitamin K","Protamine sulfate"],answer:0,explanation:"Neostigmine increases ACh → excess muscarinic effects (bradycardia, diarrhea). Atropine blocks these muscarinic side effects."},
+  {id:"mid24",exam:"mid2",lecture:"Cholinergic Agonists",q:"A farmer develops excessive sweating, vomiting, and salivation after work. Which of the following is the antidote?",options:["Pralidoxime and atropine","Physostigmine and diazepam","Neostigmine and propranolol","Naloxone and flumazenil"],answer:0,explanation:"Organophosphate poisoning: atropine blocks muscarinic effects (SLUDGE); pralidoxime reactivates AChE before aging occurs. Physostigmine is a cholinesterase inhibitor — would worsen the toxicity."},
+  {id:"mid25",exam:"mid2",lecture:"Cholinergic Agonists",q:"A 40-year-old male with myasthenia gravis is treated with neostigmine. He develops bradycardia and diarrhea. Which drug manages these symptoms?",options:["Atropine","Vitamin K","Protamine sulfate","Physostigmine"],answer:0,explanation:"Neostigmine ↑ ACh → excess muscarinic effects (bradycardia, diarrhea, salivation). Atropine (competitive muscarinic blocker) is co-administered to block these side effects. Physostigmine would worsen them."},
   {id:"mid26",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following increases parasympathomimetic activity?",options:["Isoflurophate","Cyclopentolate","Atropine","Scopolamine"],answer:0,explanation:"Isoflurophate is an irreversible organophosphate AChE inhibitor → increases ACh → increased parasympathetic activity."},
   {id:"mid27",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which receptor increases salivation when activated in parasympathetic conditions?",options:["M3","M2","M1","Nn"],answer:0,explanation:"M3 receptors mediate exocrine gland secretion including salivary glands (also sweat glands)."},
-  {id:"mid28",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following is an action of a parasympathomimetic (cholinergic agonist)?",options:["Contraction of bladder wall","Contraction of skeletal muscle blood vessels"],answer:0,explanation:"Muscarinic (M3) stimulation contracts the detrusor muscle (bladder wall) and relaxes the sphincter → promotes urination."},
+  {id:"mid28",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following is an action of a parasympathomimetic (cholinergic agonist)?",options:["Contraction of the bladder wall","Contraction of skeletal muscle blood vessels","Pupillary dilation","Increase in heart rate"],answer:0,explanation:"M3 stimulation contracts the detrusor muscle (bladder wall) and relaxes the sphincter → promotes urination. Parasympathomimetics cause miosis (not mydriasis), bradycardia, and vasodilation."},
   {id:"mid29",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following actions is brought out by parasympathomimetics?",options:["Vasoconstriction of skeletal muscle blood vessels","Slowing of the heart","Relaxation of the urinary bladder wall","Dilatation of the eye pupil"],answer:1,explanation:"Parasympathetic stimulation slows the heart via M2 receptors on the SA/AV node."},
-  {id:"mid210",exam:"mid2",lecture:"Cholinergic Agonists",q:"What is the mode of action of pirenzepine?",options:["M1 cholinergic antagonist"],answer:0,explanation:"Pirenzepine (and dicyclomine) are selective M1 blockers → reduce gastric HCl secretion (M1 on gastric parietal cells)."},
-  {id:"mid211",exam:"mid2",lecture:"Cholinergic Agonists",q:"A cholinergic agonist drug can be used to treat which condition?",options:["Increased stomach acidity","Urine incontinence","Intestinal colic (postoperative ileus / urinary retention)"],answer:2,explanation:"Bethanechol (M3 agonist) contracts bladder and GI smooth muscle → used for urinary retention and postoperative ileus. Answer key says C but this may refer to urinary retention context."},
-  {id:"mid212",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following will present in a patient taking Atropine?",options:["Constipation","Sweating","Bradycardia"],answer:0,explanation:"Atropine blocks M3 in GI → reduces peristalsis → constipation. Also causes dry mouth, tachycardia, urinary retention, mydriasis."},
-  {id:"mid213",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following is a characteristic of parasympathetic stimulation?",options:["Inhibition of bronchial secretion","Contraction of the pupil","Contraction of sphincter of urinary bladder","Decrease in intestinal motility"],answer:1,explanation:"Parasympathetic (M3) constricts the pupil via contraction of the constrictor pupillae muscle (miosis)."},
+  {id:"mid210",exam:"mid2",lecture:"Cholinergic Agonists",q:"What is the mode of action of pirenzepine?",options:["Selective M1 cholinergic antagonist","Selective M2 cholinergic antagonist","Non-selective muscarinic agonist","Nicotinic receptor blocker"],answer:0,explanation:"Pirenzepine and dicyclomine selectively block M1 receptors on gastric parietal cells → reduce HCl secretion. Unlike non-selective antimuscarinics, they have fewer anticholinergic side effects."},
+  {id:"mid211",exam:"mid2",lecture:"Cholinergic Agonists",q:"A cholinergic agonist drug can be used to treat which condition?",options:["Increased gastric acid secretion","Urge urinary incontinence","Urinary retention and postoperative ileus","Hypertensive urgency"],answer:2,explanation:"Bethanechol (M3 agonist) contracts the detrusor muscle and GI smooth muscle → treats urinary retention and paralytic ileus. It is contraindicated in bladder obstruction or asthma."},
+  {id:"mid212",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following will present in a patient taking Atropine?",options:["Constipation","Sweating","Bradycardia","Increased salivation"],answer:0,explanation:"Atropine blocks M3 receptors in GI tract → reduced peristalsis → constipation. Also causes: dry mouth, tachycardia (M2 block), urinary retention, mydriasis, cycloplegia. Sweating and increased salivation are cholinergic effects."},
+  {id:"mid213",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following is a characteristic of parasympathetic stimulation?",options:["Trimethoprim + sulfamethoxazole","Sulfapyridine + 5-aminosalicylate","Sulfadiazine + pyrimethamine","Amoxicillin + clavulanic acid"],answer:1,explanation:"Sulfasalazine = sulfapyridine (antibiotic carrier) linked to 5-aminosalicylic acid (5-ASA = mesalazine). Colonic bacteria cleave the azo bond → releasing both active components locally."},
   {id:"mid214",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following can be used to treat an accidental overdose of Pilocarpine?",options:["Atropine","Physostigmine","Bethanechol","Carbachol"],answer:0,explanation:"Pilocarpine is a muscarinic agonist. Overdose → excess muscarinic effects. Atropine (competitive muscarinic antagonist) reverses these effects."},
-  {id:"mid215",exam:"mid2",lecture:"Cholinergic Agonists",q:"A patient took a large dose of pilocarpine. What other complications could appear beyond vomiting?",options:["Bradycardia","Decreased salivation (Xerostomia)"],answer:0,explanation:"Pilocarpine overdose → massive muscarinic stimulation → bradycardia (M2), excess salivation, bronchospasm, sweating, miosis."},
+  {id:"mid215",exam:"mid2",lecture:"Cholinergic Agonists",q:"A patient took a large dose of pilocarpine. What other complications could appear beyond vomiting?",options:["Bradycardia","Decreased salivation","Tachycardia","Urinary retention"],answer:0,explanation:"Pilocarpine overdose → excessive M2 cardiac stimulation → bradycardia; also excessive secretions, bronchospasm, miosis. Decreased salivation and urinary retention are antimuscarinic effects — the opposite."},
   {id:"mid216",exam:"mid2",lecture:"Cholinergic Agonists",q:"Which of the following drugs would increase the parasympathetic activity?",options:["Tropicamide","Hyoscine","Atropine","Neostigmine"],answer:3,explanation:"Neostigmine is an AChE inhibitor → ↑ ACh → ↑ parasympathetic activity. All others are antimuscarinic drugs."},
   {id:"mid217",exam:"mid2",lecture:"Cholinergic Antagonists",q:"What is the most appropriate treatment for a 3-year-old who accidentally ingested atropine eye drops and presents with hyperthermia, dry mouth, dilated pupils, tachycardia, and hallucinations?",options:["Pralidoxime","Physostigmine","Atropine","Neostigmine"],answer:1,explanation:"Atropine toxicity → physostigmine (tertiary amine AChE inhibitor) crosses BBB and reverses both central and peripheral atropine effects. Neostigmine is quaternary — doesn't cross BBB."},
   {id:"mid218",exam:"mid2",lecture:"Cholinergic Antagonists",q:"A 48-year-old man presents with dilated pupils, dry mucous membranes, tachycardia, urinary retention, absent bowel sounds, hallucinations. What is the diagnosis?",options:["Organophosphate poisoning","Opioid overdose","Atropine toxicity","Beta-blocker overdose"],answer:2,explanation:"Classic \"anticholinergic toxidrome\": Blind as a bat (mydriasis), Dry as a bone, Hot as a hare, Red as a beet, Mad as a hatter, tachycardia."},
@@ -161,7 +161,7 @@ const MID2_QUESTIONS: Question[] = [
   {id:"mid224",exam:"mid2",lecture:"Cholinergic Antagonists",q:"Parasympatholytics should not be used in which conditions?",options:["Pre-anesthetic","Intestinal colic","Bronchospasm","Prostate enlargement"],answer:3,explanation:"Antimuscarinics relax bladder wall and contract sphincter → urinary retention → contraindicated in enlarged prostate (BPH)."},
   {id:"mid225",exam:"mid2",lecture:"Cholinergic Antagonists",q:"A medical student evaluating atropine doses. At a steady-state dose of 0.5 mg, what effect is expected?",options:["Coma","Skin dryness","Bradykinesia","Hallucinations"],answer:1,explanation:"At 0.5 mg atropine → initial paradoxical bradycardia (vagal M1 block), dry mouth/skin. Higher doses → tachycardia → mydriasis → hallucinations/CNS effects. The dose-dependent table: 0.5mg = mild dryness; 1mg = dry mouth + ↑HR; 2mg = mydriasis; 5mg+ = hallucinations/delirium."},
   {id:"mid226",exam:"mid2",lecture:"Cholinergic Antagonists",q:"Which of the following adverse effects is expected after administration of anticholinergic (atropine)?",options:["Urinary incontinence","Cycloplegia","Diarrhea","Salivation"],answer:1,explanation:"Atropine blocks M3 in ciliary muscle → paralysis of accommodation (cycloplegia) and mydriasis. It causes urinary RETENTION (not incontinence), constipation, and dry mouth."},
-  {id:"mid227",exam:"mid2",lecture:"Cholinergic Antagonists",q:"A patient with BPH is about to undergo prostatectomy. Which of the following is absolutely contraindicated?",options:["Scopolamine","Propranolol","Labetalol"],answer:0,explanation:"Scopolamine (antimuscarinic) → urinary retention → absolutely contraindicated in BPH patients, especially pre-surgery."},
+  {id:"mid227",exam:"mid2",lecture:"Cholinergic Antagonists",q:"A patient with BPH is about to undergo prostatectomy. Which of the following is absolutely contraindicated?",options:["Scopolamine","Propranolol","Labetalol","Metformin"],answer:0,explanation:"Scopolamine (antimuscarinic) blocks M3 receptors in the bladder → urinary retention → absolutely contraindicated in BPH, especially pre-operatively. Propranolol and labetalol are beta-blockers unrelated to urinary tone."},
   {id:"mid228",exam:"mid2",lecture:"Cholinergic Antagonists",q:"Why is ipratropium bromide preferred over scopolamine in treating chronic pulmonary obstruction?",options:["Better bioavailability by inhalation","Minor effects on the central nervous system","No effects on bronchial secretions","More potent than scopolamine"],answer:1,explanation:"Ipratropium is a quaternary amine → does not cross BBB → fewer CNS side effects. Inhaled route also limits systemic effects. Used in asthma and COPD."},
   {id:"mid229",exam:"mid2",lecture:"Cholinergic Antagonists",q:"A patient with COPD prescribed an inhaled anticholinergic. After prolonged use, he does NOT develop tolerance. Which drug?",options:["Tiotropium","Ipratropium","Succinylcholine","Benztropine"],answer:0,explanation:"Tiotropium is selective M3 blocker → does not block presynaptic M2 → no ↑ ACh → no tolerance. Also longer acting (once daily, for COPD maintenance)."},
   {id:"mid230",exam:"mid2",lecture:"Cholinergic Antagonists",q:"A 60-year-old male with urinary urgency/incontinence is prescribed a selective M3 antagonist. Which is most appropriate?",options:["Ipratropium","Scopolamine","Solifenacin","Pancuronium"],answer:2,explanation:"Solifenacin, darifenacin, oxybutynin are uroselective M3 blockers → relax bladder wall → used for urge incontinence and nocturnal enuresis."},
@@ -174,39 +174,39 @@ const MID2_QUESTIONS: Question[] = [
   {id:"mid237",exam:"mid2",lecture:"Cholinergic Antagonists",q:"A patient develops malignant hyperthermia (severe muscle rigidity, hyperthermia) after a NMB. Which drug?",options:["Succinylcholine","Atracurium","Rocuronium","Vecuronium"],answer:0,explanation:"Succinylcholine (depolarizing) can trigger malignant hyperthermia in genetically susceptible patients → treat with dantrolene."},
   {id:"mid238",exam:"mid2",lecture:"Cholinergic Antagonists",q:"An ICU patient with liver cirrhosis needs a competitive NMB for ventilator management. Which is the best choice?",options:["Suxamethonium","Pancuronium","Vecuronium","Rocuronium"],answer:1,explanation:"Atracurium/cisatracurium are actually preferred in liver disease (Hofmann elimination, not liver-dependent). Answer key says B (pancuronium) which is partially hepatically excreted. Accept B per answer key."},
   {id:"mid239",exam:"mid2",lecture:"Adrenergic Agonists",q:"A 17-year-old girl is brought to the ER 15 minutes after being stung by a bee. She has shortness of breath, face swelling, low blood pressure, and bilateral wheezing. Which drug is most appropriate?",options:["Norepinephrine","Dopamine","Epinephrine","Dobutamine"],answer:2,explanation:"Anaphylactic shock → epinephrine is drug of choice. α1 effect → vasoconstriction (raises BP); β2 effect → bronchodilation; β1 → ↑HR. Also stabilizes mast cells."},
-  {id:"mid240",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following is a non-selective beta agonist?",options:["Isoproterenol","Dobutamine","Phenylephrine","Epinephrine"],answer:0,explanation:"Isoproterenol stimulates both β1 and β2 equally (non-selective). Dobutamine is selective β1; phenylephrine is pure α1; epinephrine is α1+α2+β1+β2."},
-  {id:"mid241",exam:"mid2",lecture:"Adrenergic Agonists",q:"A patient with septic shock is treated with a drug that decreases total peripheral resistance at low doses and increases it at high doses. Which drug?",options:["Dopamine","Norepinephrine"],answer:0,explanation:"Dopamine: low dose → D1 receptors → vasodilation (↓TPR, ↑renal flow); intermediate dose → β1 → ↑cardiac output; high dose → α1 → vasoconstriction (↑TPR)."},
+  {id:"mid240",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following is a non-selective beta agonist?",options:["Dobutamine","Salbutamol","Isoproterenol","Terbutaline"],answer:2,explanation:"Isoproterenol stimulates both β1 (cardiac) and β2 (bronchial, vascular) equally → nonselective. Dobutamine is selective β1. Salbutamol and terbutaline are selective β2 agonists."},
+  {id:"mid241",exam:"mid2",lecture:"Adrenergic Agonists",q:"A patient with septic shock is treated with a drug that decreases total peripheral resistance at low doses and increases it at high doses. Which drug?",options:["Dopamine","Norepinephrine","Epinephrine","Phenylephrine"],answer:0,explanation:"Dopamine has dose-dependent receptor selectivity: low dose → D1 → vasodilation (↓TPR, ↑renal flow); moderate → β1 → ↑cardiac output; high → α1 → vasoconstriction (↑TPR). NE and phenylephrine cause vasoconstriction at all doses."},
   {id:"mid242",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which adrenergic agonist is primarily used as a vasopressor for septic shock?",options:["Epinephrine","Norepinephrine","Dobutamine","Dopamine"],answer:1,explanation:"Norepinephrine is the vasopressor of choice for septic shock — potent α1+α2 → strong vasoconstriction → ↑BP. Mainly α effects, minimal β2."},
   {id:"mid243",exam:"mid2",lecture:"Adrenergic Agonists",q:"Phenylephrine acts primarily through which mechanism?",options:["Alpha-1 agonist","Alpha-2 antagonist","Beta-1 agonist","Beta-2 agonist"],answer:0,explanation:"Phenylephrine is a pure α1 agonist → vasoconstriction → ↑BP, nasal decongestant (topical), reflex bradycardia when used IV."},
-  {id:"mid244",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following is a selective β1 agonist?",options:["Dobutamine","Dopamine"],answer:0,explanation:"Dobutamine is selective β1 → ↑myocardial contractility (inotropic effect) → used in acute heart failure. Dopamine is non-selective at various doses."},
-  {id:"mid245",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following is a mixed adrenergic agonist?",options:["Propranolol","Ephedrine"],answer:1,explanation:"Ephedrine has both direct (α and β receptor activation) and indirect (↑NE release) effects → \"mixed\" adrenergic agonist. Propranolol is a β blocker."},
+  {id:"mid244",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following is a selective β1 agonist?",options:["Dobutamine","Dopamine","Salbutamol","Salmeterol"],answer:0,explanation:"Dobutamine is a selective β1 agonist → ↑ myocardial contractility (positive inotrope) with minimal chronotropy. Used in acute heart failure. Salbutamol and salmeterol are selective β2 agonists."},
+  {id:"mid245",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following is a mixed adrenergic agonist?",options:["Propranolol","Ephedrine","Phenylephrine","Terbutaline"],answer:1,explanation:"Ephedrine has both direct (α and β receptor stimulation) and indirect (triggers NE release from nerve terminals) effects — classically described as a \"mixed\" adrenergic agonist. Propranolol is a β-blocker."},
   {id:"mid246",exam:"mid2",lecture:"Adrenergic Agonists",q:"An asthmatic patient given a non-selective β agonist to relieve bronchoconstriction. What adverse effect is expected?",options:["Tachycardia","Bradycardia","Hypotension","Bronchoconstriction"],answer:0,explanation:"Non-selective β agonist → β1 stimulation → tachycardia and palpitations (while β2 provides bronchodilation). Selective β2 agonists (salbutamol) preferred in asthma to minimize this."},
   {id:"mid247",exam:"mid2",lecture:"Adrenergic Agonists",q:"An 8-year-old girl with bronchial asthma (started therapy 2 weeks ago) presents with tremors, muscle cramps, palpitations. Which drug is responsible?",options:["Propranolol","Albuterol","Prazosin","Dobutamine"],answer:1,explanation:"Albuterol (salbutamol) is a β2 agonist. At higher doses/systemic absorption → β1-mediated tachycardia/palpitations + β2-mediated skeletal muscle tremors and cramps."},
-  {id:"mid248",exam:"mid2",lecture:"Adrenergic Agonists",q:"A second-trimester pregnant woman in labor was given a medication to relax the uterus and delay delivery. What adverse effect could occur?",options:["Tachycardia","Hypotension"],answer:0,explanation:"Tocolytics (β2 agonists like terbutaline, ritodrine) relax uterine smooth muscle (β2). β1 stimulation → tachycardia is the main adverse effect."},
+  {id:"mid248",exam:"mid2",lecture:"Adrenergic Agonists",q:"A second-trimester pregnant woman in labor was given a medication to relax the uterus and delay delivery. What adverse effect could occur?",options:["Tachycardia","Hypotension","Bradycardia","Bronchoconstriction"],answer:0,explanation:"Tocolytics (β2 agonists: terbutaline, ritodrine) relax uterine smooth muscle (β2). Spillover onto cardiac β1 receptors → tachycardia is the main cardiovascular adverse effect."},
   {id:"mid249",exam:"mid2",lecture:"Adrenergic Agonists",q:"The following drug can relax the pregnant uterus:",options:["Noradrenaline","Acetylcholine","Terbutaline","Propranolol"],answer:2,explanation:"Terbutaline is a β2 agonist → relaxes uterine smooth muscle → used as tocolytic (delays premature labor)."},
-  {id:"mid250",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following drugs is used to treat nasal congestion?",options:["An alpha-1 agonist"],answer:0,explanation:"α1 agonists (phenylephrine, oxymetazoline) → vasoconstrict nasal mucosal blood vessels → decongestant. Prolonged use → atrophic rhinitis (rebound congestion)."},
+  {id:"mid250",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following drugs is used to treat nasal congestion?",options:["Alpha-1 agonist","Beta-2 agonist","Alpha-2 antagonist","Dopamine agonist"],answer:0,explanation:"α1 agonists (phenylephrine, oxymetazoline, xylometazoline) vasoconstrict nasal mucosal vessels → reduce congestion. Prolonged use causes atrophic rhinitis (rebound congestion)."},
   {id:"mid251",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following is a result of prolonged use of phenylephrine as a nasal decongestant?",options:["Epistaxis","Atrophic rhinitis","Chronic cough","Hypertrophy of nasal mucosa"],answer:1,explanation:"Prolonged α1 agonist nasal decongestant → receptor downregulation → rebound congestion → atrophic rhinitis (rhinitis medicamentosa)."},
   {id:"mid252",exam:"mid2",lecture:"Adrenergic Agonists",q:"A patient taking MAO inhibitors ingests tyramine-rich food (red wine, aged cheese). Which acute response is most likely?",options:["No response","Stimulation of NE release","Inhibition of ACh release","Inhibition of NE release"],answer:1,explanation:"MAOIs block MAO → tyramine not metabolized → enters nerve terminals → massive NE release → hypertensive crisis (\"cheese reaction\")."},
   {id:"mid253",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following is a common adverse effect of amphetamines?",options:["Bradycardia","Somnolence","Constipation","Hypertension"],answer:3,explanation:"Amphetamines → indirect sympathomimetics → massive NE/DA release → hypertension, tachycardia, insomnia, anorexia."},
   {id:"mid254",exam:"mid2",lecture:"Adrenergic Agonists",q:"Which of the following drugs can be used to treat hypertension?",options:["Norepinephrine","Phenylephrine","Alpha methyldopa","Tyramine"],answer:2,explanation:"Alpha-methyldopa is a central α2 agonist → ↓ sympathetic outflow → ↓ BP. Preferred in pregnancy-induced hypertension."},
-  {id:"mid255",exam:"mid2",lecture:"Adrenergic Agonists",q:"A doctor administered norepinephrine IV for septic shock; it caused tissue necrosis at the injection site. What is the best antidote?",options:["Phentolamine","Timolol","Terazosin"],answer:0,explanation:"NE extravasation → intense α1-mediated vasoconstriction → tissue necrosis. Phentolamine (non-selective α blocker) injected locally reverses vasoconstriction."},
-  {id:"mid256",exam:"mid2",lecture:"Adrenergic Agonists",q:"Using epinephrine with local anesthetic will:",options:["Prolong duration of action","Shorten onset of action","Rapid onset of action"],answer:0,explanation:"Epinephrine + local anesthetic: α1-mediated local vasoconstriction → ↓ absorption of local anesthetic → prolonged duration of action + reduced systemic toxicity."},
+  {id:"mid255",exam:"mid2",lecture:"Adrenergic Agonists",q:"A doctor administered norepinephrine IV for septic shock; it caused tissue necrosis at the injection site. What is the best antidote?",options:["Phentolamine","Timolol","Terazosin","Prazosin"],answer:0,explanation:"NE extravasation → intense α1 vasoconstriction → ischemic tissue necrosis. Phentolamine (non-selective α blocker) injected locally reverses vasoconstriction and restores blood flow. All options are alpha blockers but phentolamine is the agent used for this specific indication."},
+  {id:"mid256",exam:"mid2",lecture:"Adrenergic Agonists",q:"Using epinephrine with local anesthetic will:",options:["Prolong the duration of anesthetic action","Shorten the onset of action","Cause rapid systemic distribution","Increase systemic toxicity of the local anesthetic"],answer:0,explanation:"Epinephrine causes local vasoconstriction (α1) → reduces absorption of local anesthetic from injection site → prolongs duration of action + reduces systemic toxicity."},
   {id:"mid257",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A 58-year-old man with hypertension is started on a drug that selectively blocks α1 receptors. Which effect is most likely?",options:["Increased heart rate","Vasoconstriction","Decreased peripheral resistance","Bronchoconstriction"],answer:2,explanation:"α1 blockade → vasodilation → ↓ peripheral resistance → ↓ BP. Used for hypertension and BPH."},
   {id:"mid258",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A patient with BPH without hypertension is prescribed a drug to improve urinary symptoms. Which is most appropriate?",options:["Tamsulosin","Dobutamine","Clonidine","Propranolol"],answer:0,explanation:"Tamsulosin is a selective α1A blocker (uroselective) → relaxes smooth muscle of prostate/bladder neck → improves urinary flow in BPH without significant BP drop."},
-  {id:"mid259",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A 60-year-old asthmatic man with hypertension and slightly enlarged prostate. Which medication treats both conditions?",options:["Prazosin","Tamsulosin","Labetalol"],answer:0,explanation:"Prazosin (α1 blocker) lowers BP and helps BPH. Tamsulosin (selective α1A) helps BPH. Either works; some keys accept both A and B. Labetalol is CI in asthma."},
-  {id:"mid260",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A patient taking an α-blocker complains of dizziness when standing. What is the most likely mechanism?",options:["Increased vagal tone","Reduced venous return due to vasodilation","Increased cardiac output","Bronchospasm"],answer:1,explanation:"α1 blockade → vasodilation (venodilation) → ↓ venous return → orthostatic (postural) hypotension, especially with first dose (\"first-dose effect\" of prazosin)."},
+  {id:"mid259",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A 60-year-old asthmatic man with hypertension and slightly enlarged prostate. Which medication treats both conditions?",options:["Prazosin","Tamsulosin","Labetalol","Propranolol"],answer:0,explanation:"Prazosin (non-selective α1 blocker) lowers BP by vasodilation and relaxes prostate/bladder neck smooth muscle → treats both HTN and BPH. Labetalol and propranolol are beta-blockers (CI in asthma). Tamsulosin (selective α1A) helps BPH but has minimal BP effect."},
+  {id:"mid260",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A patient taking an α-blocker complains of dizziness when standing. What is the most likely mechanism?",options:["Ketoconazole","Fluconazole","Amphotericin B","Nystatin"],answer:0,explanation:"Ketoconazole inhibits CYP enzymes → ↓ testosterone and adrenal steroid synthesis → gynecomastia, decreased libido, and menstrual irregularities. This adrenal/gonadal side effect is unique to ketoconazole among antifungals."},
   {id:"mid261",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which of the following best describes the effect of α1 blockade on blood vessels?",options:["Vasoconstriction","Vasodilation","No change","Increased contractility"],answer:1,explanation:"α1 receptor activation → vasoconstriction. Blocking α1 → removes vasoconstrictor tone → vasodilation."},
-  {id:"mid262",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which is most likely to cause reflex tachycardia?",options:["Prazosin","Propranolol","Timolol","Metoprolol"],answer:0,explanation:"Prazosin (α1 blocker) → vasodilation → ↓ BP → baroreceptor reflex → ↑ sympathetic activity → reflex tachycardia (compensatory)."},
+  {id:"mid262",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which is most likely to cause reflex tachycardia?",options:["Doxorubicin","Methotrexate","Cyclophosphamide","Vincristine"],answer:0,explanation:"Doxorubicin (anthracycline) causes irreversible dose-dependent dilated cardiomyopathy via free-radical damage. Iron chelator dexrazoxane helps prevent it."},
   {id:"mid263",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which of the following drugs blocks both α and β receptors?",options:["Propranolol","Labetalol","Metoprolol","Tamsulosin"],answer:1,explanation:"Labetalol blocks both α1 and β receptors → combined vasodilation + reduced cardiac output → useful in hypertensive emergencies, pregnancy-induced HTN."},
   {id:"mid264",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which of the following is the primary mechanism of β-blockers in hypertension?",options:["Increased peripheral resistance","Increased cardiac output","Decreased cardiac output and renin release","Increased sodium retention"],answer:2,explanation:"β-blockers: β1 blockade → ↓ HR and contractility → ↓ CO; ↓ renin release from kidney (β1) → ↓ angiotensin II → ↓ BP."},
   {id:"mid265",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which of the following drugs is a non-selective β-blocker?",options:["Metoprolol","Atenolol","Propranolol","Nebivolol"],answer:2,explanation:"Propranolol is non-selective (β1+β2). Metoprolol, atenolol, nebivolol are selective β1 (cardioselective) blockers."},
-  {id:"mid266",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A nonselective β-blocker is given to a patient with asthma. What is the most likely adverse effect?",options:["Bronchodilation","Bronchospasm","Increased mucus secretion","Vasodilation"],answer:1,explanation:"β2 blockade in lungs → bronchoconstriction → dangerous in asthma/COPD. Only cardioselective β1 blockers (metoprolol) are used with caution if needed."},
+  {id:"mid266",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A nonselective β-blocker is given to a patient with asthma. What is the most likely adverse effect?",options:["Mutation of topoisomerase I","Mutation of DNA gyrase","Production of an active efflux pump","Beta-lactamase production"],answer:1,explanation:"Fluoroquinolone resistance: primarily via mutations in DNA gyrase (topoisomerase II) reducing drug binding affinity. Efflux pumps (C) are a secondary mechanism. Beta-lactamase (D) is irrelevant to quinolones."},
   {id:"mid267",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which β-blocker is safest in a patient with asthma?",options:["Propranolol","Timolol","Metoprolol","Nadolol"],answer:2,explanation:"Metoprolol is cardioselective (β1 > β2) → less bronchospasm risk. Propranolol, timolol, nadolol are non-selective → contraindicated in asthma."},
-  {id:"mid268",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A patient with hypertension and asthma was given an adrenergic blocker, after which asthma worsened. What is the best alternative?",options:["Propranolol","Metoprolol"],answer:1,explanation:"Switch to cardioselective β1 blocker (metoprolol, atenolol) → less β2 blockade → fewer respiratory effects."},
+  {id:"mid268",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A patient with hypertension and asthma was given an adrenergic blocker, after which asthma worsened. What is the best alternative?",options:["Propranolol","Metoprolol","Timolol","Carvedilol"],answer:1,explanation:"Switch to a cardioselective β1 blocker (metoprolol, atenolol) → minimal β2 blockade → less bronchoconstriction. Propranolol, timolol, and carvedilol are non-selective → worsen asthma."},
   {id:"mid269",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A patient taking a β-blocker develops fatigue and bradycardia. Which receptor is primarily responsible?",options:["α1","β1","β2","M3"],answer:1,explanation:"β1 blockade in heart → ↓ HR (bradycardia) and ↓ contractility → fatigue."},
   {id:"mid270",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A diabetic patient taking a nonselective β-blocker. Which symptom of hypoglycemia may be masked?",options:["Sweating","Tachycardia","Confusion","Hunger"],answer:1,explanation:"β-blockers mask adrenergic signs of hypoglycemia (tachycardia, palpitations, tremor). Sweating is cholinergic → NOT masked. Confusion and hunger are central signs → not masked."},
   {id:"mid271",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which symptoms of hypoglycemia are masked by beta blockers?",options:["Sweating only","Tremor and tachycardia","Confusion only","Polyuria"],answer:1,explanation:"β-blockers mask β-adrenergic signs: tachycardia + tremor. Sweating (cholinergic) and CNS symptoms (confusion) are NOT masked."},
-  {id:"mid272",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A patient on chronic β-blocker therapy suddenly stops the medication. What is the expected outcome?",options:["Hypotension","Bradycardia","Rebound tachycardia","Bronchodilation"],answer:2,explanation:"Abrupt withdrawal → upregulation of β receptors → rebound sympathetic stimulation → tachycardia, angina, hypertension. Must taper gradually."},
+  {id:"mid272",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A patient on chronic β-blocker therapy suddenly stops the medication. What is the expected outcome?",options:["Receptor downregulation due to prolonged drug exposure","Induction of hepatic enzymes that accelerate ipratropium clearance","Blockade of presynaptic M2 autoreceptors increases ACh release, overcoming M3 blockade","Formation of neutralizing antibodies against ipratropium"],answer:2,explanation:"Ipratropium is non-selective (blocks M2 + M3). Blocking presynaptic M2 autoreceptors removes the negative feedback → ↑ ACh release → compensates for M3 blockade → tolerance develops. Tiotropium (selective M3) does not block M2 → no tolerance."},
   {id:"mid273",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which receptor blockade is responsible for decreased aqueous humor production in glaucoma?",options:["α1","α2","β1","β2"],answer:3,explanation:"β2 blockade in ciliary epithelium → ↓ aqueous humor production → ↓ IOP. Example: timolol eye drops for glaucoma."},
   {id:"mid274",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"A patient with glaucoma is treated with a β-blocker eye drop. What is the main mechanism?",options:["Increased aqueous humor outflow","Decreased aqueous humor production","Increased pupil size","Increased ciliary contraction"],answer:1,explanation:"Timolol (β1+β2 blocker) eye drop → ↓ aqueous humor secretion by ciliary body → ↓ IOP. Does not affect pupil size (unlike miotics or mydratics)."},
   {id:"mid275",exam:"mid2",lecture:"Adrenergic Receptors & Blockers",q:"Which β-blocker is a beta-receptor antagonist primarily used for glaucoma?",options:["Nadolol","Pilocarpine","Timolol","Propranolol"],answer:2,explanation:"Timolol (non-selective β-blocker) topical → ↓ aqueous humor → glaucoma treatment."},
@@ -228,46 +228,46 @@ const MID2_QUESTIONS: Question[] = [
   {id:"mid291",exam:"mid2",lecture:"Eicosanoids & Kinins",q:"Which leukotriene is responsible for neutrophil chemotaxis and inflammation?",options:["LTB4","LTD4","LTE4","LTF4"],answer:0,explanation:"LTB4 is a potent neutrophil chemoattractant. LTC4, LTD4, LTE4 (cysteinyl leukotrienes) cause bronchoconstriction and are blocked by montelukast."},
   {id:"mid292",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"NSAIDs exert their therapeutic effect by inhibiting which enzyme?",options:["Phospholipase A2","Cyclooxygenase (COX)","Lipoxygenase","Thromboxane synthase"],answer:1,explanation:"NSAIDs inhibit COX-1 and/or COX-2 → ↓ prostaglandin and thromboxane synthesis → anti-inflammatory, analgesic, antipyretic effects."},
   {id:"mid293",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"A patient with myocardial infarction is given aspirin to prevent thrombus formation. What is the appropriate dose?",options:["81 mg once daily","4 g per day","8 g per day","650 mg every 6 hours"],answer:0,explanation:"Aspirin at low dose (75-150 mg/day): irreversibly inhibits platelet COX-1 → ↓ TXA2 → antiplatelet effect. Higher doses needed for anti-inflammatory (4-8g/day). Low dose preferred for cardiovascular prophylaxis."},
-  {id:"mid294",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"Which of the following is a reversible inhibitor of platelet cyclooxygenase?",options:["Leukotrienes","Ibuprofen","Aspirin"],answer:1,explanation:"Ibuprofen reversibly inhibits COX. Aspirin is IRREVERSIBLE (acetylation). Platelets have no nucleus → cannot synthesize new COX → aspirin effect lasts platelet lifetime (7-10 days)."},
+  {id:"mid294",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"Which of the following is a reversible inhibitor of platelet cyclooxygenase?",options:["Leukotrienes","Ibuprofen","Aspirin","Celecoxib"],answer:1,explanation:"Ibuprofen (and most NSAIDs) reversibly inhibit COX-1/COX-2 → platelet function recovers when drug is eliminated. Aspirin irreversibly acetylates COX-1 in platelets → effect lasts platelet lifespan (7–10 days). Celecoxib selectively inhibits COX-2 (not platelet COX-1)."},
   {id:"mid295",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"Celecoxib contraindication:",options:["Peptic ulcer","Gout","Myocardial infarction"],answer:2,explanation:"Celecoxib (COX-2 selective): reduced GI toxicity but ↑ cardiovascular risk (thrombotic events, MI). Contraindicated in patients with history of MI or cardiovascular disease."},
-  {id:"mid296",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"Which of the following patient characteristics is the most compelling reason for avoiding celecoxib?",options:["History of alcohol abuse","History of gout","History of myocardial infarction","History of osteoporosis","History of peptic ulcer disease"],answer:2,explanation:"The most compelling CI for celecoxib is cardiovascular disease (MI, stroke risk) due to ↑ thrombosis risk from unopposed PGI2 inhibition."},
+  {id:"mid296",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"Which of the following patient characteristics is the most compelling reason for avoiding celecoxib?",options:["History of peptic ulcer disease","History of gout","History of myocardial infarction","History of rheumatoid arthritis"],answer:2,explanation:"COX-2 inhibitors (celecoxib) selectively inhibit COX-2 → ↓ PGI2 (vasodilatory) without reducing thromboxane A2 → prothrombotic state → increased risk of MI and stroke. Contraindicated in patients with existing cardiovascular disease."},
   {id:"mid297",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"A 16-year-old girl with aspirin overdose. Which syndrome is most likely?",options:["Bone marrow suppression and aplastic anemia","Fever, hepatic dysfunction, encephalopathy (Reye's)","Hyperthermia, metabolic acidosis, and coma (salicylism)","Rapid, fulminant hepatic failure","Rash, interstitial nephritis, and acute renal failure"],answer:2,explanation:"Salicylate (aspirin) overdose → salicylism: tinnitus, nausea; severe: hyperthermia, metabolic acidosis, respiratory alkalosis (CNS stimulation then depression), coma. Treatment: alkalinize urine (NaHCO3) + renal excretion."},
   {id:"mid298",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"A patient takes an NSAID and develops a gastric ulcer. What type of ADR is this?",options:["Type C","Type B","Type D","Type A"],answer:3,explanation:"Type A (Augmented) ADR = predictable, dose-related, based on drug's pharmacological action. NSAID → gastric ulcer from COX-1 inhibition (↓ protective prostaglandins) is Type A. Anaphylaxis to penicillin = Type B (bizarre/unpredictable)."},
   {id:"mid299",exam:"mid2",lecture:"NSAIDs & Paracetamol",q:"Which of the following is an example of an augmented (Type A) adverse drug reaction?",options:["Cushing syndrome with corticosteroids","Anaphylaxis with penicillin","Bleeding with warfarin","Peptic ulcer with NSAIDs"],answer:2,explanation:"Type A reactions are dose-dependent and predictable. Bleeding with warfarin = predictable extension of pharmacological effect = Type A. Cushing's with corticosteroids = also Type A. Anaphylaxis = Type B. Answer key lists C."},
   {id:"mid2100",exam:"mid2",lecture:"Gout",q:"What is the first-line treatment of acute gout?",options:["Allopurinol","Indomethacin","Probenecid","Colchicine (prophylaxis)"],answer:1,explanation:"NSAIDs (especially indomethacin) are first-line for acute gout attacks. Allopurinol and probenecid are for chronic urate-lowering therapy (NOT given during acute attack). Colchicine is second-line."},
   {id:"mid2101",exam:"mid2",lecture:"Gout",q:"A patient with a history of MI is switched to another xanthine oxidase inhibitor. What adverse effect should be monitored?",options:["Stevens-Johnson syndrome","Nephrolithiasis","Neuropathy","Increased risk of cardiovascular events"],answer:3,explanation:"Febuxostat (xanthine oxidase inhibitor, alternative to allopurinol) → ↑ cardiovascular mortality risk in patients with established CV disease. Allopurinol carries risk of SJS/hypersensitivity rash."},
-  {id:"mid2102",exam:"mid2",lecture:"Gout",q:"Which of the following drugs if given with allopurinol must be reduced by 25%?",options:["Mercaptopurine","Mechlorethamine","Methotrexate"],answer:0,explanation:"Allopurinol inhibits xanthine oxidase → ↓ metabolism of 6-mercaptopurine (antineoplastic) and azathioprine → ↑ toxicity. Dose of 6-MP must be reduced by 75% (to 25% of original) when used with allopurinol."},
+  {id:"mid2102",exam:"mid2",lecture:"Gout",q:"Which of the following drugs if given with allopurinol must be reduced by 25%?",options:["Mercaptopurine","Mechlorethamine","Methotrexate","Cisplatin"],answer:0,explanation:"Allopurinol inhibits xanthine oxidase → ↓ 6-MP metabolism → accumulation → severe myelosuppression. Dose must be reduced to 25% of normal when used with allopurinol."},
   {id:"mid2103",exam:"mid2",lecture:"DMARDs",q:"What is the first-line treatment of rheumatoid arthritis?",options:["Methotrexate","Ibuprofen","Prednisolone","Hydroxychloroquine"],answer:0,explanation:"Methotrexate is the anchor drug / first-line csDMARD for RA. Given once weekly, requires folic acid supplementation."},
   {id:"mid2104",exam:"mid2",lecture:"DMARDs",q:"Which drug is associated with retinal toxicity and is used in autoimmune diseases?",options:["Methotrexate","Hydroxychloroquine","Sulfasalazine","Leflunomide"],answer:1,explanation:"Hydroxychloroquine deposits in melanin-containing tissues → retinal toxicity (maculopathy). Requires ophthalmologic exam every 6-12 months. Used for SLE, RA."},
   {id:"mid2105",exam:"mid2",lecture:"DMARDs",q:"A patient with severe active RA is started on a targeted synthetic DMARD that inhibits the JAK-STAT signaling pathway. Which adverse effect carries a \"black box\" warning?",options:["Hypothyroidism","Hypoglycemia","Thromboembolic events","Nephrotoxicity"],answer:2,explanation:"JAK inhibitors (tofacitinib, baricitinib) → black box warning for: thromboembolism, serious infections, malignancies, and cardiovascular events. Thrombosis is the key boxed warning."},
-  {id:"mid2106",exam:"mid2",lecture:"DMARDs",q:"A woman on methotrexate becomes pregnant. What is the right protocol?",options:["Continue treatment but increase folic acid intake","Immediately stop treatment because the drug will decrease DNA synthesis in baby causing birth defects","Use leflunomide because it has less effect in pregnancy"],answer:1,explanation:"Methotrexate is teratogenic (Category X) — folic acid antagonist → neural tube defects, craniofacial abnormalities. Must stop and use contraception. Leflunomide is ALSO teratogenic (even worse — very long half-life, requires cholestyramine washout)."},
-  {id:"mid2107",exam:"mid2",lecture:"DMARDs",q:"Which of the following drugs contains both an anti-inflammatory and antimicrobial component?",options:["Sulfasalazine"],answer:0,explanation:"Sulfasalazine is cleaved in the colon into 5-aminosalicylate (anti-inflammatory) + sulfapyridine (antimicrobial sulfonamide). Used in RA and inflammatory bowel disease."},
+  {id:"mid2106",exam:"mid2",lecture:"DMARDs",q:"A woman on methotrexate becomes pregnant. What is the right protocol?",options:["Continue treatment and increase folic acid supplementation","Stop methotrexate immediately due to teratogenicity","Replace with leflunomide which is safer in pregnancy","Switch to hydroxychloroquine and reduce dose gradually"],answer:1,explanation:"Methotrexate is Category X — teratogenic (folic acid antagonist → neural tube defects). Must be stopped immediately; effective contraception required. Leflunomide is ALSO teratogenic and has a very long half-life requiring cholestyramine washout."},
+  {id:"mid2107",exam:"mid2",lecture:"DMARDs",q:"Which of the following drugs contains both an anti-inflammatory and antimicrobial component?",options:["Sulfasalazine","Methotrexate","Hydroxychloroquine","Leflunomide"],answer:0,explanation:"Sulfasalazine = sulfapyridine (sulfonamide antimicrobial) + 5-aminosalicylate (anti-inflammatory). Cleaved by colonic bacteria. Used in RA and inflammatory bowel disease."},
   {id:"mid2108",exam:"mid2",lecture:"DMARDs",q:"Sulfasalazine is combined with what?",options:["5-aminosalicylate"],answer:0,explanation:"Sulfasalazine = sulfapyridine + 5-aminosalicylic acid (mesalazine). The 5-ASA component provides local anti-inflammatory action in the gut."},
-  {id:"mid2109",exam:"mid2",lecture:"Mixed / Other Questions",q:"Which drug is used for testicular carcinoma and can cause nephrotoxicity?",options:["Cisplatin","Bleomycin","Vinblastine"],answer:0,explanation:"Cisplatin → nephrotoxicity (platinum compound, alkylating-like). Bleomycin → pulmonary fibrosis. Vinblastine → neurotoxicity."},
+  {id:"mid2109",exam:"mid2",lecture:"Mixed / Other Questions",q:"Which drug is used for testicular carcinoma and can cause nephrotoxicity?",options:["Cisplatin","Bleomycin","Vinblastine","Methotrexate"],answer:0,explanation:"Cisplatin causes proximal tubular nephrotoxicity → prevented by intensive IV hydration. BEP regimen (bleomycin + etoposide + cisplatin). Bleomycin → pulmonary toxicity; vinblastine → neurotoxicity."},
   {id:"mid2110",exam:"mid2",lecture:"Mixed / Other Questions",q:"Which drug would most likely cause cardiac problems?",options:["Doxorubicin"],answer:0,explanation:"Doxorubicin (anthracycline) → cardiotoxicity (dilated cardiomyopathy) via free radical damage. Cumulative dose-dependent."},
-  {id:"mid2111",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the mechanism of action of methotrexate (antineoplastic context)?",options:["Inhibiting dihydrofolate reductase (DHFR)"],answer:0,explanation:"Methotrexate inhibits DHFR → ↓ tetrahydrofolate → ↓ thymidylate synthesis → ↓ DNA synthesis. At low doses for RA also ↑ adenosine (anti-inflammatory)."},
-  {id:"mid2112",exam:"mid2",lecture:"Mixed / Other Questions",q:"Which of the following treatments needs leucovorin to increase its efficiency?",options:["5-Fluorouracil"],answer:0,explanation:"5-FU + leucovorin (folinic acid): leucovorin stabilizes the 5-FU–thymidylate synthase complex → ↑ cytotoxicity. Used in colorectal cancer."},
-  {id:"mid2113",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the mechanism of action of 5-fluorouracil?",options:["Thymidylate synthase inhibition"],answer:0,explanation:"5-FU (as FdUMP) inhibits thymidylate synthase → ↓ dTMP synthesis → ↓ DNA synthesis. Pyrimidine antimetabolite."},
-  {id:"mid2114",exam:"mid2",lecture:"Mixed / Other Questions",q:"The first-line treatment for breast cancer with positive receptor:",options:["Interferons","Tamoxifen","Trastuzumab"],answer:1,explanation:"ER-positive breast cancer → tamoxifen (selective estrogen receptor modulator, SERM). HER2-positive → trastuzumab (monoclonal antibody)."},
-  {id:"mid2115",exam:"mid2",lecture:"Mixed / Other Questions",q:"Administration of filgrastim (G-CSF) is mainly to do what?",options:["Minimize systemic infection"],answer:0,explanation:"G-CSF (filgrastim) stimulates neutrophil production → used to prevent infection in chemotherapy-induced neutropenia (febrile neutropenia prophylaxis)."},
+  {id:"mid2111",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the mechanism of action of methotrexate (antineoplastic context)?",options:["Inhibition of dihydrofolate reductase","Inhibition of topoisomerase II","Alkylation of DNA at the N7 position of guanine","Inhibition of thymidylate synthase by forming the FdUMP complex"],answer:0,explanation:"MTX inhibits DHFR → blocks FH2→FH4 conversion → depletes tetrahydrofolate → inhibits both thymidylate synthase (indirect) and purine synthesis. Leucovorin bypasses the block."},
+  {id:"mid2112",exam:"mid2",lecture:"Mixed / Other Questions",q:"Which of the following treatments needs leucovorin to increase its efficiency?",options:["5-Fluorouracil","Methotrexate","6-Mercaptopurine","Cyclophosphamide"],answer:0,explanation:"5-FU + leucovorin: leucovorin (reduced folate) stabilizes the ternary complex of FdUMP-thymidylate synthase → prolongs enzyme inhibition → enhanced cytotoxicity. Used in colorectal cancer."},
+  {id:"mid2113",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the mechanism of action of 5-fluorouracil?",options:["Irreversible inhibition of thymidylate synthase","Inhibition of dihydrofolate reductase","Alkylation of DNA at the N7 position of guanine","Inhibition of topoisomerase I"],answer:0,explanation:"5-FU → FdUMP → irreversibly inhibits thymidylate synthase → ↓ dTMP synthesis → ↓ DNA synthesis. It is a pyrimidine antimetabolite, CCS (S-phase)."},
+  {id:"mid2114",exam:"mid2",lecture:"Mixed / Other Questions",q:"The first-line treatment for breast cancer with positive receptor:",options:["Interferons","Tamoxifen","Trastuzumab","Cyclophosphamide"],answer:1,explanation:"Tamoxifen (SERM) competitively blocks estrogen receptors in breast tissue → first-line for ER+ breast cancer. Trastuzumab is for HER2+ cancer. Interferons and cyclophosphamide are non-targeted."},
+  {id:"mid2115",exam:"mid2",lecture:"Mixed / Other Questions",q:"Administration of filgrastim (G-CSF) is mainly to do what?",options:["Minimize systemic infection in neutropenic patients","Reduce tumor mass in solid tumors","Prevent cardiotoxicity from anthracyclines","Enhance drug delivery to tumor cells"],answer:0,explanation:"Filgrastim (G-CSF) stimulates bone marrow neutrophil production → prevents febrile neutropenia from chemotherapy. Also used after paclitaxel to prevent severe neutropenia."},
   {id:"mid2116",exam:"mid2",lecture:"Mixed / Other Questions",q:"The half-life of a drug is 3 hours. How much time will it take for this drug to be completely eliminated?",options:["9 hours","12 hours","21 hours","4 hours"],answer:1,explanation:"Drug elimination takes ~4-5 half-lives to reach >97% elimination. 5 × 3h = 15h (some say 4 × 3h = 12h for practical purposes). Answer key says 12h."},
   {id:"mid2117",exam:"mid2",lecture:"Mixed / Other Questions",q:"Which enzyme is the main target of zidovudine?",options:["RNA synthesis","Protease inhibitor","Nucleoside reverse transcriptase inhibitors","Non-nucleoside reverse transcriptase inhibitors"],answer:2,explanation:"Zidovudine (AZT) is an NRTI — inhibits HIV reverse transcriptase (nucleoside analog chain terminator)."},
-  {id:"mid2118",exam:"mid2",lecture:"Mixed / Other Questions",q:"A female patient with cryptococcal meningitis refused IV medication. What is the best drug?",options:["Fluconazole","Amphotericin B","Ketoconazole"],answer:0,explanation:"Fluconazole — oral bioavailability ~90%, penetrates CNS well, used for cryptococcal meningitis maintenance therapy (or when IV amphotericin B not possible)."},
+  {id:"mid2118",exam:"mid2",lecture:"Mixed / Other Questions",q:"A female patient with cryptococcal meningitis refused IV medication. What is the best drug?",options:["Fluconazole","Amphotericin B","Ketoconazole","Flucytosine"],answer:0,explanation:"Fluconazole has excellent oral bioavailability (~90%) and good CNS penetration → appropriate oral alternative for cryptococcal meningitis maintenance therapy. Amphotericin B is IV only; ketoconazole does not penetrate CSF."},
   {id:"mid2119",exam:"mid2",lecture:"Mixed / Other Questions",q:"A patient has recurrent UTIs and ciprofloxacin resistance. What is the most likely cause?",options:["Mutation of topoisomerase I","Mutation of DNA gyrase","Production of an active efflux pump"],answer:1,explanation:"Fluoroquinolone resistance: primarily via mutations in DNA gyrase (topoisomerase II) or topoisomerase IV. Efflux pumps are also a mechanism."},
   {id:"mid2120",exam:"mid2",lecture:"Mixed / Other Questions",q:"A patient with S. pneumoniae infection and penicillin allergy (bronchospasm). Which is the best treatment?",options:["Ciprofloxacin","Cefaclor","Ampicillin","Erythromycin"],answer:3,explanation:"Penicillin allergy (anaphylaxis/bronchospasm) → avoid penicillins AND cephalosporins (cross-reactivity). Erythromycin (macrolide) or azithromycin are alternatives for S. pneumoniae in penicillin-allergic patients."},
-  {id:"mid2121",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the main role of clavulanic acid in Augmentin?",options:["Enables it to pass through the BBB","Protect from beta-lactamase"],answer:1,explanation:"Clavulanic acid is a β-lactamase inhibitor (suicide inhibitor) → binds and inactivates bacterial β-lactamase → protects amoxicillin from enzymatic degradation."},
+  {id:"mid2121",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the main role of clavulanic acid in Augmentin?",options:["Enables amoxicillin to cross the blood-brain barrier","Protects amoxicillin from beta-lactamase destruction","Increases amoxicillin absorption from the GI tract","Prolongs the half-life of amoxicillin in plasma"],answer:1,explanation:"Clavulanic acid is a beta-lactamase inhibitor — it irreversibly binds and inhibits bacterial beta-lactamase → protects amoxicillin from enzymatic hydrolysis → extends its spectrum to beta-lactamase-producing organisms."},
   {id:"mid2122",exam:"mid2",lecture:"Mixed / Other Questions",q:"A boy has pneumonia and was treated with an antibiotic, but it didn't affect him. What is the next antibiotic?",options:["Amoxicillin","Ampicillin","Fluoxetine","Vancomycin"],answer:3,explanation:"If standard antibiotics fail for pneumonia (resistant Streptococcus or MRSA) → vancomycin is the drug of last resort for resistant gram-positive organisms."},
-  {id:"mid2123",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the mechanism of action of terbinafine?",options:["Accumulation of squalene"],answer:0,explanation:"Terbinafine inhibits squalene epoxidase → ↑ squalene accumulation (toxic to fungi) + ↓ ergosterol synthesis. Used for dermatophyte fungal infections (nails, skin)."},
-  {id:"mid2124",exam:"mid2",lecture:"Mixed / Other Questions",q:"A doctor wanted to give a neonate chloramphenicol but was worried about gray baby syndrome. What would increase the baby's risk?",options:["Decreased conjugation in the liver","Decreased excretion"],answer:0,explanation:"Neonates have immature UDP-glucuronosyltransferase (UGT) → can't conjugate chloramphenicol → accumulation → gray baby syndrome (cardiovascular collapse, ashen color, abdominal distension)."},
-  {id:"mid2125",exam:"mid2",lecture:"Mixed / Other Questions",q:"Which of the following binds reversibly to the 50S ribosomal subunit and inhibits the peptidyl transferase reaction?",options:["Chloramphenicol","Linezolid"],answer:0,explanation:"Chloramphenicol binds 50S → inhibits peptidyl transferase → bacteriostatic. Linezolid also binds 23S rRNA of 50S but different mechanism (prevents 70S initiation complex formation)."},
-  {id:"mid2126",exam:"mid2",lecture:"Mixed / Other Questions",q:"A 21-year-old with cutaneous anthrax is prescribed ciprofloxacin. Which should he avoid taking with ciprofloxacin?",options:["Alcohol","Grapefruit juice","Antacid"],answer:2,explanation:"Antacids (containing Ca²⁺, Mg²⁺, Al³⁺) chelate fluoroquinolones → ↓ absorption by up to 90%. Must be taken 2 hours apart from antacids, dairy products, iron supplements."},
-  {id:"mid2127",exam:"mid2",lecture:"Mixed / Other Questions",q:"A patient is given a drug targeting dihydropteroate synthase. What is the most common adverse effect?",options:["Skin rash","Kernicterus in neonates"],answer:1,explanation:"Sulfonamides (dihydropteroate synthase inhibitors): most common AE = skin rash. In neonates: kernicterus (displace bilirubin from albumin). Key says B but A (skin rash) is classically the most common adverse effect overall."},
-  {id:"mid2128",exam:"mid2",lecture:"Mixed / Other Questions",q:"A drug made of sulfamethoxazole and trimethoprim. Mechanism of action?",options:["Inhibiting folate synthesis and reduction","Inhibiting two sequential steps in nucleic acid synthesis"],answer:1,explanation:"Co-trimoxazole (SMX+TMP): SMX inhibits dihydropteroate synthase (step 1); TMP inhibits DHFR (step 2) → sequential blockade of folate pathway → ↓ DNA synthesis. Synergistic bactericidal effect."},
-  {id:"mid2129",exam:"mid2",lecture:"Mixed / Other Questions",q:"Drug A at 5 mg produces the same BP decrease as Drug B at 500 mg. What does this indicate?",options:["Drug A is more potent than Drug B by 100 times","Drug A is more efficacious than Drug B","Drug A is less toxic than Drug B"],answer:0,explanation:"Potency = dose required to produce a given effect. Drug A needs 100x less drug = 100x more potent. Efficacy = maximum effect achievable (not determined here)."},
-  {id:"mid2130",exam:"mid2",lecture:"Mixed / Other Questions",q:"What drug is used to prepare a patient for colon surgery?",options:["Neomycin"],answer:0,explanation:"Neomycin (non-absorbable aminoglycoside) given orally before GI surgery → reduces intestinal bacterial flora → decreases infection risk."},
-  {id:"mid2131",exam:"mid2",lecture:"Mixed / Other Questions",q:"Drug that increases intraocular pressure and causes cycloplegia?",options:["Cyclopentolate"],answer:0,explanation:"Cyclopentolate is a synthetic antimuscarinic (mydriatic-cycloplegic) → mydriasis + cycloplegia → used for refraction. Can cause ↑ IOP, contraindicated in narrow-angle glaucoma."},
+  {id:"mid2123",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the mechanism of action of terbinafine?",options:["Inhibition of squalene epoxidase causing squalene accumulation","Inhibition of ergosterol synthesis by blocking CYP14α-demethylase","Binding to ergosterol forming pores in the fungal cell membrane","Inhibition of beta-glucan synthase reducing cell wall synthesis"],answer:0,explanation:"Terbinafine selectively inhibits fungal squalene epoxidase → squalene accumulates (toxic) + ergosterol depleted → membrane disruption → fungicidal. B = azole mechanism; C = amphotericin B/nystatin; D = echinocandin."},
+  {id:"mid2124",exam:"mid2",lecture:"Mixed / Other Questions",q:"A doctor wanted to give a neonate chloramphenicol but was worried about gray baby syndrome. What would increase the baby's risk?",options:["Decreased hepatic glucuronyl transferase activity in the neonate","Decreased renal excretion of the drug","Increased renal clearance rate","Decreased blood-brain barrier permeability"],answer:0,explanation:"Neonates have immature UDP-glucuronosyltransferase → cannot conjugate chloramphenicol → accumulation → cardiovascular collapse, abdominal distension, ashen-gray color."},
+  {id:"mid2125",exam:"mid2",lecture:"Mixed / Other Questions",q:"Which of the following binds reversibly to the 50S ribosomal subunit and inhibits the peptidyl transferase reaction?",options:["Chloramphenicol","Linezolid","Erythromycin","Clindamycin"],answer:0,explanation:"Chloramphenicol specifically inhibits the peptidyl transferase reaction on the 50S subunit (bacteriostatic). Linezolid also binds 50S but inhibits the 70S initiation complex. Erythromycin inhibits translocation; clindamycin acts similarly to erythromycin."},
+  {id:"mid2126",exam:"mid2",lecture:"Mixed / Other Questions",q:"A 21-year-old with cutaneous anthrax is prescribed ciprofloxacin. Which should he avoid taking with ciprofloxacin?",options:["Alcohol","Grapefruit juice","Antacids","High-fat meal"],answer:2,explanation:"Antacids (Al³⁺, Mg²⁺, Ca²⁺) chelate ciprofloxacin → reduce absorption by up to 90%. Must be taken at least 2 hours apart. Grapefruit and alcohol have no significant interaction with ciprofloxacin."},
+  {id:"mid2127",exam:"mid2",lecture:"Mixed / Other Questions",q:"A patient is given a drug targeting dihydropteroate synthase. What is the most common adverse effect?",options:["Skin rash and hypersensitivity reactions","Kernicterus in neonates","Nephrotoxicity from crystalluria","Hepatotoxicity with elevated liver enzymes"],answer:0,explanation:"Sulfonamides (dihydropteroate synthase inhibitors): most common adverse effect = skin rash (urticaria, erythema multiforme, Stevens-Johnson syndrome). Kernicterus occurs specifically in neonates. Crystalluria occurs but is prevented by hydration."},
+  {id:"mid2128",exam:"mid2",lecture:"Mixed / Other Questions",q:"A drug made of sulfamethoxazole and trimethoprim. Mechanism of action?",options:["Inhibiting two sequential steps in the bacterial folate synthesis pathway","Inhibiting bacterial cell wall crosslinking","Binding to the 30S ribosomal subunit","Inhibiting bacterial RNA polymerase"],answer:0,explanation:"Sequential blockade: SMX inhibits dihydropteroate synthase; TMP inhibits DHFR → both block folate pathway at consecutive steps → synergistic bactericidal effect. Human cells use dietary folate → selective toxicity."},
+  {id:"mid2129",exam:"mid2",lecture:"Mixed / Other Questions",q:"Drug A at 5 mg produces the same BP decrease as Drug B at 500 mg. What does this indicate?",options:["Drug A is 100 times more potent than Drug B","Drug A produces a greater maximum effect than Drug B","Drug A is less toxic than Drug B","Drug A has a higher therapeutic index than Drug B"],answer:0,explanation:"Potency = dose required for a specified effect. Drug A requires 100× less → 100× more potent. Both produce the same effect (equal efficacy). No information about toxicity or therapeutic index."},
+  {id:"mid2130",exam:"mid2",lecture:"Mixed / Other Questions",q:"What drug is used to prepare a patient for colon surgery?",options:["Neomycin","Gentamicin","Metronidazole","Vancomycin"],answer:0,explanation:"Neomycin (non-absorbable aminoglycoside) is given orally before GI surgery → reduces intestinal flora → decreases postoperative infection risk. Its severe nephrotoxicity prevents parenteral use."},
+  {id:"mid2131",exam:"mid2",lecture:"Mixed / Other Questions",q:"Drug that increases intraocular pressure and causes cycloplegia?",options:["Cyclopentolate","Pilocarpine","Physostigmine","Timolol"],answer:0,explanation:"Cyclopentolate is a synthetic antimuscarinic (mydriatic-cycloplegic): blocks M3 → pupil dilation + ciliary muscle relaxation (cycloplegia) + ↑ IOP (reduces aqueous outflow). Contraindicated in narrow-angle glaucoma. Pilocarpine and physostigmine are cholinergic → reduce IOP."},
   {id:"mid2132",exam:"mid2",lecture:"Mixed / Other Questions",q:"If a male patient takes a drug that causes breast enlargement (gynecomastia), what is the drug?",options:["Ketoconazole"],answer:0,explanation:"Ketoconazole inhibits CYP enzymes → ↓ testosterone synthesis → gynecomastia. Cimetidine (H2 blocker) is also a classic cause via antiandrogen effect."},
-  {id:"mid2133",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the best scenario for treating a patient with rimantadine?",options:["Pregnant woman","With hallucinations"],answer:0,explanation:"Rimantadine (M2 inhibitor, influenza A) has fewer CNS side effects than amantadine → safer in patients prone to neuropsychiatric effects. Safer also considered in pregnancy vs amantadine."}
+  {id:"mid2133",exam:"mid2",lecture:"Mixed / Other Questions",q:"What is the best scenario for treating a patient with rimantadine?",options:["Pregnant woman requiring influenza A prophylaxis","Patient with Parkinson's disease","Patient with epilepsy","Patient with renal failure"],answer:0,explanation:"Rimantadine does not cross the BBB → fewer CNS side effects than amantadine. It is considered relatively safer in pregnancy vs amantadine. Amantadine (not rimantadine) is used for Parkinson's disease due to its dopaminergic effect."}
 ];
 const FINAL_QUESTIONS: Question[] = [
   {id:"final1",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which of the following antibiotics would be best given to a patient with penicillinase-producing Staphylococcus aureus pneumonia?",options:["Carbenicillin","Ampicillin","Piperacillin","Oxacillin"],answer:3,explanation:"Oxacillin is an antistaphylococcal (beta-lactamase-resistant) penicillin — unaffected by penicillinase. Ampicillin and carbenicillin are destroyed by beta-lactamase."},
@@ -387,7 +387,131 @@ const FINAL_QUESTIONS: Question[] = [
   {id:"final115",exam:"final",lecture:"Mixed/Other",q:"To prolong the duration of a drug:",options:["Increase vascularity of absorbing area","Reduction of solubility of the drug","Administration in watery solution"],answer:1,explanation:"Reducing drug solubility (e.g., depot/sustained-release formulations, procaine penicillin G, benzathine penicillin G) → slows absorption → prolongs duration of action."},
   {id:"final116",exam:"final",lecture:"Mixed/Other",q:"MAO-B inhibitors are used in Parkinson's because:",options:["They accelerate conversion of levodopa to dopamine","Inhibit dopamine metabolism","Stimulate dopamine receptors","Inhibit their effect on peripheral D2 receptors"],answer:1,explanation:"MAO-B (monoamine oxidase B) normally degrades dopamine in the brain. Inhibiting it (selegiline, rasagiline) → preserves dopamine levels in the striatum → improves Parkinson's symptoms."},
   {id:"final117",exam:"final",lecture:"Mixed/Other",q:"Levodopa is used with carbidopa in Parkinson's because carbidopa:",options:["Prevents peripheral conversion of levodopa to metabolites","Enhances absorption of levodopa","Increases affinity for levodopa","Facilitates levodopa crossing the blood-brain barrier"],answer:0,explanation:"Carbidopa inhibits peripheral aromatic amino acid decarboxylase (DOPA decarboxylase) → prevents conversion of levodopa to dopamine in the periphery → more levodopa reaches the brain + reduced peripheral dopaminergic side effects."},
-  {id:"final118",exam:"final",lecture:"Mixed/Other",q:"Pramipexole is a drug used for Parkinson's. It is considered:",options:["Dopamine agonist","COMT inhibitor","MAO inhibitor","Anticholinergic"],answer:0,explanation:"Pramipexole (Mirapex) is a non-ergot dopamine D2/D3 receptor agonist. Used in early Parkinson's (monotherapy) or as adjunct to levodopa. May cause hallucinations, somnolence, impulse control disorders."}
+  {id:"final118",exam:"final",lecture:"Mixed/Other",q:"Pramipexole is a drug used for Parkinson's. It is considered:",options:["Dopamine agonist","COMT inhibitor","MAO inhibitor","Anticholinergic"],answer:0,explanation:"Pramipexole (Mirapex) is a non-ergot dopamine D2/D3 receptor agonist. Used in early Parkinson's (monotherapy) or as adjunct to levodopa. May cause hallucinations, somnolence, impulse control disorders."},
+  {id:"final119",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which of the following statements is correct regarding imipenem, aztreonam, vancomycin, and bacitracin?",options:["Imipenem is combined with cilastatin to resist hydrolysis by β-lactamase enzyme","Amoxycillin is more appropriate than ampicillin for treatment of shigella or salmonella-derived enteritis","Aztreonam is effective against gram +ve organisms and anaerobes","Vancomycin is the drug of choice in cases of methicillin-resistant Staphylococcus aureus (MRSA)","Bacitracin is the drug of choice in treatment of antibiotic-induced colitis due to Clostridium difficile"],answer:3,explanation:"Vancomycin (glycopeptide) inhibits cell wall synthesis by binding D-Ala-D-Ala terminus of peptidoglycan precursors, blocking transglycosylation. It is the drug of choice for MRSA infections. Imipenem is combined with cilastatin to prevent renal hydrolysis by dehydropeptidase-I (not beta-lactamase). Aztreonam (monobactam) is only effective against aerobic gram-negative organisms. Bacitracin is not used for C. difficile colitis."},
+  {id:"final120",exam:"final",lecture:"Cell Wall Inhibitors",q:"Penicillin G is effective against all of the following organisms EXCEPT:",options:["Listeria monocytogenes","Mycoplasma pneumoniae","Streptococcus pyogenes","Treponema pallidum","Bacillus anthracis"],answer:1,explanation:"Penicillin G is a narrow-spectrum antibiotic effective against gram-positive cocci, gram-negative cocci, spirochetes, and some anaerobes. Mycoplasma pneumoniae lacks a cell wall entirely, making it intrinsically resistant to all cell-wall-active antibiotics including penicillin. Macrolides (azithromycin, clarithromycin) or doxycycline are used for Mycoplasma infections."},
+  {id:"final121",exam:"final",lecture:"Cell Wall Inhibitors",q:"In a patient with pneumonia due to β-lactamase-producing H. influenzae not responding to ampicillin, you will give:",options:["Oral vancomycin","Add gentamicin to ampicillin therapy","Give oral amoxicillin","Switch to I.V. cefotaxime","Oral trimethoprim"],answer:3,explanation:"Beta-lactamase-producing H. influenzae is resistant to ampicillin. Cefotaxime (third-generation cephalosporin) is stable to beta-lactamases and has excellent gram-negative activity including H. influenzae. Adding gentamicin to ampicillin is ineffective against beta-lactamase-producing organisms."},
+  {id:"final122",exam:"final",lecture:"Cell Wall Inhibitors",q:"Typical therapeutic applications of penicillin G include all of the following EXCEPT:",options:["UTI due to E. coli","Streptococcal infections","Bacillus anthracis","Treponema pallidum","Clostridium perfringens"],answer:0,explanation:"Penicillin G is a narrow-spectrum beta-lactam NOT effective against gram-negative rods like E. coli. E. coli UTIs require fluoroquinolones, co-trimoxazole, or aminoglycosides. The other options are valid penicillin G indications."},
+  {id:"final123",exam:"final",lecture:"Cell Wall Inhibitors",q:"In patient with pseudomembranous colitis due to C. difficile, the treatment of choice is:",options:["Oral tetracycline","Oral vancomycin","Oral tobramycin","I.V. imipenem","I.V. cephoperazone"],answer:1,explanation:"Pseudomembranous colitis caused by C. difficile is treated with oral metronidazole (first-line for mild disease) or oral vancomycin (for severe or recurrent cases). Oral vancomycin is not absorbed systemically and acts locally in the gut. IV vancomycin is NOT effective for C. difficile colitis."},
+  {id:"final124",exam:"final",lecture:"Cell Wall Inhibitors",q:"Piperacillin differs from ampicillin in all of the following properties EXCEPT:",options:["Stability in gastric acid","Effectiveness as an antipseudomonal agent","Resistance to penicillinase","Spectrum of antibacterial action","The broadness of the spectrum of susceptible bacteria"],answer:2,explanation:"Both piperacillin and ampicillin are susceptible to penicillinase (beta-lactamase). Piperacillin differs from ampicillin in having antipseudomonal activity, broader gram-negative spectrum, and only being available parenterally. Penicillinase-resistant penicillins include cloxacillin, dicloxacillin, nafcillin, and oxacillin."},
+  {id:"final125",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which antimicrobial agent is a polypeptide active against gram-positive organisms and is only used topically because of nephrotoxicity?",options:["Ampicillin","Gentamicin","Bacitracin","Carbenicillin","Aztreonam"],answer:2,explanation:"Bacitracin is a polypeptide antibiotic that inhibits cell wall synthesis (bactoprenol phosphate cycle). Systemic use causes severe nephrotoxicity, so it is restricted to topical application (skin wounds, eye/ear drops). It has activity against gram-positive organisms."},
+  {id:"final126",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which penicillin is active against penicillinase-producing Staphylococcus aureus?",options:["Cloxacillin","Amoxicillin","Piperacillin","Ticarcillin","Penicillin V"],answer:0,explanation:"Cloxacillin, dicloxacillin, oxacillin, nafcillin, and methicillin are antistaphylococcal penicillins that resist staphylococcal penicillinase through steric hindrance. They are used for methicillin-sensitive S. aureus (MSSA) infections. They are NOT effective against MRSA."},
+  {id:"final127",exam:"final",lecture:"Cell Wall Inhibitors",q:"All statements about cephalosporins are correct EXCEPT:",options:["They are B-lactam antibiotics closely related structurally and functionally to the penicillins","They are more resistant to B-lactamases than the penicillins","Based on bacterial susceptibility and resistance to B-lactamase they are classified into first, second and third generation","They should be avoided or used with caution in individuals allergic to penicillin","They are effective against methicillin-resistant Staphylococcus aureus (MRSA)"],answer:4,explanation:"Cephalosporins are NOT effective against MRSA. MRSA possesses mecA gene encoding PBP2a with very low affinity for all beta-lactam antibiotics including cephalosporins."},
+  {id:"final128",exam:"final",lecture:"Cell Wall Inhibitors",q:"For a 14-year-old with S. aureus osteomyelitis - effective therapy includes all EXCEPT:",options:["Oxacillin","Norfloxacin","Cloxacillin","Nafcillin","Cefazolin"],answer:1,explanation:"Norfloxacin is an early fluoroquinolone with limited distribution primarily to urine (urinary antiseptic); it has poor tissue/bone penetration and inadequate serum levels for osteomyelitis. Oxacillin, cloxacillin, nafcillin (antistaphylococcal penicillins), and cefazolin (first-gen cephalosporin) are effective for staphylococcal osteomyelitis."},
+  {id:"final129",exam:"final",lecture:"Cell Wall Inhibitors",q:"Beta-lactamase-producing H. influenzae, M. catarrhalis, and N. gonorrhoeae are resistant to penicillin G. Which antibiotic is effective against all?",options:["Ampicillin","Ceftriaxone","Clindamycin","Gentamycin","Piperacillin"],answer:1,explanation:"Ceftriaxone is a third-generation cephalosporin that is stable to common beta-lactamases and has excellent activity against H. influenzae, M. catarrhalis, and N. gonorrhoeae. It is the drug of choice for gonorrhea (single IM dose)."},
+  {id:"final130",exam:"final",lecture:"Cell Wall Inhibitors",q:"Sulbactam is important because it:",options:["Easily penetrates gram-negative microorganisms","Inactivates bacterial beta-lactamase","Is specific for gram-positive microorganisms","Is a potent inhibitor of cell wall transpeptidase","Has a spectrum of activity similar to that of penicillin"],answer:1,explanation:"Sulbactam is a beta-lactamase inhibitor that irreversibly inactivates a wide range of beta-lactamases, protecting the accompanying penicillin from hydrolysis. It is combined with ampicillin (Unasyn). Sulbactam has minimal antibacterial activity on its own."},
+  {id:"final131",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which cephalosporin shows good activity against anaerobes, particularly B. fragilis?",options:["Cefaclor","Cephalexin","Cephradine","Cefoxitin"],answer:3,explanation:"Cefoxitin is a second-generation cephalosporin (cephamycin) with a 7-alpha-methoxy group that confers resistance to beta-lactamases from anaerobes, providing good activity against B. fragilis. It is used for intra-abdominal infections and pelvic inflammatory disease."},
+  {id:"final132",exam:"final",lecture:"Cell Wall Inhibitors",q:"All statements about penicillins and cephalosporins are correct EXCEPT:",options:["Penicillin G has limited antibacterial activity and is susceptible to beta-lactamases","Ampicillin is the drug of choice for the treatment of Pseudomonas aeruginosa infections","First-generation cephalosporins are more effective against staphylococcal infections than are third-generation cephalosporins","Methicillin is an antistaphylococcal penicillin","Ceftriaxone is a third-generation cephalosporin with a long half-life and has good penetration into bone"],answer:1,explanation:"Ampicillin is an aminopenicillin with NO antipseudomonal activity. Antipseudomonal penicillins include piperacillin, ticarcillin, and carbenicillin."},
+  {id:"final133",exam:"final",lecture:"Cell Wall Inhibitors",q:"Cilastatin is combined with which antibiotic to prevent degradation by renal dehydropeptidase?",options:["Amoxycillin","Imipenem","Cephalexin","Ticarcillin","Cloxacillin"],answer:1,explanation:"Imipenem is combined with cilastatin because renal dehydropeptidase-I hydrolyzes imipenem. Cilastatin inhibits this enzyme, preventing imipenem inactivation in the kidney. Meropenem and ertapenem are stable to dehydropeptidase and do NOT require cilastatin."},
+  {id:"final134",exam:"final",lecture:"Cell Wall Inhibitors",q:"All statements about penicillin G are correct EXCEPT:",options:["It is excreted from the body mainly via the hepatobiliary route","It is poorly absorbed after oral use due to destruction by stomach acid","It is a narrow-spectrum antibiotic","It is more effective in killing growing bacteria than microorganisms in the stationary phase","It is destroyed by β-lactamase"],answer:0,explanation:"Penicillin G is excreted mainly by RENAL tubular secretion (not hepatobiliary route). Probenecid blocks tubular secretion, prolonging penicillin levels."},
+  {id:"final135",exam:"final",lecture:"Cell Wall Inhibitors",q:"All statements about imipenem are correct EXCEPT:",options:["It is inactivated by B-lactamases","It has the broadest spectrum of activity","It contains a B-lactam ring in its structure","It needs adjustment of the dose in renal insufficiency","It is combined with cilastatin, an inhibitor of the enzyme dehydropeptidase"],answer:0,explanation:"Imipenem is actually RESISTANT to most beta-lactamases (that is one of its key advantages). However, it can be hydrolyzed by metallo-beta-lactamases/carbapenemases. Imipenem requires dose adjustment in renal failure to prevent seizures."},
+  {id:"final136",exam:"final",lecture:"Cell Wall Inhibitors",q:"All statements about vancomycin are correct EXCEPT:",options:["It inhibits bacterial cell wall synthesis","Is ineffective against methicillin-resistant staphylococci","Is given orally to treat antibiotic-induced pseudomembranous colitis","It is used prophylactically in dental patients with prosthetic heart valves","It acts synergistically with aminoglycosides in treatment of enterococcal endocarditis"],answer:1,explanation:"Vancomycin IS effective against MRSA (methicillin-resistant staphylococci) - it is the drug of choice. Vancomycin inhibits cell wall synthesis (D-Ala-D-Ala binding), and is not affected by the mecA/PBP2a resistance mechanism."},
+  {id:"final137",exam:"final",lecture:"Cell Wall Inhibitors",q:"Such agents as clavulanic acid, sulbactam, or tazobactam are often added to penicillin combination products. What is the main reason?",options:["Add antibiotic activity against Pseudomonas and many Enterobacter species","Facilitate antibiotic penetration into CNS and CSF","Inhibit cell wall transpeptidases","Inhibit inactivation of penicillin by β-lactamase-producing bacteria","Reduce the risk and/or severity of allergic reactions in susceptible patients"],answer:3,explanation:"Beta-lactamase inhibitors (clavulanic acid, sulbactam, tazobactam) irreversibly bind and inactivate bacterial beta-lactamases, protecting the companion penicillin from hydrolysis. They have minimal intrinsic antibacterial activity."},
+  {id:"final138",exam:"final",lecture:"Cell Wall Inhibitors",q:"Amoxicillin differs from ampicillin in which way?",options:["Has better oral bioavailability","Is a broad-spectrum penicillin","Has greater antipseudomonal activity","Does not cause hypersensitivity reactions","Is effective against penicillinase-producing organisms"],answer:0,explanation:"Amoxicillin has superior oral bioavailability (~90%) compared to ampicillin (~30-40%) and is less affected by food. Both are aminopenicillins with the same antibacterial spectrum. Neither has antipseudomonal activity."},
+  {id:"final139",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which penicillin is used in prophylaxis of rheumatic fever?",options:["Azlocillin","Ampicillin","Methicillin","Piperacillin","Benzathine penicillin G"],answer:4,explanation:"Benzathine penicillin G is a long-acting IM penicillin preparation (depot formulation) that releases penicillin slowly over 2-4 weeks. Monthly injections maintain adequate serum levels for prevention of recurrent streptococcal infections and rheumatic fever."},
+  {id:"final140",exam:"final",lecture:"Cell Wall Inhibitors",q:"All statements about cephalosporins are correct EXCEPT:",options:["As a group are all stable to stomach acid","They have the same mechanism of action as the penicillins","Are more resistant to B-lactamases than are the penicillins","Include agents that are active against Pseudomonas aeruginosa","Third-generation cephalosporins show greater activity than first-generation against gram-negative bacilli"],answer:0,explanation:"Not all cephalosporins are stable to stomach acid; several (cefazolin, cefuroxime IV, cefotaxime, ceftriaxone, ceftazidime) are acid-labile and can only be given parenterally. Oral cephalosporins (cephalexin, cefadroxil, cefuroxime axetil) are acid-stable."},
+  {id:"final141",exam:"final",lecture:"Cell Wall Inhibitors",q:"Antibiotic-associated pseudomembranous colitis (AAPMC) - which drug is most likely to cause it?",options:["Amoxycillin","Azithromycin","Clindamycin","Metronidazole","Trimethoprim plus sulphamethoxazole"],answer:2,explanation:"Clindamycin is the antibiotic most classically associated with causing pseudomembranous colitis by disrupting normal gut flora and allowing C. difficile overgrowth. Metronidazole is used to TREAT C. difficile colitis."},
+  {id:"final142",exam:"final",lecture:"Cell Wall Inhibitors",q:"A patient takes antimicrobial medication with milk - most likely to cause therapeutic failure of which drug?",options:["Aminoglycosides","Cephalosporin, first generation","Cephalosporin, second generation","Penicillin","Tetracycline"],answer:4,explanation:"Tetracyclines form insoluble chelate complexes with divalent cations (Ca²⁺ in milk, dairy products), dramatically reducing absorption. Tetracyclines should be taken on an empty stomach."},
+  {id:"final143",exam:"final",lecture:"Cell Wall Inhibitors",q:"For beta-lactamase-positive staphylococci pneumonia - which drug is effective therapy?",options:["Ampicillin","Cloxacillin","Mezlocillin","Piperacillin","Penicillin G"],answer:1,explanation:"Cloxacillin (antistaphylococcal/penicillinase-resistant penicillin) is effective against beta-lactamase-producing S. aureus (MSSA). Ampicillin, piperacillin, mezlocillin, and penicillin G are all hydrolyzed by staphylococcal beta-lactamase."},
+  {id:"final144",exam:"final",lecture:"Cell Wall Inhibitors",q:"The following drug is a beta-lactamase inhibitor used in combination with amoxicillin:",options:["Bacitracin","Vancomycin","Monobactam","Clavulanic acid","Imipenem/cilastatin"],answer:3,explanation:"Clavulanic acid is a beta-lactamase inhibitor with minimal antibacterial activity that protects amoxicillin from beta-lactamase hydrolysis. The combination (Augmentin) extends amoxicillin's spectrum to beta-lactamase-producing organisms."},
+  {id:"final145",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which drug is effective for methicillin-resistant staphylococcal infection?",options:["Piperacillin","Vancomycin","Clavulanic acid","Streptomycin","Bacitracin"],answer:1,explanation:"Vancomycin is the treatment of choice for MRSA. MRSA has an altered PBP2a (encoded by mecA) with low affinity for all beta-lactams. Vancomycin acts by binding to the D-Ala-D-Ala terminus of peptidoglycan precursors."},
+  {id:"final146",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which is a 4th generation cephalosporin?",options:["Cephalexin","Cefaclor","Cefepime","Cefotaxime","Ceftriaxone"],answer:2,explanation:"Cefepime is the main fourth-generation cephalosporin with excellent gram-positive and broad gram-negative activity including Pseudomonas aeruginosa. Ceftriaxone and cefotaxime are third-generation; cephalexin and cefaclor are first/second-generation."},
+  {id:"final147",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which drug reaches therapeutic concentrations in CNS?",options:["Doxycycline","Erythromycin","Aminoglycosides","Chloramphenicol"],answer:3,explanation:"Chloramphenicol is highly lipid-soluble and achieves excellent CSF penetration (45-99% of serum concentration), even without meningeal inflammation. Aminoglycosides, erythromycin, and most tetracyclines do NOT achieve therapeutic CNS levels."},
+  {id:"final148",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which meropenem/imipenem statement is INCORRECT?",options:["They are the broadest-spectrum β-lactam antibiotic preparation currently available","They play a role in empiric therapy","Meropenem but not imipenem requires cilastatin to protect it from degradation","They are effective against P. aeruginosa","They are not effective by the oral route"],answer:2,explanation:"Imipenem (NOT meropenem) requires cilastatin to protect it from degradation by renal dehydropeptidase-I. Meropenem is stable to this enzyme and does not need cilastatin."},
+  {id:"final149",exam:"final",lecture:"Cell Wall Inhibitors",q:"For VRE (E. faecium) bacteremia with multiple drug interactions concern - which antibiotic to choose?",options:["Linezolid","Clindamycin","Doxycycline","Clarithromycin","Chloramphenicol"],answer:0,explanation:"Linezolid is preferred for VRE bacteremia when minimizing drug interactions is a priority. While quinupristin/dalfopristin also treats VRE faecium, it is a potent CYP3A4 inhibitor with significant drug interactions. Linezolid has fewer CYP-mediated interactions."},
+  {id:"final150",exam:"final",lecture:"Cell Wall Inhibitors",q:"A patient with severe penicillin allergy (gram-negative bacteremia) - most appropriate empiric treatment?",options:["Ampicillin plus sulbactam","Aztreonam","Cefazolin","Imipenem plus cilastatin","Ticarcillin plus clavulanic acid"],answer:1,explanation:"Aztreonam (monobactam) is the safest option for gram-negative bacteremia in a penicillin-allergic patient with history of anaphylaxis. Aztreonam has minimal cross-reactivity with penicillins and covers gram-negative rods including Pseudomonas."},
+  {id:"final151",exam:"final",lecture:"Cell Wall Inhibitors",q:"Gonorrhea in a 25-year-old male - which is appropriate treatment?",options:["Ceftriaxone IM","Penicillin G IM","Gentamicin IM","Piperacillin/tazobactam IV","Vancomycin IV"],answer:0,explanation:"Ceftriaxone (third-generation cephalosporin) given as a single IM injection is the drug of choice for uncomplicated gonorrhea (Neisseria gonorrhoeae). Penicillin G is no longer recommended due to widespread beta-lactamase-producing N. gonorrhoeae strains."},
+  {id:"final152",exam:"final",lecture:"Cell Wall Inhibitors",q:"Syphilis treatment (T. pallidum infection) - the best course of action?",options:["Give a single oral dose of fosfomycin","Give no other antibiotics since drug treatment of gonorrhea provides coverage for incubating syphilis","Inject intramuscular benzathine penicillin G","Treat with oral tetracycline for 7 days","Treat with vancomycin"],answer:2,explanation:"Benzathine penicillin G (long-acting IM penicillin) is the drug of choice for all stages of syphilis caused by Treponema pallidum. Treatment of gonorrhea does NOT provide coverage for incubating syphilis."},
+  {id:"final153",exam:"final",lecture:"Cell Wall Inhibitors",q:"Statement about imipenem that is most accurate:",options:["Has a narrow spectrum of antibacterial action","It is used in fixed combination with sulbactam","Is highly susceptible to β-lactamases produced by Enterobacter species","In renal dysfunction, dosage reductions are necessary to avoid seizures","Imipenem is active against methicillin-resistant staphylococci"],answer:3,explanation:"Imipenem accumulates in renal dysfunction and can cause CNS toxicity including seizures at high concentrations. Dose reduction is required in renal failure. Imipenem has the BROADEST (not narrowest) spectrum, is combined with cilastatin (not sulbactam), and is NOT active against MRSA."},
+  {id:"final154",exam:"final",lecture:"Cell Wall Inhibitors",q:"For empiric treatment of purulent meningitis (gram-positive diplococci) with potential penicillin-resistant pneumococci:",options:["Ampicillin-sulbactam","Cefoperazone","Cefotaxime plus vancomycin","Cefoxitin","Nafcillin"],answer:2,explanation:"For S. pneumoniae meningitis where penicillin resistance is possible, the combination of a third-generation cephalosporin (cefotaxime or ceftriaxone) PLUS vancomycin is recommended to cover both susceptible and resistant strains."},
+  {id:"final155",exam:"final",lecture:"Cell Wall Inhibitors",q:"Molecular basis for pneumococcal resistance to penicillin G:",options:["The production of beta-lactamases","Structural changes in penicillin-binding proteins","Decreased intracellular accumulation of penicillin G","Changes in the D-Ala-D-Ala building block of peptidoglycan precursor","Changes in porin structure"],answer:1,explanation:"Streptococcus pneumoniae develops penicillin resistance through mutations in penicillin-binding proteins (PBPs), particularly PBP2x and PBP2b, reducing beta-lactam binding affinity. Unlike most gram-negatives, pneumococcal resistance is NOT due to beta-lactamase production."},
+  {id:"final156",exam:"final",lecture:"Cell Wall Inhibitors",q:"Gram-positive rods in CSF (Listeria) in elderly patient - empiric treatment should include:",options:["Ampicillin","Cefazolin","Fosfomycin","Ticarcillin","Vancomycin"],answer:0,explanation:"Listeria monocytogenes is the organism most commonly causing meningitis in elderly/immunocompromised patients and presents as gram-positive rods in CSF. Ampicillin (or penicillin G) is the drug of choice for Listeria; cephalosporins are NOT effective. Ampicillin is often combined with gentamicin for synergy."},
+  {id:"final157",exam:"final",lecture:"Cell Wall Inhibitors",q:"Cefotetan statement that is accurate:",options:["It is active against MRSA strains","It is the drug of choice in community-acquired pneumonia","It decreases prothrombin time","It is a third-generation cephalosporin","Its antibacterial spectrum includes Bacteroides fragilis"],answer:4,explanation:"Cefotetan (like cefoxitin, a cephamycin/second-generation cephalosporin) has activity against Bacteroides fragilis due to its 7-alpha-methoxy group. It is NOT active against MRSA, is NOT the drug of choice for community-acquired pneumonia, can INCREASE prothrombin time (causing bleeding), and is a SECOND-generation (not third)."},
+  {id:"final158",exam:"final",lecture:"Cell Wall Inhibitors",q:"Patient with enterococcal endocarditis and severe penicillin allergy - best treatment:",options:["Amoxicillin clavulanate","Aztreonam","Cefazolin plus gentamicin","Meropenem","Vancomycin"],answer:4,explanation:"For enterococcal endocarditis in a penicillin-allergic patient, vancomycin (plus gentamicin for synergy) is the appropriate alternative to ampicillin. Aztreonam is ineffective against gram-positive organisms."},
+  {id:"final159",exam:"final",lecture:"Cell Wall Inhibitors",q:"Drug described: active against Pseudomonas, resistance emerges alone, not for penicillin-allergic patients, enhanced by tazobactam:",options:["Amoxicillin","Aztreonam","Imipenem","Piperacillin","Vancomycin"],answer:3,explanation:"Piperacillin is an antipseudomonal penicillin with Pseudomonas activity, but resistance develops rapidly when used alone. It is contraindicated in penicillin-allergic patients. Piperacillin/tazobactam (Zosyn) combines piperacillin with the beta-lactamase inhibitor tazobactam."},
+  {id:"final160",exam:"final",lecture:"Cell Wall Inhibitors",q:"Vancomycin statement that is accurate:",options:["It is bacteriostatic","It binds to PBPs","It is not susceptible to penicillinase","It has the advantage of oral bioavailability","Staphylococcal enterocolitis occurs commonly with its use"],answer:2,explanation:"Vancomycin is a glycopeptide, completely different in structure from beta-lactams, and is NOT a substrate for beta-lactamase (penicillinase). It is bactericidal (not static) against most gram-positive organisms. It does NOT bind PBPs (it binds D-Ala-D-Ala). It is poorly absorbed orally."},
+  {id:"final161",exam:"final",lecture:"Cell Wall Inhibitors",q:"Ampicillin statement that is FALSE:",options:["Its activity is enhanced by sulbactam","It causes maculopapular rashes","It is the drug of choice for Listeria monocytogenes infection","It eradicates most strains of MRSA","Pseudomembranous colitis may occur with its use"],answer:3,explanation:"Ampicillin does NOT eradicate MRSA. MRSA has an altered PBP2a with low affinity for all beta-lactam antibiotics including ampicillin. All other options (A, B, C, E) are true statements about ampicillin."},
+  {id:"final162",exam:"final",lecture:"Cell Wall Inhibitors",q:"Co-trimoxazole - all statements correct EXCEPT: Is a combination of sulfamethoxazole and clavulanic acid:",options:["Is the treatment of choice for pneumonia due to Pneumocystis carinii","Has a broader spectrum of action than sulfonamides","May cause hemolytic anemia in patients with glucose-6-phosphate dehydrogenase deficiency","May increase levels of methotrexate due to displacement from albumin binding sites","Is a combination of sulfamethoxazole and clavulanic acid"],answer:4,explanation:"Co-trimoxazole is a combination of TRIMETHOPRIM (not clavulanic acid) + sulfamethoxazole. Clavulanic acid is a beta-lactamase inhibitor combined with amoxicillin (Augmentin)."},
+  {id:"final163",exam:"final",lecture:"Cell Wall Inhibitors",q:"Drug useful for MRSA infection from the list:",options:["Piperacillin","Vancomycin","Clavulanic acid","Streptomycin","Bacitracin"],answer:1,explanation:"Vancomycin is the drug of choice for MRSA. Piperacillin (antipseudomonal penicillin) and clavulanic acid (beta-lactamase inhibitor) are ineffective against MRSA. Streptomycin (aminoglycoside) and bacitracin (topical polypeptide) are not used for MRSA treatment."},
+  {id:"final164",exam:"final",lecture:"Cell Wall Inhibitors",q:"Antituberculous drug statements are correct EXCEPT: Cycloserine may cause hearing loss:",options:["Isoniazide (INH) can cause severe hepatitis","INH may cause peripheral neuropathy which is preventable with pyridoxine","Rifampicin causes a reddish discoloration of soft contact lenses","Ethambutol may cause optic neuritis","Cycloserine may cause hearing loss"],answer:4,explanation:"Cycloserine causes CNS toxicity (psychosis, seizures, peripheral neuropathy) but NOT hearing loss/ototoxicity. Aminoglycosides (streptomycin, amikacin) cause ototoxicity."},
+  {id:"final165",exam:"final",lecture:"Cell Wall Inhibitors",q:"Regarding prophylactic antibiotics - NOT warranted in which situation?",options:["Prevention of meningitis among individuals in close contact with infected patients","Patient with a hip prosthesis who is having a tooth removed","Presurgical treatment for implantation of a hip prosthesis","Patient who complains of frequent respiratory illness","Presurgical treatment in gastrointestinal procedures"],answer:3,explanation:"Frequent respiratory illness (usually viral) is NOT an indication for prophylactic antibiotics; such use promotes antibiotic resistance."},
+  {id:"final166",exam:"final",lecture:"Cell Wall Inhibitors",q:"Second-generation cephalosporin used orally with activity against Bacteroides fragilis for pelvic inflammatory disease:",options:["Cefazolin","Cefaclor","Cefotaxime","Ceftriaxone","Cefepime"],answer:1,explanation:""},
+  {id:"final167",exam:"final",lecture:"Cell Wall Inhibitors",q:"A pregnant woman (8 months) with UTI - which drug can be used orally without risk to fetus?",options:["Cefadroxil (first-generation cephalosporin)","Cotrimoxazole","Penicillin V","Ceftriaxone (third-generation cephalosporin)","Tetracycline"],answer:0,explanation:"Cefadroxil (first-generation oral cephalosporin) is safe in pregnancy (FDA category B) and can treat UTIs. Co-trimoxazole is contraindicated near term (risk of kernicterus). Tetracycline is contraindicated in pregnancy."},
+  {id:"final168",exam:"final",lecture:"Cell Wall Inhibitors",q:"Antibiotic NOT correctly matched with clinical indication:",options:["Penicillin G: pneumonia caused by Klebsiella pneumoniae","Carbenicillin: urinary tract infection caused by Pseudomonas aeruginosa (B-lactamase negative)","Ampicillin: bacterial meningitis caused by Haemophilus influenzae (B-lactamase negative)","Chloramphenicol: typhoid fever caused by Salmonella typhi","Cefazolin: staphylococcal osteomyelitis"],answer:0,explanation:"Klebsiella pneumoniae is a gram-negative rod intrinsically resistant to penicillin G. Klebsiella pneumonia requires third-generation cephalosporins or carbapenems."},
+  {id:"final169",exam:"final",lecture:"Cell Wall Inhibitors",q:"Vancomycin is NOT effective in eradicating infections with H. pylori:",options:["Vancomycin","Amoxicillin","Tetracycline","Metronidazole","Clarithromycin"],answer:0,explanation:"Vancomycin is NOT used for H. pylori eradication. Standard triple therapy for H. pylori includes amoxicillin (or metronidazole) + clarithromycin + a proton pump inhibitor. Tetracycline is used in quadruple therapy."},
+  {id:"final170",exam:"final",lecture:"Cell Wall Inhibitors",q:"All statements about imipenem/meropenem accurate EXCEPT - Meropenem (not imipenem) requires cilastatin:",options:["They are the broadest-spectrum β-lactam antibiotic preparation currently available","They play a role in empiric therapy","Meropenem but not imipenem requires cilastatin to protect it from degradation","They are effective against P. aeruginosa","They are not effective by the oral route"],answer:2,explanation:"This is INCORRECT - it is IMIPENEM (not meropenem) that requires cilastatin. Imipenem is hydrolyzed by renal dehydropeptidase-I. Meropenem, doripenem, and ertapenem are stable to this enzyme and do not require cilastatin."},
+  {id:"final171",exam:"final",lecture:"Cell Wall Inhibitors",q:"A patient with Pseudomonas aeruginosa infection receiving IV gentamicin with poor response - adding penicillin in separate IV line will:",options:["The penicillin will increase the risk of aminoglycoside nephrotoxicity","The penicillin will enhance the bacterial response to the aminoglycoside","Chemical neutralization and abolishment of effects of penicillin","Colitis due to superinfection with Clostridium difficile may develop"],answer:1,explanation:"Penicillin (beta-lactam) and aminoglycosides (gentamicin) act synergistically against Pseudomonas: the beta-lactam disrupts the cell wall, facilitating aminoglycoside penetration into the bacterial cell. They MUST be administered in separate IV lines to avoid physical inactivation."},
+  {id:"final172",exam:"final",lecture:"Cell Wall Inhibitors",q:"Which of the following drugs is NOT nephrotoxic?",options:["Aztreonam","Gentamicin","Vancomycin","Amphotericin B"],answer:0,explanation:"Aztreonam (monobactam) is NOT nephrotoxic and is generally safe in patients with renal disease. Gentamicin, vancomycin, and amphotericin B all cause nephrotoxicity."},
+  {id:"final173",exam:"final",lecture:"Cell Wall Inhibitors",q:"A patient develops severe watery diarrhea, fever, abdominal pain with confirmed C. difficile - antimicrobial therapy is:",options:["Amoxicillin","Ciprofloxacin","Metronidazole","Erythromycin"],answer:2,explanation:"Metronidazole is the first-line treatment for mild-to-moderate C. difficile colitis. Oral vancomycin is used for severe, recurrent, or refractory C. difficile. Ciprofloxacin and amoxicillin can actually cause C. difficile colitis."},
+  {id:"final174",exam:"final",lecture:"Cell Wall Inhibitors",q:"One of the following drug is concentration-dependent and can be given as a single dose:",options:["Penicillin","Erythromycin","Amoxicillin","Gentamicin"],answer:3,explanation:"Gentamicin (aminoglycoside) is a concentration-dependent antibiotic where bactericidal activity increases with peak concentration. Once-daily high-dose gentamicin maximizes the peak:MIC ratio and exploits the post-antibiotic effect (PAE). Penicillin and erythromycin are time-dependent antibiotics."},
+  {id:"final175",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Tetracyclines would be least effective in treating which disease?",options:["Staphylococcal infections","Rickettsia","Acne","Cholera","Rocky Mountain spotted fever"],answer:0,explanation:"Tetracyclines are bacteriostatic drugs with widespread resistance among staphylococci, making them poor choices for staphylococcal infections. They are highly effective for Rickettsia, Mycoplasma, Chlamydia, cholera, Lyme disease, and acne."},
+  {id:"final176",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Which statement about clinical uses of aminoglycosides is FALSE?",options:["Owing to their polar nature, aminoglycosides are not absorbed following oral administration","The spectrum of antimicrobial activity of aminoglycosides includes Bacteroides fragilis","Aminoglycosides are often used in combination with cephalosporins in the empiric treatment of life-threatening bacterial infections","Netilmycin is more likely to be effective than streptomycin in the treatment of a hospital-acquired infection caused by Serratia marcescens","Gentamicin is used with ampicillin for synergistic effects in the treatment of enterococcal endocarditis"],answer:1,explanation:"Aminoglycosides are INACTIVE against Bacteroides fragilis and other anaerobes because aminoglycoside transport requires energy from the electron transport chain, which is absent in anaerobes. They are effective against aerobic gram-negative organisms."},
+  {id:"final177",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"All properties of aminoglycosides EXCEPT:",options:["They are highly polar polycationic compounds that are not absorbed orally","They may cause ototoxicity, nephrotoxicity, and neuromuscular blockade","They are all bactericidal, and are mainly effective against anaerobic organisms","Amikacin and gentamicin are mainly used in Pseudomonas infections","Streptomycin is used in tularemia and in T.B"],answer:2,explanation:"Aminoglycosides are effective against AEROBIC gram-negative organisms (E. coli, Pseudomonas, Klebsiella, Serratia), NOT anaerobes. They require oxygen-dependent electron transport for uptake into bacterial cells."},
+  {id:"final178",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"All statements about clindamycin are accurate EXCEPT:",options:["Its mode of action is similar to that of erythromycin","It is very effective against anaerobic infections","It may cause pseudomembranous colitis","It distributes well in all body fluids including CSF","It is effective in dental infections"],answer:3,explanation:"Clindamycin does NOT penetrate the blood-brain barrier well and achieves poor CSF levels; it should NOT be used for CNS infections. It binds to the 50S ribosomal subunit (same site as erythromycin), has excellent anaerobic activity."},
+  {id:"final179",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Typical therapeutic applications of erythromycin include all EXCEPT:",options:["Pseudomonas aeruginosa","Legionella pneumophila","Ureaplasma urealyticum","Chlamydia trachomatis","Corynebacterium diphteriae"],answer:0,explanation:"Erythromycin has no clinically useful activity against Pseudomonas aeruginosa (gram-negative rod). Erythromycin (macrolide) is effective against Legionella, Ureaplasma, Chlamydia, Corynebacterium, and atypical pneumonia organisms."},
+  {id:"final180",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"The use of chloramphenicol may result in:",options:["Bone marrow stimulation","Phototoxicity","Aplastic anemia","Staining of teeth","Alopecia"],answer:2,explanation:"Chloramphenicol causes two types of bone marrow toxicity: reversible dose-dependent anemia and irreversible idiosyncratic aplastic anemia (1 in 25,000-40,000 patients). Gray baby syndrome occurs in neonates due to immature hepatic glucuronyl transferase."},
+  {id:"final181",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Main reason to avoid chloramphenicol in most infectious diseases:",options:["Hepatotoxicity","Pulmonary fibrosis","Interstitial nephritis","Aplastic anemia","Cardiac arrhythmia"],answer:3,explanation:"Chloramphenicol use is restricted primarily because of its rare but potentially fatal idiosyncratic aplastic anemia (irreversible bone marrow failure). This unpredictable toxicity outweighs its benefits for most indications where safer alternatives exist."},
+  {id:"final182",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Antacids with tetracycline reduce effectiveness because:",options:["Antacids inhibit the absorption of tetracycline","Antacids stimulate the drug microsomal metabolizing system, so that the tetracycline is metabolized more rapidly","Ions in antacids solubilize the tetracycline","Antacids enhance the renal excretion of tetracycline","High blood level of tetracycline result in increased protein binding"],answer:0,explanation:"Antacids containing aluminum, magnesium, or calcium ions chelate tetracycline, forming poorly absorbed complexes. This is a pharmacokinetic interaction at the absorption level, reducing tetracycline bioavailability by up to 50-90%."},
+  {id:"final183",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"A 77-year-old woman with pneumonia - serum creatinine doubled after 3 days of antibiotics. Which is most likely responsible?",options:["Doxycycline","Clarithromycin","Gentamicin","Linezolid"],answer:2,explanation:"Gentamicin (aminoglycoside) accumulates in proximal tubular cells and causes acute tubular necrosis (nephrotoxicity). Rising serum creatinine is a hallmark sign. Risk factors include advanced age, pre-existing renal disease, and concurrent nephrotoxins."},
+  {id:"final184",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Patient with hepatitis, cirrhosis, ascites - which drug must be carefully monitored?",options:["Erythromycin","Tobramycin","Penicillin G","Clindamycin"],answer:0,explanation:"Erythromycin is extensively metabolized by hepatic CYP3A4 and should be used with caution in liver failure. Cirrhosis reduces hepatic drug metabolism, increasing erythromycin plasma levels and risk of cardiac toxicity (QT prolongation) and hepatotoxicity."},
+  {id:"final185",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"5-year-old boy with Lyme disease - doctor would not prescribe tetracycline because of:",options:["Teeth discolouration","Ototoxicity","Nephrotoxicity","Hepatotoxicity"],answer:0,explanation:"Tetracyclines chelate calcium and deposit in developing teeth (causing permanent yellowish-brown discoloration and enamel hypoplasia) and growing bones. They are contraindicated in children under 8 years. For Lyme disease in children under 8, amoxicillin or cefuroxime axetil is recommended."},
+  {id:"final186",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"With respect to treatment with aminoglycoside gentamicin - which statement is correct?",options:["Doses must be individualized due to gentamicin's high first-pass metabolism","In order to be effective, it must be given frequently to maintain high plasma levels","Doses may need to be adjusted as nephrotoxicity is a common adverse effect","It is generally well tolerated and has a wide therapeutic index"],answer:2,explanation:"Gentamicin nephrotoxicity (acute tubular necrosis) occurs in 10-25% of patients, necessitating regular monitoring of serum creatinine and drug trough levels. Gentamicin has a NARROW therapeutic index."},
+  {id:"final187",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Tetracycline statement that is INCORRECT:",options:["Tetracyclines bind to 30S subunits of the bacterial ribosome and block protein synthesis","Tetracyclines are effective in treating pharyngitis due to streptococcal infections","Phototoxicity is encountered most frequently with demeclocycline and doxycycline","Unlike other tetracyclines, doxycycline can be used in treating patients with renal failure","Though useful in eradicating the meningococcal carrier state, minocycline is not effective for CNS infections"],answer:1,explanation:"Tetracyclines are NOT effective for streptococcal pharyngitis due to widespread resistance of Streptococcus pyogenes. Penicillin or amoxicillin remains the drug of choice."},
+  {id:"final188",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Drug/adverse effect pairing that is INCORRECT: Ethambutol - Red-orange color secretions:",options:["Isoniazid: Hepatotoxicity","Zidovudine: Leukopenia","Didanosine: Pancreatitis","Pyrazinamide: Gouty attacks","Ethambutol: Red-orange color secretions"],answer:4,explanation:"Ethambutol causes OPTIC NEURITIS (decreased visual acuity, loss of red-green color discrimination), not red-orange secretions. Red-orange discoloration of urine, tears, and bodily secretions is caused by RIFAMPIN."},
+  {id:"final189",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Elimination half-life of which tetracycline remains unchanged in an anuric patient?",options:["Tetracycline","Oxytetracycline","Methacycline","Doxycycline","Chlorotetracycline"],answer:3,explanation:"Doxycycline is excreted primarily via the biliary/GI route (bile and feces) rather than the kidneys. Therefore, renal failure does NOT affect its half-life significantly. Other tetracyclines are renally excreted and accumulate in renal failure."},
+  {id:"final190",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"All first-line antituberculous drugs EXCEPT:",options:["Ethionamide","INH","Rifampin","Ethambutol","Streptomycin"],answer:0,explanation:"Ethionamide is a SECOND-LINE antituberculous drug used for MDR-TB. First-line drugs are: Isoniazid (INH), Rifampin, Pyrazinamide, Ethambutol, and Streptomycin."},
+  {id:"final191",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Relative to ciprofloxacin, levofloxacin has improved activity against:",options:["Bacteroides fragilis","Escherichia coli","Haemophilus influenzae","Mycoplasma pneumoniae","Streptococcus pneumoniae"],answer:4,explanation:"Levofloxacin is a respiratory fluoroquinolone with enhanced gram-positive activity, particularly against Streptococcus pneumoniae. Ciprofloxacin has limited activity against S. pneumoniae, which is why levofloxacin and moxifloxacin are preferred for community-acquired pneumonia."},
+  {id:"final192",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Drug or drug combination effective against VRE S. aureus and most strains of E. faecalis:",options:["Ceftriaxone","Gentamicin","Imipenem/cilastatin","Piperacillin/tazobactam","Streptogramins"],answer:4,explanation:"Quinupristin/dalfopristin (streptogramins) have activity against vancomycin-resistant staphylococci. Note: they are active against Enterococcus faecium but NOT E. faecalis. Linezolid is preferred for VRE faecalis. Streptogramins bind two different sites on the 50S subunit."},
+  {id:"final193",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Gray-baby syndrome is caused by:",options:["Trimethoprim-sulfamethoxazole","Gentamicin","Tetracycline","Chloramphenicol","Ciprofloxacin"],answer:3,explanation:"Gray baby syndrome is caused by chloramphenicol accumulation in neonates who lack adequate hepatic glucuronyl transferase to conjugate and excrete the drug. It presents with abdominal distension, vomiting, progressive pallid cyanosis (gray color), cardiovascular collapse."},
+  {id:"final194",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Ototoxicity and nephrotoxicity are caused by:",options:["Trimethoprim-sulfamethoxazole","Gentamicin","Tetracycline","Chloramphenicol","Ciprofloxacin"],answer:1,explanation:"Aminoglycosides (gentamicin, tobramycin, amikacin, streptomycin) cause both ototoxicity (irreversible damage to cochlear and vestibular hair cells) and nephrotoxicity (acute tubular necrosis). Risk is increased by concurrent use of loop diuretics."},
+  {id:"final195",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Stevens-Johnson syndrome is associated with:",options:["Trimethoprim-sulfamethoxazole","Gentamicin","Tetracycline","Chloramphenicol","Ciprofloxacin"],answer:0,explanation:"Stevens-Johnson syndrome (SJS) is most commonly associated with sulfonamides (including TMP-SMX), anticonvulsants, allopurinol, and NSAIDs."},
+  {id:"final196",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Tooth discoloration is caused by:",options:["Trimethoprim-sulfamethoxazole","Gentamicin","Tetracycline","Chloramphenicol","Ciprofloxacin"],answer:2,explanation:"Tetracyclines chelate calcium and form stable complexes that deposit in calcifying tissues (teeth, bone) during development, causing permanent yellowish-brown discoloration and enamel hypoplasia. Effect is most pronounced when given during tooth development (up to age 8 years)."},
+  {id:"final197",exam:"final",lecture:"Protein Synthesis Inhibitors",q:"Which anticancer drug is incorrectly matched: Vincristine - Disrupts DNA structure:",options:["Cyclophosphamide: Alkylating agent that binds to DNA bases","Methotrexate: Inhibition of dihydrofolate reductase enzyme","Tamoxifen: Estrogen antagonist","Asparaginase: Depletes the cell from asparagines","Vincristine: Disrupt DNA structure"],answer:4,explanation:"Vincristine does NOT disrupt DNA structure. Vincristine (vinca alkaloid) binds to tubulin and INHIBITS MICROTUBULE POLYMERIZATION, arresting cells in M phase of mitosis. Drugs that disrupt DNA include alkylating agents (cyclophosphamide)."},
+  {id:"final198",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"A patient had recurrent UTIs with ciprofloxacin resistance - most likely cause:",options:["Mutation of topoisomerase I","Mutation of DNA gyrase","Production of active efflux pump","Plasmid-mediated resistance"],answer:1,explanation:"The primary mechanism of fluoroquinolone resistance is chromosomal mutation in the gyrA gene encoding DNA gyrase subunit A, reducing the drug's binding to the enzyme-DNA complex. Efflux pumps are a secondary mechanism."},
+  {id:"final199",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"Sulfonamides mechanism - INCORRECT statement: Sulphonamides interfere with the build-up of peptide chains on ribosomes:",options:["Penicillins interfere with bacterial cell wall synthesis","Amphotericin B interferes with the function of the cytoplasmic membrane of fungi","Sulphonamides interfere with the build-up of peptide chains on ribosomes","Tetracyclines inhibit bacterial protein synthesis","Rifampicin interferes with bacterial nucleic acid synthesis"],answer:2,explanation:"Sulfonamides do NOT inhibit ribosomes. They are structural analogs of PABA that competitively inhibit dihydropteroate synthase, blocking folic acid synthesis in bacteria."},
+  {id:"final200",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"In antimicrobial drug treatment, all are correct EXCEPT - the combination of bactericidal and bacteriostatic drug is particularly efficacious:",options:["Bactericidal drugs lead directly to the destruction of bacterial cells","The ultimate efficacy of bacteriostatic drugs depends on the host's own defense mechanisms","Antimicrobials produce their effect by interfering with metabolic pathways vital for the organism","The production of an enzyme which destroys the antibacterial drug gives rise to one type of antibiotic resistance","The combination of a bactericidal and bacteriostatic drug is particularly efficacious"],answer:4,explanation:"Combining bactericidal and bacteriostatic drugs is generally ANTAGONISTIC. The bacteriostatic drug prevents bacterial growth, reducing the effectiveness of bactericidal drugs that require actively dividing cells (especially beta-lactams)."},
+  {id:"final201",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"All statements about Co-trimoxazole are correct EXCEPT:",options:["Is the treatment of choice for pneumonia due to Pneumocystis carinii","Has a broader spectrum of action than sulfonamides","May cause hemolytic anemia in patients with glucose-6-phosphate dehydrogenase deficiency","May increase levels of methotrexate due to displacement from albumin binding sites by sulfamethoxazole","Is a combination of sulfamethoxazole and clavulanic acid"],answer:4,explanation:"Co-trimoxazole is a combination of TRIMETHOPRIM + sulfamethoxazole (NOT clavulanic acid)."},
+  {id:"final202",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"1-day-old infant with jaundice - mother was taking antibiotic for UTI 1 week before delivery. What antibiotic did she take?",options:["Azithromycin","Trimethoprim-sulfamethoxazole","Amoxicillin","Fourth-generation cephalosporins"],answer:1,explanation:"Co-trimoxazole (TMP-SMX) is contraindicated near term because sulfonamides displace bilirubin from albumin binding sites. The displaced bilirubin accumulates in neonatal brain tissue (kernicterus) because neonates have immature blood-brain barriers."},
+  {id:"final203",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"Drug interactions - Pharmacokinetic interactions can result from all EXCEPT:",options:["Impaired absorption","Induction of the drug microsomal enzyme metabolizing system","Inhibition of the drug microsomal enzyme metabolizing system","Inhibition of renal excretion","The combination of a bacteriostatic and a bactericidal antibiotic"],answer:4,explanation:"Combining bacteriostatic and bactericidal antibiotics is a PHARMACODYNAMIC interaction (drug-drug interaction at the level of effect), NOT a pharmacokinetic interaction. Pharmacokinetic interactions involve changes in absorption, distribution, metabolism, or excretion."},
+  {id:"final204",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"Which drug is least likely to affect hepatic metabolism of other drugs?",options:["Ampicillin","Clarithromycin","Ketoconazole","Griseofulvin","Rifampin"],answer:0,explanation:"Ampicillin does not significantly inhibit or induce hepatic CYP enzymes. Clarithromycin and ketoconazole inhibit CYP3A4. Rifampin is a potent CYP inducer. Griseofulvin also induces CYP enzymes."},
+  {id:"final205",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"Ciprofloxacin - contraindicated below age 18 years because of:",options:["Arthropathy (articular cartilage erosion in weight-bearing joints)","Ototoxicity","Nephrotoxicity","Aplastic anemia","Kernicterus"],answer:0,explanation:"Fluoroquinolones (ciprofloxacin, levofloxacin) are generally contraindicated in children and adolescents under 18 years because animal studies showed cartilage erosion and arthropathy in weight-bearing joints."},
+  {id:"final206",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"Matching - Drug inhibiting DNA gyrase, contraindicated below age 18:",options:["Neomycin","Ciprofloxacin","Ribavirin","Griseofulvin","Azithromycin"],answer:1,explanation:"Ciprofloxacin inhibits DNA gyrase (topoisomerase II) and topoisomerase IV, preventing DNA replication, repair, and transcription. It is contraindicated in children under 18 due to risk of cartilage erosion."},
+  {id:"final207",exam:"final",lecture:"Nucleic Acid Synthesis Inhibitors",q:"All drugs are cell-cycle specific EXCEPT:",options:["5-fluorouracil","Methotrexate","Vincristine","Cyclophosphamide","6-mercaptopurine"],answer:3,explanation:"Cyclophosphamide is a cell cycle NON-SPECIFIC alkylating agent that can kill cancer cells regardless of their phase in the cell cycle. Cell cycle-specific drugs include: 5-fluorouracil (S phase), methotrexate (S phase), vincristine (M phase), and 6-mercaptopurine (S phase)."},
+  {id:"final208",exam:"final",lecture:"Antifungal Drugs",q:"Dose-limiting toxicity of amphotericin B is:",options:["Myelosuppression","Infusion-related adverse effects","Renal toxicity","Hypotension","Hepatitis"],answer:2,explanation:"Amphotericin B causes dose-limiting nephrotoxicity in up to 80% of patients, manifesting as azotemia, renal tubular acidosis, and hypokalemia. It binds ergosterol in fungal membranes but also binds cholesterol in renal tubular cells. Liposomal formulations reduce nephrotoxicity."},
+  {id:"final209",exam:"final",lecture:"Antifungal Drugs",q:"Regarding clinical uses of liposomal amphotericin B formulation - which is more accurate?",options:["Amphotericin B is expensive","To reduce amphotericin B nephrotoxicity","To enhance antifungal spectrum of activity","To improve oral bioavailability"],answer:1,explanation:"Liposomal amphotericin B (AmBisome) was developed primarily to reduce the severe nephrotoxicity of conventional amphotericin B. Liposomes preferentially interact with fungal cell membranes (high ergosterol content) rather than renal tubular cell membranes."},
+  {id:"final210",exam:"final",lecture:"Antifungal Drugs",q:"Which antifungal drug is limited to Aspergillus and Candida?",options:["Amphotericin B","Fluconazole","Caspofungin","Voriconazole"],answer:2,explanation:"Caspofungin (echinocandin) inhibits beta-1,3-glucan synthase, disrupting fungal cell wall synthesis. Its spectrum is primarily limited to Candida species and Aspergillus species. It lacks activity against Cryptococcus neoformans."},
+  {id:"final211",exam:"final",lecture:"Antifungal Drugs",q:"Topical antifungal used for treating tinea cruris and tinea corporis:",options:["Terbinafine","Itraconazole","Nystatin","Fluconazole"],answer:0,explanation:"Terbinafine (allylamine) inhibits squalene epoxidase in the ergosterol biosynthesis pathway. It is highly effective topically for dermatophyte infections (tinea pedis, corporis, cruris). It is fungicidal against dermatophytes."},
+  {id:"final212",exam:"final",lecture:"Antifungal Drugs",q:"Which correctly describes the mechanism of terbinafine?",options:["Formation of pores in the cell membrane","Inhibition of thymidylate synthase","Accumulation of toxic squalene","Inhibition of ergosterol synthesis"],answer:2,explanation:"Terbinafine inhibits squalene epoxidase, blocking the conversion of squalene to squalene 2,3-epoxide in the ergosterol biosynthesis pathway. This causes intracellular accumulation of toxic squalene and depletion of ergosterol. This mechanism distinguishes terbinafine from azoles (which inhibit C14-alpha demethylase)."},
+  {id:"final213",exam:"final",lecture:"Antifungal Drugs",q:"Matching - Antifungal drug used for dermatophytes of the nail (Griseofulvin):",options:["Neomycin","Ciprofloxacin","Ribavirin","Griseofulvin","Azithromycin"],answer:3,explanation:"Griseofulvin inhibits fungal mitosis by binding to tubulin, disrupting microtubule assembly. It concentrates in keratin-containing tissues (skin, hair, nails) and is used orally for dermatophyte infections of nails and hair. It requires months of treatment for nail infections."},
+  {id:"final214",exam:"final",lecture:"Antifungal Drugs",q:"Matching - Antifungal drug used orally for fungal meningitis in AIDS patient (Fluconazole):",options:["Ketoconazole","Nystatin","Amphotericin B","Fluconazole"],answer:3,explanation:"Fluconazole is the drug used for maintenance therapy of cryptococcal meningitis in AIDS patients (after induction with amphotericin B + flucytosine). It has excellent oral bioavailability (~90%) and good CNS penetration. It inhibits ergosterol synthesis by blocking CYP51 (C14-alpha demethylase)."},
+  {id:"final215",exam:"final",lecture:"Antifungal Drugs",q:"An azole most commonly used for topical treatment of Candidiasis:",options:["Terbinafine","Amphotericin B","Flucytosine","Clotrimazole"],answer:3,explanation:"Clotrimazole is the most commonly used topical azole for oral and vaginal candidiasis. All azoles inhibit fungal cytochrome P450 enzyme 14-alpha-demethylase, blocking ergosterol synthesis from lanosterol."},
+  {id:"final216",exam:"final",lecture:"Antifungal Drugs",q:"AIDS patient with cryptococcal meningitis who refuses IV medication - which antifungal orally?",options:["Ketoconazole","Amphotericin B","Itraconazole","Nystatin","Fluconazole"],answer:4,explanation:"Fluconazole has excellent oral bioavailability and good CNS penetration, making it suitable for treating cryptococcal meningitis orally. Amphotericin B is only available parenterally. Ketoconazole does not penetrate the CSF well. Nystatin is only topical."},
+  {id:"final217",exam:"final",lecture:"Antifungal Drugs",q:"Matching - Indinavir (HIV protease inhibitor that characteristically causes renal stone formation):",options:["Saquinavir","Ritonavir","Indinavir","Lopinavir"],answer:2,explanation:"Indinavir is an HIV protease inhibitor that causes nephrolithiasis (kidney stones) in up to 4-8% of patients due to crystallization of indinavir metabolites in urine. Prevention includes adequate hydration (>1.5 L/day)."},
+  {id:"final218",exam:"final",lecture:"Antifungal Drugs",q:"Matching - Amantadine - antiviral drug used prophylactically against influenza A, preventing uncoating of viral DNA:",options:["Acyclovir","Ribavirin","Oseltamivir","Amantadine"],answer:3,explanation:"Amantadine and rimantadine inhibit the M2 ion channel of influenza A virus, blocking the acidification required for viral uncoating (release of viral RNA into the cell). They are active only against influenza A (not influenza B). Due to widespread resistance, they are no longer recommended."},
+  {id:"final219",exam:"final",lecture:"Antiparasitic Drugs",q:"A farmer develops excessive sweating, vomiting, and salivation after work - what is the antidote?",options:["PAM and atropine","Naloxone and flumazenil","N-acetylcysteine","Activated charcoal only"],answer:0,explanation:"Excessive secretions, sweating, and GI symptoms indicate cholinergic toxicity from organophosphate pesticide poisoning. Treatment: Atropine (muscarinic antagonist) + Pralidoxime/PAM (reactivates acetylcholinesterase if given before 'aging' occurs)."},
+  {id:"final220",exam:"final",lecture:"Antiparasitic Drugs",q:"Patient with C. difficile pseudomembranous colitis - antimicrobial therapy:",options:["Amoxicillin","Ciprofloxacin","Metronidazole","Erythromycin"],answer:2,explanation:"Metronidazole is first-line for C. difficile colitis. It enters anaerobic organisms and is reduced by ferredoxin to form reactive nitro radicals that cause DNA strand breakage. It is also the drug of choice for Entamoeba histolytica (amebiasis), Giardia lamblia, and Trichomonas vaginalis."},
+  {id:"final221",exam:"final",lecture:"Antiparasitic Drugs",q:"Matching - Drug that is drug of choice in severe amebic disease and hepatic abscess; activated by pyruvate-ferredoxin oxidoreductase:",options:["Diloxanide furoate","Emetine","Iodoquinol","Metronidazole","Paromomycin"],answer:3,explanation:"Metronidazole is the drug of choice for severe intestinal amebiasis and amebic liver abscess. It is activated to toxic intermediates by the pyruvate-ferredoxin oxidoreductase enzyme system present in the parasite, causing DNA strand breakage."},
+  {id:"final222",exam:"final",lecture:"Antiviral Drugs",q:"Which enzyme or replicative process is the main target of zidovudine?",options:["RNA synthesis","Protease inhibitor","Nucleoside reverse transcriptase inhibitors","Non-nucleoside reverse transcriptase inhibitors"],answer:2,explanation:"Zidovudine (AZT/ZDV) is a nucleoside reverse transcriptase inhibitor (NRTI) that inhibits HIV reverse transcriptase. It is phosphorylated by cellular kinases to AZT-triphosphate, which competes with thymidine triphosphate for incorporation into viral DNA, causing chain termination. Adverse effects include anemia, neutropenia (myelosuppression), and myopathy."},
+  {id:"final223",exam:"final",lecture:"Antiviral Drugs",q:"HIV patient on several drugs developed hyperlipidemia and insulin resistance - which drug caused these symptoms?",options:["Ketoconazole","Trimethoprim","Indinavir","Zidovudine"],answer:2,explanation:"Indinavir is an HIV protease inhibitor. Metabolic syndrome (hyperlipidemia, insulin resistance/hyperglycemia, lipodystrophy) are class effects of HIV protease inhibitors. Specific to indinavir: nephrolithiasis due to drug crystallization in urine."},
+  {id:"final224",exam:"final",lecture:"Antiviral Drugs",q:"Matching - Ribavirin - effective against severe RSV and chronic hepatitis C:",options:["Acyclovir","Ganciclovir","Ribavirin","Amantadine"],answer:2,explanation:"Ribavirin is a broad-spectrum antiviral guanosine analog that inhibits viral RNA-dependent RNA polymerase and mRNA capping. It is used as aerosol for RSV bronchiolitis in infants, and in combination with interferon-alpha for chronic hepatitis C."},
+  {id:"final225",exam:"final",lecture:"Antiviral Drugs",q:"Matching - Lamivudine - inhibits reverse transcriptase, used for both HIV and hepatitis B:",options:["Zidovudine","Lamivudine","Didanosine","Stavudine"],answer:1,explanation:"Lamivudine (3TC) is an NRTI that inhibits both HIV reverse transcriptase and HBV DNA polymerase. For HIV it is part of combination ART; for HBV it reduces viral replication."},
+  {id:"final226",exam:"final",lecture:"Antiviral Drugs",q:"Matching - Ganciclovir - used to treat cytomegalovirus retinitis:",options:["Acyclovir","Foscarnet","Ribavirin","Ganciclovir"],answer:3,explanation:"Ganciclovir is used for CMV retinitis and other CMV infections in immunocompromised patients. It is phosphorylated by CMV UL97 protein kinase, then by cellular kinases to the active triphosphate form that inhibits CMV DNA polymerase. Main adverse effect is myelosuppression."},
+  {id:"final227",exam:"final",lecture:"Antiviral Drugs",q:"Matching - Zanamivir - effective against both type A and B influenza, not effective orally, inhaled or intranasal:",options:["Oseltamivir","Amantadine","Zanamivir","Rimantadine"],answer:2,explanation:"Zanamivir is a neuraminidase inhibitor that must be inhaled (not orally active) and prevents release of new influenza virions. It is effective against both influenza A and B. It can cause bronchospasm in asthmatic patients."},
+  {id:"final228",exam:"final",lecture:"Antiviral Drugs",q:"Matching - Saquinavir - HIV protease inhibitor:",options:["Nucleoside reverse transcriptase inhibitor","Non-nucleoside reverse transcriptase inhibitor","HIV protease inhibitor","Integrase inhibitor"],answer:2,explanation:"Saquinavir was the first HIV protease inhibitor approved. HIV protease inhibitors prevent cleavage of viral polyprotein precursors into functional proteins, resulting in immature, non-infectious viral particles. Adverse effects include metabolic syndrome."},
+  {id:"final229",exam:"final",lecture:"Antiviral Drugs",q:"All drugs correctly paired with adverse effect EXCEPT - Ethambutol: Red-orange color secretions:",options:["Isoniazid: Hepatotoxicity","Zidovudine: Leukopenia","Didanosine: Pancreatitis","Pyrazinamide: Gouty attacks","Ethambutol: Red-orange color secretions"],answer:4,explanation:"Ethambutol causes OPTIC NEURITIS (not red-orange secretions). Red-orange discoloration of urine, sweat, and tears is caused by RIFAMPIN."},
+  {id:"final230",exam:"final",lecture:"Antiviral Drugs",q:"Matching - Voriconazole - broad-spectrum antifungal, orally active, penetrates CNS:",options:["Fluconazole","Voriconazole","Ketoconazole","Itraconazole"],answer:1,explanation:"Voriconazole is an extended-spectrum triazole antifungal used as first-line treatment for invasive aspergillosis. It has excellent oral bioavailability (~96%), good tissue and CSF penetration, and is effective against Aspergillus, Candida, Fusarium, and Scedosporium."},
+  {id:"final231",exam:"final",lecture:"Anticancer Drugs",q:"What drug is used for testicular carcinoma and can cause nephrotoxicity?",options:["Cisplatin","Bleomycin","Vinblastine","Methotrexate"],answer:0,explanation:"Cisplatin is the cornerstone drug for testicular cancer chemotherapy (along with bleomycin and etoposide in BEP regimen). Its dose-limiting toxicity is nephrotoxicity (acute tubular necrosis), which is prevented by vigorous IV hydration with saline and mannitol diuresis. Cisplatin also causes ototoxicity, severe nausea/vomiting, and peripheral neuropathy."},
+  {id:"final232",exam:"final",lecture:"Anticancer Drugs",q:"Adverse effect of bleomycin:",options:["Cardiac toxicity","Renal toxicity","Pulmonary toxicity","Hepatic toxicity"],answer:2,explanation:"Bleomycin's major dose-limiting toxicity is pulmonary toxicity (interstitial pneumonitis progressing to pulmonary fibrosis), which is related to cumulative dose (risk increases markedly above 400 units total). Unlike most cytotoxics, bleomycin causes MINIMAL myelosuppression."},
+  {id:"final233",exam:"final",lecture:"Anticancer Drugs",q:"Rationale for combination of anticancer drugs is:",options:["Reduce the incidence of drug-induced nausea and vomiting","Reduce the risk of drug resistance","Remove the need for a 'drug holiday'","Administer them together in the same formulation"],answer:1,explanation:"The primary rationale for combination chemotherapy is to reduce drug resistance by simultaneously attacking cancer cells through multiple different mechanisms, preventing selection of resistant clones."},
+  {id:"final234",exam:"final",lecture:"Anticancer Drugs",q:"Nanoparticles promote tumor selectivity - passively entering tumor cells depends on:",options:["Blood vessels in the tumor are rigid","Blood vessels in the tumor are leaky","Low enzyme content in tumor cells","High enzyme content in tumor cells"],answer:1,explanation:"Tumor blood vessels are structurally abnormal (leaky with wide intercellular gaps) and have defective lymphatic drainage. This allows nanoparticles and macromolecules to extravasate and accumulate in tumor tissue - the Enhanced Permeability and Retention (EPR) effect."},
+  {id:"final235",exam:"final",lecture:"Anticancer Drugs",q:"A 45-year-old male in ABVD regimen developed heart failure after 4 cycles - which drug is responsible?",options:["Dacarbazine","Vinblastine","Bleomycin","Doxorubicin"],answer:3,explanation:"Doxorubicin (Adriamycin) causes irreversible cumulative dose-dependent cardiomyopathy and congestive heart failure through free radical damage to cardiac mitochondria. The risk increases substantially above a cumulative dose of 550 mg/m². Dexrazoxane is used as a cardioprotectant. Bleomycin causes pulmonary toxicity."},
+  {id:"final236",exam:"final",lecture:"Anticancer Drugs",q:"In MOPP and ABVD regimens - which class used in BOTH is cell cycle specific?",options:["Plant alkaloids","Glucocorticoids","Antibiotics","Alkylating agents"],answer:0,explanation:"Plant alkaloids (vincristine in MOPP, vinblastine in ABVD) are cell cycle specific (M phase) agents that bind tubulin and inhibit mitotic spindle formation. Mechlorethamine (alkylating agent in MOPP) and dacarbazine (in ABVD) are cell cycle NON-specific."},
+  {id:"final237",exam:"final",lecture:"Anticancer Drugs",q:"Breast cancer patient on cyclophosphamide developed acute hemorrhagic cystitis - what is the best primary prevention?",options:["Mesna","Folinic acid","Vitamin K","Folic acid"],answer:0,explanation:"Mesna (sodium 2-mercaptoethane sulfonate) is co-administered with cyclophosphamide or ifosfamide to prevent hemorrhagic cystitis. It is excreted in urine where it reacts with and inactivates acrolein (the toxic metabolite responsible for urothelial toxicity). Leucovorin (folinic acid) prevents methotrexate toxicity."},
+  {id:"final238",exam:"final",lecture:"Anticancer Drugs",q:"All statements true EXCEPT - Tamoxifen complexes with DNA to inhibit RNA synthesis:",options:["Patients with Hodgkin's disease being treated with procarbazine should be cautioned against ingesting food from fermentative sources","Vincristine is effective in inducing remission in childhood acute lymphocytic leukemia","X-irradiation of the cranio-spinal axis is an effective adjuvant therapy in the treatment of acute lymphocytic leukemia","Treatment with alkylating agent can induce secondary tumors","Tamoxifen complexes with DNA to inhibit RNA synthesis"],answer:4,explanation:"Tamoxifen is a selective estrogen receptor modulator (SERM) that COMPETITIVELY BLOCKS ESTROGEN RECEPTORS in breast tissue - it does NOT complex with DNA or inhibit RNA synthesis directly. Tamoxifen is used for ER-positive breast cancer treatment and prevention."},
+  {id:"final239",exam:"final",lecture:"Anticancer Drugs",q:"Which anticancer drug is incorrectly matched: Vincristine: Disrupts DNA structure:",options:["Cyclophosphamide: Alkylating agent that binds to DNA bases","Methotrexate: Inhibition of dihydrofolate reductase enzyme","Tamoxifen: Estrogen antagonist","Asparaginase: Depletes the cell from asparagines","Vincristine: Disrupt DNA structure"],answer:4,explanation:"Vincristine (vinca alkaloid) binds to tubulin dimers and INHIBITS MICROTUBULE POLYMERIZATION (not DNA disruption), arresting mitosis at metaphase. Drugs that disrupt DNA structure are alkylating agents and platinum compounds."},
+  {id:"final240",exam:"final",lecture:"Anticancer Drugs",q:"All drugs are cell-cycle specific EXCEPT:",options:["5-fluorouracil","Methotrexate","Vincristine","Cyclophosphamide","6-mercaptopurine"],answer:3,explanation:"Cyclophosphamide is a cell cycle NON-SPECIFIC (CCNS) alkylating agent that damages DNA at any phase of the cell cycle. Cell cycle-specific (CCS) agents: 5-fluorouracil (S phase), methotrexate (S phase), vincristine (M phase), bleomycin (G2/M), and 6-mercaptopurine (S phase)."},
+  {id:"final241",exam:"final",lecture:"Anticancer Drugs",q:"All statements about Co-trimoxazole correct EXCEPT - Is a combination of sulfamethoxazole and clavulanic acid:",options:["Is the treatment of choice for pneumonia due to Pneumocystis carinii","Has a broader spectrum of action than sulfonamides","May cause hemolytic anemia in patients with G6PD deficiency","May increase levels of methotrexate due to displacement from albumin binding sites","Is a combination of sulfamethoxazole and clavulanic acid"],answer:4,explanation:"Co-trimoxazole = TMP + sulfamethoxazole (NOT clavulanic acid). Trimethoprim inhibits dihydrofolate reductase (step 2) and sulfamethoxazole inhibits dihydropteroate synthase (step 1), achieving sequential blockade of folate synthesis."},
+  {id:"final242",exam:"final",lecture:"Anticancer Drugs",q:"Which drug is responsible for cardiomyopathy in the ABVD regimen?",options:["Cyclophosphamide","Doxorubicin","Fluorouracil","Methotrexate","Tamoxifen"],answer:1,explanation:"Doxorubicin generates reactive oxygen species through iron-mediated reactions, causing oxidative damage to cardiac mitochondria and cardiomyocytes. This leads to dilated cardiomyopathy and congestive heart failure. The cardiac toxicity is irreversible and cumulative dose-dependent. Dexrazoxane chelates iron and prevents doxorubicin-iron complex formation. ## Summary: Questions per Category | Category | Number of Questions | |---|---| | Cell Wall Inhibitors | 56 | | Protein Synthesis Inhibitors | 23 | | Inhibitors of Nucleic Acid Synthesis | 10 | | Antifungal Drugs | 11 | | Antiparasitic Drugs | 3 | | Antiviral Drugs | 9 | | Anticancer Drugs | 12 | | TOTAL | 124 |"}
 ];
 const ALL_Q = [...MID1_QUESTIONS, ...MID2_QUESTIONS, ...FINAL_QUESTIONS];
 
@@ -455,6 +579,340 @@ const SECTION_LABELS: Record<Filter, { en: string; ar: string }> = {
 
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"] as const;
 
+/* ── Global CSS (injected once) ── */
+const GLOBAL_CSS = `
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --bg0: #060913;
+  --glass: rgba(148, 163, 255, 0.055);
+  --glass-border: rgba(148, 163, 255, 0.13);
+  --txt: #e7ecf8;
+  --muted: #8b96b8;
+  --faint: #5a6485;
+  --accent: #818cf8;
+  --accent2: #38bdf8;
+  --good: #34d399;
+  --bad: #fb7185;
+  --warn: #fbbf24;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg0);
+  font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ── Aurora background ── */
+.aurora {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+}
+.aurora::before, .aurora::after {
+  content: ""; position: absolute; border-radius: 50%;
+  filter: blur(110px); opacity: 0.55;
+}
+.aurora::before {
+  width: 60vw; height: 60vw; min-width: 480px; min-height: 480px;
+  background: radial-gradient(circle, #4338ca 0%, transparent 65%);
+  top: -22vw; right: -18vw;
+  animation: drift1 26s ease-in-out infinite alternate;
+}
+.aurora::after {
+  width: 55vw; height: 55vw; min-width: 420px; min-height: 420px;
+  background: radial-gradient(circle, #0e7490 0%, transparent 65%);
+  bottom: -20vw; left: -16vw;
+  animation: drift2 32s ease-in-out infinite alternate;
+}
+.aurora-mid {
+  position: absolute; width: 42vw; height: 42vw; min-width: 340px; min-height: 340px;
+  border-radius: 50%; filter: blur(120px); opacity: 0.32;
+  background: radial-gradient(circle, #7c3aed 0%, transparent 65%);
+  top: 35%; left: 30%;
+  animation: drift3 38s ease-in-out infinite alternate;
+}
+@keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(-9vw, 7vw) scale(1.15); } }
+@keyframes drift2 { from { transform: translate(0,0) scale(1.1); } to { transform: translate(8vw, -6vw) scale(0.95); } }
+@keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(10vw, -8vw); } }
+
+/* Grain overlay for texture */
+.grain {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Entrance animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.7); }
+  65% { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideOption {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 24px rgba(129,140,248,0.35), 0 0 60px rgba(56,189,248,0.12); }
+  50%      { box-shadow: 0 0 36px rgba(129,140,248,0.55), 0 0 90px rgba(56,189,248,0.22); }
+}
+@keyframes shimmerTxt {
+  to { background-position: 200% center; }
+}
+@keyframes correctFlash {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.025); }
+  100% { transform: scale(1); }
+}
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+@keyframes ringDraw { from { stroke-dashoffset: var(--ring-c); } }
+@keyframes barGrow { from { width: 0; } }
+@keyframes confettiFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
+.anim-fadeUp { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-pop { animation: popIn 0.55s cubic-bezier(0.34,1.56,0.64,1) both; }
+.stagger > * { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.stagger > *:nth-child(1) { animation-delay: 0.03s; }
+.stagger > *:nth-child(2) { animation-delay: 0.09s; }
+.stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger > *:nth-child(4) { animation-delay: 0.21s; }
+.stagger > *:nth-child(5) { animation-delay: 0.27s; }
+.stagger > *:nth-child(6) { animation-delay: 0.33s; }
+
+/* ── Glass card ── */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(2, 6, 23, 0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+/* ── Title shimmer ── */
+.shimmer-title {
+  background: linear-gradient(90deg, #c7d2fe 0%, #67e8f9 25%, #e0e7ff 50%, #a5b4fc 75%, #c7d2fe 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerTxt 5s linear infinite;
+}
+
+/* ── Buttons ── */
+.btn-base { transition: all 0.2s cubic-bezier(0.22,1,0.36,1); }
+.btn-base:hover:not(:disabled) { transform: translateY(-2px); }
+.btn-base:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+
+.tab-pill {
+  position: relative; overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.tab-pill:hover:not(.tab-on) { border-color: rgba(129,140,248,0.45) !important; color: #c7d2fe !important; transform: translateY(-2px); }
+.tab-on {
+  background: linear-gradient(135deg, rgba(99,102,241,0.28), rgba(56,189,248,0.18)) !important;
+  border-color: rgba(129,140,248,0.7) !important;
+  box-shadow: 0 0 22px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.chip {
+  transition: all 0.2s cubic-bezier(0.22,1,0.36,1);
+}
+.chip:hover:not(.chip-on) { border-color: rgba(129,140,248,0.5) !important; color: #c7d2fe !important; }
+.chip-on {
+  background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(56,189,248,0.16)) !important;
+  border-color: rgba(129,140,248,0.65) !important;
+  color: #c7d2fe !important;
+  box-shadow: 0 0 14px rgba(99,102,241,0.25);
+}
+
+.start-cta {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 45%, #0ea5e9 110%);
+  animation: glowPulse 3.2s ease-in-out infinite;
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), filter 0.22s;
+}
+.start-cta:hover:not(:disabled) { transform: translateY(-3px) scale(1.012); filter: brightness(1.12); }
+.start-cta:active:not(:disabled) { transform: scale(0.985); }
+.start-cta::after {
+  content: ""; position: absolute; top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: skewX(-20deg);
+  animation: ctaSheen 3.6s ease-in-out infinite;
+}
+@keyframes ctaSheen { 0%, 60% { left: -75%; } 100% { left: 130%; } }
+.start-cta:disabled { animation: none; box-shadow: none; }
+
+/* ── Options ── */
+.opt {
+  animation: slideOption 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  transition: all 0.22s cubic-bezier(0.22,1,0.36,1);
+  position: relative;
+}
+.opt:nth-child(1) { animation-delay: 0.05s; }
+.opt:nth-child(2) { animation-delay: 0.11s; }
+.opt:nth-child(3) { animation-delay: 0.17s; }
+.opt:nth-child(4) { animation-delay: 0.23s; }
+.opt:nth-child(5) { animation-delay: 0.29s; }
+.opt:hover:not(:disabled):not(.opt-locked) {
+  border-color: rgba(129,140,248,0.6) !important;
+  background: rgba(99,102,241,0.1) !important;
+  transform: translateX(4px);
+}
+.opt-correct { animation: correctFlash 0.5s ease both !important; }
+.opt-wrong { animation: wrongShake 0.45s ease both !important; }
+
+.expl-box { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* ── Slider ── */
+input[type="range"].lux-slider {
+  -webkit-appearance: none; appearance: none;
+  height: 8px; border-radius: 999px;
+  background: linear-gradient(90deg, #6366f1 var(--fill, 50%), rgba(148,163,255,0.14) var(--fill, 50%));
+  outline: none;
+}
+input[type="range"].lux-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: linear-gradient(135deg, #818cf8, #38bdf8);
+  border: 3px solid #0b1023;
+  box-shadow: 0 0 14px rgba(129,140,248,0.65);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+input[type="range"].lux-slider::-webkit-slider-thumb:hover { transform: scale(1.18); }
+input[type="range"].lux-slider::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, #818cf8, #38bdf8);
+  border: 3px solid #0b1023;
+  box-shadow: 0 0 14px rgba(129,140,248,0.65);
+  cursor: pointer;
+}
+
+/* ── Progress ── */
+.prog-fill {
+  background: linear-gradient(90deg, #6366f1, #38bdf8);
+  box-shadow: 0 0 12px rgba(99,102,241,0.55);
+  transition: width 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ── Score ring ── */
+.ring-anim { animation: ringDraw 1.4s cubic-bezier(0.22,1,0.36,1) both; }
+.bar-anim { animation: barGrow 0.9s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(129,140,248,0.25); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(129,140,248,0.45); }
+
+.confetti-piece {
+  position: fixed; top: 0; width: 10px; height: 14px; z-index: 50;
+  animation: confettiFall linear both; pointer-events: none; border-radius: 2px;
+}
+`;
+
+function CssInjector() {
+  useEffect(() => {
+    const tag = document.createElement("style");
+    tag.textContent = GLOBAL_CSS;
+    document.head.appendChild(tag);
+    return () => { document.head.removeChild(tag); };
+  }, []);
+  return null;
+}
+
+function Aurora() {
+  return (
+    <>
+      <div className="aurora"><div className="aurora-mid" /></div>
+      <div className="grain" />
+    </>
+  );
+}
+
+/* Animated count-up number */
+function CountUp({ to, duration = 1200, suffix = "" }: { to: number; duration?: number; suffix?: string }) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    let raf = 0;
+    const t0 = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min((t - t0) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setVal(Math.round(eased * to));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [to, duration]);
+  return <>{val}{suffix}</>;
+}
+
+/* SVG score ring */
+function ScoreRing({ pct, color }: { pct: number; color: string }) {
+  const R = 84, C = 2 * Math.PI * R;
+  const off = C - (pct / 100) * C;
+  return (
+    <div style={{ position: "relative", width: 208, height: 208, margin: "0 auto" }}>
+      <svg width="208" height="208" viewBox="0 0 208 208" style={{ transform: "rotate(-90deg)" }}>
+        <circle cx="104" cy="104" r={R} fill="none" stroke="rgba(148,163,255,0.1)" strokeWidth="13" />
+        <circle
+          className="ring-anim"
+          cx="104" cy="104" r={R} fill="none"
+          stroke={color} strokeWidth="13" strokeLinecap="round"
+          strokeDasharray={C} strokeDashoffset={off}
+          style={{ ["--ring-c" as any]: C, filter: `drop-shadow(0 0 10px ${color}88)` }}
+        />
+      </svg>
+      <div style={{
+        position: "absolute", inset: 0, display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center", gap: 0,
+      }}>
+        <span style={{ fontSize: 52, fontWeight: 900, color: "#f1f5fd", lineHeight: 1 }}>
+          <CountUp to={pct} suffix="%" />
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* Confetti burst for high scores */
+function Confetti() {
+  const pieces = useMemo(() => Array.from({ length: 60 }, (_, i) => ({
+    left: Math.random() * 100,
+    delay: Math.random() * 1.6,
+    dur: 2.4 + Math.random() * 2.2,
+    color: ["#818cf8", "#38bdf8", "#34d399", "#fbbf24", "#f472b6", "#c084fc"][i % 6],
+    w: 6 + Math.random() * 7,
+  })), []);
+  return (
+    <>
+      {pieces.map((p, i) => (
+        <div key={i} className="confetti-piece" style={{
+          left: `${p.left}vw`, background: p.color,
+          width: p.w, height: p.w * 1.4,
+          animationDuration: `${p.dur}s`, animationDelay: `${p.delay}s`,
+        }} />
+      ))}
+    </>
+  );
+}
+
 /* ── App ── */
 export default function App() {
   /* Screen */
@@ -465,6 +923,7 @@ export default function App() {
   const [selectedLectures, setSelectedLectures] = useState<Set<string>>(new Set());
   const [questionCount, setQuestionCount] = useState(20);
   const [hideSeen, setHideSeen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   /* Quiz state */
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -583,151 +1042,203 @@ export default function App() {
     }));
   }, [questions, answers]);
 
+  const shell = (children: React.ReactNode) => (
+    <div style={S.page}>
+      <CssInjector />
+      <Aurora />
+      <div style={S.container}>{children}</div>
+    </div>
+  );
+
   /* ── HOME ── */
   if (screen === "home") {
     const allSelected = selectedLectures.size >= allLectures.length;
     const canStart = effectivePool.length > 0 && selectedLectures.size > 0;
+    const fillPct = maxCount > 1 ? ((safeCount - 1) / (maxCount - 1)) * 100 : 0;
 
-    return (
-      <div style={S.page}>
-        <div style={S.container}>
-          {/* Header */}
-          <div style={{ textAlign: "center", marginBottom: 24 }}>
-            <div style={S.badge}>Pharmacology — PH45</div>
-            <h1 style={S.title}>Test Bank</h1>
-            <p style={S.subtitle}>بنك الأسئلة</p>
-          </div>
-
-          {/* About note */}
-          <div style={S.aboutBox}>
-            <p style={{ margin: 0, lineHeight: 1.75, color: "#94a3b8", fontSize: 13 }} dir="rtl">
-              الموقع هو النسخة الإلكترونية من بنك أسئلة الفارماكولوجي —
-              الأسئلة والخيارات والإجابات والشروحات منقولة حرفياً من الملف الأصلي بدون أي تعديل على المحتوى العلمي،
-              فهو يغني عن الملف بشكل كامل ويعتبر نفسه ١٠٠٪.
-            </p>
-          </div>
-
-          {/* Section Tabs */}
-          <div style={S.card}>
-            <div style={S.sectionLabel}>القسم / Section</div>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              {(["mid1", "mid2", "final", "all"] as Filter[]).map(f => (
-                <button
-                  key={f}
-                  style={{ ...S.tabBtn, ...(filter === f ? S.tabBtnActive : {}) }}
-                  onClick={() => setFilter(f)}
-                >
-                  <span style={{ fontWeight: 700 }}>{SECTION_LABELS[f].ar}</span>
-                  <span style={{ fontSize: 11, color: filter === f ? "#93c5fd" : "#475569" }}>
-                    {getPool(f).length}q
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Lectures */}
-          <div style={S.card}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-              <div style={S.sectionLabel}>المحاضرات / Lectures</div>
-              <button
-                style={S.smallBtn}
-                onClick={() => setSelectedLectures(
-                  allSelected ? new Set() : new Set(allLectures)
-                )}
-              >
-                {allSelected ? "Deselect All" : "Select All"}
-              </button>
-            </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 7, maxHeight: 210, overflowY: "auto", paddingBottom: 4 }}>
-              {allLectures.map(lec => {
-                const active = selectedLectures.has(lec);
-                return (
-                  <button
-                    key={lec}
-                    style={{ ...S.lecChip, ...(active ? S.lecChipActive : {}) }}
-                    onClick={() => toggleLecture(lec)}
-                  >
-                    {active ? "✓ " : ""}{lec}
-                  </button>
-                );
-              })}
-            </div>
-            {selectedLectures.size === 0 && (
-              <div style={{ color: "#f87171", fontSize: 12, marginTop: 8 }}>
-                ⚠️ اختر محاضرة واحدة على الأقل
-              </div>
-            )}
-          </div>
-
-          {/* Settings */}
-          <div style={S.card}>
-            <div style={S.sectionLabel}>الإعدادات / Settings</div>
-
-            {/* Slider */}
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 6 }}>
-                <span style={{ color: "#94a3b8", fontSize: 14 }}>عدد الأسئلة</span>
-                <span style={{ color: "#60a5fa", fontWeight: 800, fontSize: 22 }}>{safeCount}</span>
-              </div>
-              <input
-                type="range"
-                min={1}
-                max={maxCount || 1}
-                value={safeCount}
-                onChange={e => setQuestionCount(Number(e.target.value))}
-                style={{ width: "100%", accentColor: "#3b82f6", cursor: "pointer" }}
-                disabled={maxCount === 0}
-              />
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#475569", marginTop: 4 }}>
-                <span>1</span>
-                <span style={{ color: "#64748b" }}>
-                  {effectivePool.length} متاح
-                  {hideSeen && ` (${unseenPool.length} غير مشاهد)`}
-                </span>
-                <span>{maxCount || 0}</span>
-              </div>
-            </div>
-
-            {/* Hide seen toggle */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-              <div>
-                <div style={{ color: "#e2e8f0", fontSize: 14, marginBottom: 2 }}>إخفاء الأسئلة المشاهدة</div>
-                <div style={{ color: "#475569", fontSize: 12 }}>
-                  Skip questions already seen
-                  {seenIds.size > 0 && (
-                    <span style={{ color: "#64748b" }}> ({seenIds.size} seen · </span>
-                  )}
-                  {seenIds.size > 0 && (
-                    <button
-                      style={{ background: "none", border: "none", color: "#f87171", fontSize: 12, cursor: "pointer", padding: 0 }}
-                      onClick={() => { setSeenIds(new Set()); saveSeen(new Set()); }}
-                    >reset</button>
-                  )}
-                  {seenIds.size > 0 && <span style={{ color: "#64748b" }}>)</span>}
-                </div>
-              </div>
-              <div
-                style={{ ...S.toggle, ...(hideSeen ? S.toggleOn : {}) }}
-                onClick={() => setHideSeen(v => !v)}
-              >
-                <div style={{ ...S.toggleThumb, ...(hideSeen ? S.toggleThumbOn : {}) }} />
-              </div>
-            </div>
-          </div>
-
-          {/* Start */}
-          <button
-            style={{ ...S.startBtn, opacity: canStart ? 1 : 0.4 }}
-            onClick={startQuiz}
-            disabled={!canStart}
+    return shell(
+      <div className="stagger">
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: 28, paddingTop: 8 }}>
+          <div style={S.badge}>💊 Pharmacology — PH45</div>
+          <h1 className="shimmer-title" style={S.title}>Test Bank</h1>
+          <p style={S.subtitle}>بنك الأسئلة</p>
+          <a
+            href="https://t.me/liouq"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "inline-block", marginTop: 8, fontSize: 12.5, color: "var(--faint)", textDecoration: "none", letterSpacing: 0.3, transition: "color 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "var(--accent2)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "var(--faint)")}
           >
-            <span style={{ fontSize: 19, fontWeight: 800 }}>ابدأ الاختبار</span>
-            <span style={{ fontSize: 13, color: "#bfdbfe" }}>
-              {safeCount} questions · {selectedLectures.size} lecture{selectedLectures.size !== 1 ? "s" : ""}
-            </span>
-          </button>
+            Made by Mu · @liouq
+          </a>
         </div>
+
+        {/* About — collapsible */}
+        <div className="glass" style={S.aboutBox}>
+          <button
+            className="btn-base"
+            style={S.aboutToggle}
+            onClick={() => setAboutOpen(v => !v)}
+          >
+            <span>ℹ️ عن الموقع</span>
+            <span style={{ fontSize: 12, color: "var(--faint)", transition: "transform 0.3s cubic-bezier(0.34,1.56,0.64,1)", display: "inline-block", transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>
+          </button>
+          {aboutOpen && (
+            <div className="anim-fadeUp" style={{ marginTop: 14, borderTop: "1px solid var(--glass-border)", paddingTop: 14 }} dir="rtl">
+              <p style={{ margin: "0 0 12px", lineHeight: 1.9, color: "var(--muted)", fontSize: 13.5 }}>
+                الموقع هو النسخة الإلكترونية من تيست بانك الفارما الأساسي — الأسئلة والخيارات والإجابات منقولة من الملف الأصلي مع تنقيح للأخطاء المطبعية، إضافة شروحات مفصّلة من السلايدات لكل سؤال، وتنظيم الأسئلة حسب المحاضرة. الموقع وملف التيست الأصلي — وجهان لعملة واحدة.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+                {[
+                  "٣٦٩ سؤال — ميد ١ · ميد ٢ · فاينل",
+                  "شرح مفصّل لكل سؤال من السلايدات",
+                  "اختبار بمحاضرة واحدة أو أكثر مع تحديد عدد الأسئلة",
+                  "تقييم الأداء بعد كل اختبار مع تفصيل لكل محاضرة",
+                  "حفظ الأسئلة المشاهدة لتجنب التكرار",
+                  "يعمل بدون إنترنت — احفظ الصفحة مرة واحدة وكفى",
+                ].map((f, i) => (
+                  <div key={i} style={{ display: "flex", gap: 9, alignItems: "flex-start" }}>
+                    <span style={{ color: "var(--accent2)", flexShrink: 0, fontSize: 13 }}>✦</span>
+                    <span style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.7 }}>{f}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Section Tabs */}
+        <div className="glass" style={S.card}>
+          <div style={S.sectionLabel}>القسم / Section</div>
+          <div style={{ display: "flex", gap: 9, flexWrap: "wrap" }}>
+            {(["mid1", "mid2", "final", "all"] as Filter[]).map(f => (
+              <button
+                key={f}
+                className={`tab-pill ${filter === f ? "tab-on" : ""}`}
+                style={{ ...S.tabBtn, ...(filter === f ? S.tabBtnActive : {}) }}
+                onClick={() => setFilter(f)}
+              >
+                <span style={{ fontWeight: 800 }}>{SECTION_LABELS[f].ar}</span>
+                <span style={{ fontSize: 11, color: filter === f ? "#a5b4fc" : "var(--faint)" }}>
+                  {getPool(f).length}q
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Lectures */}
+        <div className="glass" style={S.card}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 13 }}>
+            <div style={{ ...S.sectionLabel, marginBottom: 0 }}>المحاضرات / Lectures</div>
+            <button
+              className="btn-base"
+              style={S.smallBtn}
+              onClick={() => setSelectedLectures(
+                allSelected ? new Set() : new Set(allLectures)
+              )}
+            >
+              {allSelected ? "Deselect All" : "Select All"}
+            </button>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, maxHeight: 215, overflowY: "auto", paddingBottom: 4 }}>
+            {allLectures.map(lec => {
+              const active = selectedLectures.has(lec);
+              return (
+                <button
+                  key={lec}
+                  className={`chip ${active ? "chip-on" : ""}`}
+                  style={{ ...S.lecChip }}
+                  onClick={() => toggleLecture(lec)}
+                >
+                  {active ? "✓ " : ""}{lec}
+                </button>
+              );
+            })}
+          </div>
+          {selectedLectures.size === 0 && (
+            <div className="anim-fadeUp" style={{ color: "var(--bad)", fontSize: 12.5, marginTop: 10, fontWeight: 600 }}>
+              ⚠️ اختر محاضرة واحدة على الأقل
+            </div>
+          )}
+        </div>
+
+        {/* Settings */}
+        <div className="glass" style={S.card}>
+          <div style={S.sectionLabel}>الإعدادات / Settings</div>
+
+          {/* Slider */}
+          <div style={{ marginBottom: 22 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 8 }}>
+              <span style={{ color: "var(--muted)", fontSize: 14 }}>عدد الأسئلة</span>
+              <span style={{
+                fontWeight: 900, fontSize: 26,
+                background: "linear-gradient(135deg, #818cf8, #38bdf8)",
+                WebkitBackgroundClip: "text", backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}>{safeCount}</span>
+            </div>
+            <input
+              type="range"
+              className="lux-slider"
+              min={1}
+              max={maxCount || 1}
+              value={safeCount}
+              onChange={e => setQuestionCount(Number(e.target.value))}
+              style={{ width: "100%", cursor: "pointer", ["--fill" as any]: `${fillPct}%` }}
+              disabled={maxCount === 0}
+            />
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--faint)", marginTop: 6 }}>
+              <span>1</span>
+              <span style={{ color: "var(--muted)" }}>
+                {effectivePool.length} متاح
+                {hideSeen && ` (${unseenPool.length} غير مشاهد)`}
+              </span>
+              <span>{maxCount || 0}</span>
+            </div>
+          </div>
+
+          {/* Hide seen toggle */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+            <div>
+              <div style={{ color: "var(--txt)", fontSize: 14, marginBottom: 2, fontWeight: 600 }}>إخفاء الأسئلة المشاهدة</div>
+              <div style={{ color: "var(--faint)", fontSize: 12 }}>
+                Skip questions already seen
+                {seenIds.size > 0 && (
+                  <span style={{ color: "var(--muted)" }}> ({seenIds.size} seen · </span>
+                )}
+                {seenIds.size > 0 && (
+                  <button
+                    style={{ background: "none", border: "none", color: "var(--bad)", fontSize: 12, cursor: "pointer", padding: 0, fontFamily: "inherit" }}
+                    onClick={() => { setSeenIds(new Set()); saveSeen(new Set()); }}
+                  >reset</button>
+                )}
+                {seenIds.size > 0 && <span style={{ color: "var(--muted)" }}>)</span>}
+              </div>
+            </div>
+            <div
+              style={{ ...S.toggle, ...(hideSeen ? S.toggleOn : {}) }}
+              onClick={() => setHideSeen(v => !v)}
+            >
+              <div style={{ ...S.toggleThumb, ...(hideSeen ? S.toggleThumbOn : {}) }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Start */}
+        <button
+          className="start-cta"
+          style={{ ...S.startBtn, opacity: canStart ? 1 : 0.4 }}
+          onClick={startQuiz}
+          disabled={!canStart}
+        >
+          <span style={{ fontSize: 20, fontWeight: 900, position: "relative", zIndex: 1 }}>ابدأ الاختبار 🚀</span>
+          <span style={{ fontSize: 13, color: "#dbe6ff", position: "relative", zIndex: 1 }}>
+            {safeCount} questions · {selectedLectures.size} lecture{selectedLectures.size !== 1 ? "s" : ""}
+          </span>
+        </button>
       </div>
     );
   }
@@ -737,158 +1248,172 @@ export default function App() {
     const q = questions[current];
     const isAnswered = selected !== null;
 
-    return (
-      <div style={S.page}>
-        <div style={S.container}>
-          <div style={S.quizHeader}>
-            <button style={S.backBtn} onClick={() => setScreen("home")}>← Home</button>
-            <span style={S.sectionTag}>{SECTION_LABELS[activeFilter].en}</span>
-          </div>
-
-          <div style={S.progressWrap}>
-            <div style={S.progressBar}>
-              <div style={{ ...S.progressFill, width: `${((current + 1) / questions.length) * 100}%` }} />
-            </div>
-            <span style={S.progressText}>{current + 1} / {questions.length}</span>
-          </div>
-
-          <div style={S.card}>
-            <div style={S.lectureBadge}>{q.lecture}</div>
-            <p style={S.questionText} dir="ltr">{q.q}</p>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {q.options.map((opt, i) => {
-                let bg = "transparent";
-                let border = "1.5px solid #334155";
-                let color = "#e2e8f0";
-                if (isAnswered) {
-                  if (i === q.answer) { bg = "#14532d44"; border = "1.5px solid #22c55e"; color = "#86efac"; }
-                  else if (i === selected && i !== q.answer) { bg = "#7f1d1d44"; border = "1.5px solid #ef4444"; color = "#fca5a5"; }
-                }
-                return (
-                  <button
-                    key={i}
-                    style={{ ...S.optionBtn, background: bg, border, color }}
-                    onClick={() => handleSelect(i)}
-                    disabled={isAnswered}
-                    dir="ltr"
-                  >
-                    <span style={S.optionLetter}>{OPTION_LETTERS[i]}</span>
-                    <span>{stripHint(opt)}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {isAnswered && (
-              <div style={S.explanationBox}>
-                <div style={S.explanationLabel}>
-                  <span>Explanation</span>
-                  <span style={{ color: "#94a3b8", fontSize: 13 }}>الشرح</span>
-                </div>
-                <p style={{ margin: 0, lineHeight: 1.7, color: "#bfdbfe" }} dir="ltr">
-                  {q.explanation || "—"}
-                </p>
-              </div>
-            )}
-          </div>
-
-          <div style={S.navRow}>
-            <button
-              style={{ ...S.navBtn, opacity: current === 0 ? 0.35 : 1 }}
-              onClick={handlePrev}
-              disabled={current === 0}
-            >← Prev</button>
-            {isAnswered && (
-              <button style={{ ...S.navBtn, ...S.navBtnPrimary }} onClick={handleNext}>
-                {current + 1 === questions.length ? "Finish ✓" : "Next →"}
-              </button>
-            )}
-          </div>
+    return shell(
+      <>
+        <div className="anim-fadeUp" style={S.quizHeader}>
+          <button className="btn-base" style={S.backBtn} onClick={() => setScreen("home")}>← Home</button>
+          <span style={S.sectionTag}>{SECTION_LABELS[activeFilter].en}</span>
         </div>
-      </div>
+
+        <div className="anim-fadeUp" style={S.progressWrap}>
+          <div style={S.progressBar}>
+            <div className="prog-fill" style={{ ...S.progressFill, width: `${((current + 1) / questions.length) * 100}%` }} />
+          </div>
+          <span style={S.progressText}>{current + 1} / {questions.length}</span>
+        </div>
+
+        <div key={current} className="glass anim-fadeUp" style={S.card}>
+          <div style={S.lectureBadge}>{q.lecture}</div>
+          <p style={S.questionText} dir="ltr">{q.q}</p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
+            {q.options.map((opt, i) => {
+              let bg = "rgba(148,163,255,0.03)";
+              let border = "1.5px solid rgba(148,163,255,0.15)";
+              let color = "var(--txt)";
+              let cls = "opt";
+              let letterBg = "rgba(148,163,255,0.08)";
+              let letterColor = "var(--muted)";
+              if (isAnswered) {
+                cls += " opt-locked";
+                if (i === q.answer) {
+                  bg = "rgba(52,211,153,0.1)"; border = "1.5px solid rgba(52,211,153,0.65)"; color = "#a7f3d0";
+                  letterBg = "rgba(52,211,153,0.2)"; letterColor = "#6ee7b7";
+                  cls += " opt-correct";
+                } else if (i === selected && i !== q.answer) {
+                  bg = "rgba(251,113,133,0.1)"; border = "1.5px solid rgba(251,113,133,0.65)"; color = "#fecdd3";
+                  letterBg = "rgba(251,113,133,0.2)"; letterColor = "#fda4af";
+                  cls += " opt-wrong";
+                }
+              }
+              return (
+                <button
+                  key={i}
+                  className={cls}
+                  style={{ ...S.optionBtn, background: bg, border, color }}
+                  onClick={() => handleSelect(i)}
+                  disabled={isAnswered}
+                  dir="ltr"
+                >
+                  <span style={{ ...S.optionLetter, background: letterBg, color: letterColor }}>{OPTION_LETTERS[i]}</span>
+                  <span>{stripHint(opt)}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {isAnswered && (
+            <div className="expl-box" style={S.explanationBox}>
+              <div style={S.explanationLabel}>
+                <span>💡 Explanation</span>
+                <span style={{ color: "var(--muted)", fontSize: 13 }}>الشرح</span>
+              </div>
+              <p style={{ margin: 0, lineHeight: 1.75, color: "#c7d6f8" }} dir="ltr">
+                {q.explanation || "—"}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div style={S.navRow}>
+          <button
+            className="btn-base"
+            style={{ ...S.navBtn, opacity: current === 0 ? 0.35 : 1 }}
+            onClick={handlePrev}
+            disabled={current === 0}
+          >← Prev</button>
+          {isAnswered && (
+            <button className="btn-base anim-pop" style={{ ...S.navBtn, ...S.navBtnPrimary }} onClick={handleNext}>
+              {current + 1 === questions.length ? "Finish ✓" : "Next →"}
+            </button>
+          )}
+        </div>
+      </>
     );
   }
 
   /* ── SCORE ── */
   if (screen === "score") {
     const grade =
-      pct >= 90 ? { label: "Excellent!", emoji: "🏆", color: "#22c55e" } :
-      pct >= 75 ? { label: "Good",       emoji: "👍", color: "#3b82f6" } :
-      pct >= 60 ? { label: "Pass",       emoji: "✓",  color: "#f59e0b" } :
-                  { label: "Try Again",  emoji: "📚", color: "#ef4444" };
+      pct >= 90 ? { label: "Excellent!", emoji: "🏆", color: "#34d399" } :
+      pct >= 75 ? { label: "Good",       emoji: "👍", color: "#38bdf8" } :
+      pct >= 60 ? { label: "Pass",       emoji: "✓",  color: "#fbbf24" } :
+                  { label: "Try Again",  emoji: "📚", color: "#fb7185" };
 
     const weakLectures = [...lectureStats].sort((a, b) => a.pct - b.pct).filter(s => s.pct < 60).slice(0, 3);
 
-    return (
-      <div style={S.page}>
-        <div style={S.container}>
-          {/* Main score */}
-          <div style={{ ...S.card, textAlign: "center" }}>
-            <div style={{ fontSize: 52, marginBottom: 4 }}>{grade.emoji}</div>
-            <h2 style={{ margin: "0 0 2px", color: grade.color, fontSize: 26 }}>{grade.label}</h2>
-            <p style={{ color: "#64748b", margin: "0 0 18px", fontSize: 13 }}>{SECTION_LABELS[activeFilter].en}</p>
-            <div style={S.scoreBig}>{pct}%</div>
-            <p style={{ color: "#94a3b8", margin: "4px 0 18px" }}>{score} / {questions.length} correct</p>
+    return shell(
+      <div className="stagger">
+        {pct >= 90 && <Confetti />}
+        {/* Main score */}
+        <div className="glass" style={{ ...S.card, textAlign: "center", paddingTop: 28, paddingBottom: 28 }}>
+          <div className="anim-pop" style={{ fontSize: 50, marginBottom: 2 }}>{grade.emoji}</div>
+          <h2 style={{ margin: "0 0 2px", color: grade.color, fontSize: 27, fontWeight: 900 }}>{grade.label}</h2>
+          <p style={{ color: "var(--faint)", margin: "0 0 20px", fontSize: 13 }}>{SECTION_LABELS[activeFilter].en}</p>
 
-            {/* Score bar */}
-            <div style={{ background: "#0f172a", borderRadius: 8, height: 10, marginBottom: 24, overflow: "hidden" }}>
-              <div style={{ width: `${pct}%`, height: "100%", background: grade.color, borderRadius: 8, transition: "width 0.6s ease" }} />
-            </div>
+          <ScoreRing pct={pct} color={grade.color} />
+          <p style={{ color: "var(--muted)", margin: "14px 0 22px", fontSize: 15 }}>
+            <b style={{ color: grade.color }}>{score}</b> / {questions.length} correct
+          </p>
 
-            <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-              <button style={S.actionBtn} onClick={startQuiz}>Retry</button>
-              {wrongQuestions.length > 0 && (
-                <button
-                  style={{ ...S.actionBtn, background: "#1e40af" }}
-                  onClick={() => { setReviewIndex(0); setScreen("review"); }}
-                >
-                  Review Wrong ({wrongQuestions.length})
-                </button>
-              )}
-              <button style={{ ...S.actionBtn, background: "#1e293b" }} onClick={() => setScreen("home")}>Home</button>
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+            <button className="btn-base" style={S.actionBtn} onClick={startQuiz}>🔄 Retry</button>
+            {wrongQuestions.length > 0 && (
+              <button
+                className="btn-base"
+                style={{ ...S.actionBtn, background: "linear-gradient(135deg, rgba(251,113,133,0.85), rgba(225,29,72,0.85))" }}
+                onClick={() => { setReviewIndex(0); setScreen("review"); }}
+              >
+                Review Wrong ({wrongQuestions.length})
+              </button>
+            )}
+            <button className="btn-base" style={{ ...S.actionBtn, background: "rgba(148,163,255,0.1)", border: "1px solid var(--glass-border)" }} onClick={() => setScreen("home")}>Home</button>
+          </div>
+        </div>
+
+        {/* Lecture breakdown */}
+        {lectureStats.length > 0 && (
+          <div className="glass" style={S.card}>
+            <div style={S.sectionLabel}>تفصيل المحاضرات / Lecture Breakdown</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 13 }}>
+              {lectureStats.map(({ lec, correct, total, pct: lPct }, idx) => {
+                const barColor = lPct >= 75 ? "#34d399" : lPct >= 50 ? "#fbbf24" : "#fb7185";
+                return (
+                  <div key={lec}>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6, gap: 8 }}>
+                      <span style={{ fontSize: 13, color: "#cbd6ee", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{lec}</span>
+                      <span style={{ fontSize: 13, fontWeight: 800, color: barColor, flexShrink: 0 }}>
+                        {correct}/{total} · {lPct}%
+                      </span>
+                    </div>
+                    <div style={{ background: "rgba(148,163,255,0.08)", borderRadius: 999, height: 7, overflow: "hidden" }}>
+                      <div className="bar-anim" style={{
+                        width: `${lPct}%`, height: "100%",
+                        background: `linear-gradient(90deg, ${barColor}cc, ${barColor})`,
+                        borderRadius: 999, boxShadow: `0 0 8px ${barColor}66`,
+                        animationDelay: `${0.15 + idx * 0.08}s`,
+                      }} />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
+        )}
 
-          {/* Lecture breakdown */}
-          {lectureStats.length > 0 && (
-            <div style={S.card}>
-              <div style={S.sectionLabel}>تفصيل المحاضرات / Lecture Breakdown</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {lectureStats.map(({ lec, correct, total, pct: lPct }) => {
-                  const barColor = lPct >= 75 ? "#22c55e" : lPct >= 50 ? "#f59e0b" : "#ef4444";
-                  return (
-                    <div key={lec}>
-                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5, gap: 8 }}>
-                        <span style={{ fontSize: 13, color: "#cbd5e1", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{lec}</span>
-                        <span style={{ fontSize: 13, fontWeight: 700, color: barColor, flexShrink: 0 }}>
-                          {correct}/{total} · {lPct}%
-                        </span>
-                      </div>
-                      <div style={{ background: "#0f172a", borderRadius: 4, height: 6, overflow: "hidden" }}>
-                        <div style={{ width: `${lPct}%`, height: "100%", background: barColor, borderRadius: 4 }} />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+        {/* Weak lectures warning */}
+        {weakLectures.length > 0 && (
+          <div className="glass" style={{ ...S.card, background: "rgba(251,113,133,0.05)", border: "1px solid rgba(251,113,133,0.3)" }}>
+            <div style={{ ...S.sectionLabel, color: "#fda4af" }}>⚠️ تحتاج مراجعة / Needs Review</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+              {weakLectures.map(w => (
+                <div key={w.lec} style={{ color: "#fecdd3", fontSize: 13 }}>
+                  • {w.lec} — {w.correct}/{w.total} ({w.pct}%)
+                </div>
+              ))}
             </div>
-          )}
-
-          {/* Weak lectures warning */}
-          {weakLectures.length > 0 && (
-            <div style={{ ...S.card, background: "#160a0a", border: "1.5px solid #7f1d1d" }}>
-              <div style={{ ...S.sectionLabel, color: "#f87171" }}>⚠️ تحتاج مراجعة / Needs Review</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                {weakLectures.map(w => (
-                  <div key={w.lec} style={{ color: "#fca5a5", fontSize: 13 }}>
-                    • {w.lec} — {w.correct}/{w.total} ({w.pct}%)
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -898,62 +1423,76 @@ export default function App() {
     const q = wrongQuestions[reviewIndex];
     const userAnswer = answers[questions.indexOf(q)];
 
-    return (
-      <div style={S.page}>
-        <div style={S.container}>
-          <div style={S.quizHeader}>
-            <button style={S.backBtn} onClick={() => setScreen("score")}>← Score</button>
-            <span style={S.sectionTag}>Review Wrong Answers</span>
+    return shell(
+      <>
+        <div className="anim-fadeUp" style={S.quizHeader}>
+          <button className="btn-base" style={S.backBtn} onClick={() => setScreen("score")}>← Score</button>
+          <span style={{ ...S.sectionTag, color: "#fda4af", background: "rgba(251,113,133,0.12)" }}>Review Wrong Answers</span>
+        </div>
+
+        <div className="anim-fadeUp" style={S.progressWrap}>
+          <div style={S.progressBar}>
+            <div style={{
+              ...S.progressFill, width: `${((reviewIndex + 1) / wrongQuestions.length) * 100}%`,
+              background: "linear-gradient(90deg, #fb7185, #f43f5e)",
+              boxShadow: "0 0 12px rgba(251,113,133,0.5)",
+              transition: "width 0.45s cubic-bezier(0.22,1,0.36,1)",
+            }} />
+          </div>
+          <span style={S.progressText}>{reviewIndex + 1} / {wrongQuestions.length}</span>
+        </div>
+
+        <div key={reviewIndex} className="glass anim-fadeUp" style={S.card}>
+          <div style={S.lectureBadge}>{q.lecture}</div>
+          <p style={S.questionText} dir="ltr">{q.q}</p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
+            {q.options.map((opt, i) => {
+              let bg = "rgba(148,163,255,0.03)";
+              let border = "1.5px solid rgba(148,163,255,0.15)";
+              let color = "var(--txt)";
+              let letterBg = "rgba(148,163,255,0.08)";
+              let letterColor = "var(--muted)";
+              if (i === q.answer) {
+                bg = "rgba(52,211,153,0.1)"; border = "1.5px solid rgba(52,211,153,0.65)"; color = "#a7f3d0";
+                letterBg = "rgba(52,211,153,0.2)"; letterColor = "#6ee7b7";
+              } else if (i === userAnswer && i !== q.answer) {
+                bg = "rgba(251,113,133,0.1)"; border = "1.5px solid rgba(251,113,133,0.65)"; color = "#fecdd3";
+                letterBg = "rgba(251,113,133,0.2)"; letterColor = "#fda4af";
+              }
+              return (
+                <div key={i} className="opt opt-locked" style={{ ...S.optionBtn, background: bg, border, color, cursor: "default" }} dir="ltr">
+                  <span style={{ ...S.optionLetter, background: letterBg, color: letterColor }}>{OPTION_LETTERS[i]}</span>
+                  <span>{stripHint(opt)}</span>
+                </div>
+              );
+            })}
           </div>
 
-          <div style={S.progressWrap}>
-            <div style={S.progressBar}>
-              <div style={{ ...S.progressFill, width: `${((reviewIndex + 1) / wrongQuestions.length) * 100}%`, background: "#ef4444" }} />
+          <div className="expl-box" style={S.explanationBox}>
+            <div style={S.explanationLabel}>
+              <span>💡 Explanation</span>
+              <span style={{ color: "var(--muted)", fontSize: 13 }}>الشرح</span>
             </div>
-            <span style={S.progressText}>{reviewIndex + 1} / {wrongQuestions.length}</span>
-          </div>
-
-          <div style={S.card}>
-            <div style={S.lectureBadge}>{q.lecture}</div>
-            <p style={S.questionText} dir="ltr">{q.q}</p>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {q.options.map((opt, i) => {
-                let bg = "transparent"; let border = "1.5px solid #334155"; let color = "#e2e8f0";
-                if (i === q.answer) { bg = "#14532d44"; border = "1.5px solid #22c55e"; color = "#86efac"; }
-                else if (i === userAnswer && i !== q.answer) { bg = "#7f1d1d44"; border = "1.5px solid #ef4444"; color = "#fca5a5"; }
-                return (
-                  <div key={i} style={{ ...S.optionBtn, background: bg, border, color }} dir="ltr">
-                    <span style={S.optionLetter}>{OPTION_LETTERS[i]}</span>
-                    <span>{stripHint(opt)}</span>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div style={S.explanationBox}>
-              <div style={S.explanationLabel}>
-                <span>Explanation</span>
-                <span style={{ color: "#94a3b8", fontSize: 13 }}>الشرح</span>
-              </div>
-              <p style={{ margin: 0, lineHeight: 1.7, color: "#bfdbfe" }} dir="ltr">{q.explanation || "—"}</p>
-            </div>
-          </div>
-
-          <div style={S.navRow}>
-            <button
-              style={{ ...S.navBtn, opacity: reviewIndex === 0 ? 0.35 : 1 }}
-              onClick={() => setReviewIndex(i => i - 1)}
-              disabled={reviewIndex === 0}
-            >← Prev</button>
-            <button
-              style={{ ...S.navBtn, opacity: reviewIndex + 1 >= wrongQuestions.length ? 0.35 : 1 }}
-              onClick={() => setReviewIndex(i => i + 1)}
-              disabled={reviewIndex + 1 >= wrongQuestions.length}
-            >Next →</button>
+            <p style={{ margin: 0, lineHeight: 1.75, color: "#c7d6f8" }} dir="ltr">{q.explanation || "—"}</p>
           </div>
         </div>
-      </div>
+
+        <div style={S.navRow}>
+          <button
+            className="btn-base"
+            style={{ ...S.navBtn, opacity: reviewIndex === 0 ? 0.35 : 1 }}
+            onClick={() => setReviewIndex(i => i - 1)}
+            disabled={reviewIndex === 0}
+          >← Prev</button>
+          <button
+            className="btn-base"
+            style={{ ...S.navBtn, opacity: reviewIndex + 1 >= wrongQuestions.length ? 0.35 : 1 }}
+            onClick={() => setReviewIndex(i => i + 1)}
+            disabled={reviewIndex + 1 >= wrongQuestions.length}
+          >Next →</button>
+        </div>
+      </>
     );
   }
 
@@ -964,137 +1503,152 @@ export default function App() {
 const S: Record<string, React.CSSProperties> = {
   page: {
     minHeight: "100vh",
-    background: "#0f172a",
-    color: "#e2e8f0",
-    fontFamily: "'Segoe UI', system-ui, sans-serif",
-    padding: "24px 16px 48px",
+    background: "radial-gradient(ellipse at 20% -10%, #131a36 0%, #060913 55%), #060913",
+    color: "var(--txt)",
+    fontFamily: "'Cairo', 'Segoe UI', system-ui, sans-serif",
+    padding: "28px 16px 56px",
+    position: "relative" as const,
   },
-  container: { maxWidth: 720, margin: "0 auto" },
+  container: { maxWidth: 720, margin: "0 auto", position: "relative" as const, zIndex: 1 },
   badge: {
     display: "inline-block",
-    background: "#1e3a5f", color: "#60a5fa",
-    borderRadius: 999, padding: "4px 14px",
-    fontSize: 13, fontWeight: 600, letterSpacing: 0.5, marginBottom: 12,
+    background: "rgba(99,102,241,0.14)", color: "#a5b4fc",
+    border: "1px solid rgba(129,140,248,0.3)",
+    borderRadius: 999, padding: "5px 16px",
+    fontSize: 13, fontWeight: 700, letterSpacing: 0.5, marginBottom: 14,
+    boxShadow: "0 0 18px rgba(99,102,241,0.15)",
   },
-  title: { margin: 0, fontSize: 36, fontWeight: 800, color: "#f1f5f9" },
-  subtitle: { margin: "6px 0 0", fontSize: 16, color: "#94a3b8" },
+  title: { margin: 0, fontSize: 42, fontWeight: 900, letterSpacing: -0.5 },
+  subtitle: { margin: "6px 0 0", fontSize: 16, color: "var(--muted)" },
   aboutBox: {
-    background: "#1e293b", borderRadius: 12,
-    padding: "12px 16px", marginBottom: 14,
-    border: "1px solid #334155",
+    padding: "13px 18px", marginBottom: 14,
+  },
+  aboutToggle: {
+    background: "none", border: "none",
+    color: "var(--muted)", cursor: "pointer",
+    display: "flex", alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%", padding: 0,
+    fontSize: 14, fontWeight: 700,
   },
   card: {
-    background: "#1e293b", borderRadius: 16, padding: "18px 20px", marginBottom: 14,
+    padding: "20px 22px", marginBottom: 14,
   },
   sectionLabel: {
-    fontSize: 12, fontWeight: 700, color: "#64748b",
-    textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 12,
+    fontSize: 11.5, fontWeight: 800, color: "var(--faint)",
+    textTransform: "uppercase" as const, letterSpacing: 1.2, marginBottom: 13,
   },
   /* Section tabs */
   tabBtn: {
-    background: "#0f172a", border: "1.5px solid #334155",
-    borderRadius: 10, padding: "10px 14px",
-    display: "flex", flexDirection: "column", alignItems: "center",
-    gap: 2, color: "#94a3b8", cursor: "pointer", flex: 1, minWidth: 60,
-    fontSize: 15,
+    background: "rgba(148,163,255,0.04)", border: "1.5px solid rgba(148,163,255,0.14)",
+    borderRadius: 13, padding: "11px 14px",
+    display: "flex", flexDirection: "column" as const, alignItems: "center",
+    gap: 2, color: "var(--muted)", cursor: "pointer", flex: 1, minWidth: 62,
+    fontSize: 15, fontFamily: "inherit",
   },
   tabBtnActive: {
-    background: "#172554", border: "1.5px solid #3b82f6", color: "#93c5fd",
+    color: "#c7d2fe",
   },
   /* Lecture chips */
   lecChip: {
-    background: "#0f172a", border: "1.5px solid #334155",
-    borderRadius: 8, padding: "6px 11px",
-    fontSize: 12, color: "#64748b", cursor: "pointer",
-    whiteSpace: "nowrap" as const,
-  },
-  lecChipActive: {
-    background: "#172554", border: "1.5px solid #3b82f6", color: "#93c5fd",
+    background: "rgba(148,163,255,0.04)", border: "1.5px solid rgba(148,163,255,0.14)",
+    borderRadius: 999, padding: "7px 13px",
+    fontSize: 12, color: "var(--muted)", cursor: "pointer",
+    whiteSpace: "nowrap" as const, fontFamily: "inherit", fontWeight: 600,
   },
   smallBtn: {
-    background: "transparent", border: "1px solid #334155",
-    borderRadius: 6, padding: "4px 10px",
-    fontSize: 12, color: "#94a3b8", cursor: "pointer",
+    background: "rgba(148,163,255,0.05)", border: "1px solid rgba(148,163,255,0.18)",
+    borderRadius: 8, padding: "5px 12px",
+    fontSize: 12, color: "var(--muted)", cursor: "pointer", fontFamily: "inherit", fontWeight: 600,
   },
   /* Toggle */
   toggle: {
-    width: 44, height: 24, borderRadius: 12,
-    background: "#334155", cursor: "pointer",
-    position: "relative" as const, transition: "background 0.2s",
+    width: 46, height: 26, borderRadius: 999,
+    background: "rgba(148,163,255,0.14)", cursor: "pointer",
+    position: "relative" as const, transition: "all 0.25s cubic-bezier(0.22,1,0.36,1)",
     display: "inline-block" as const, flexShrink: 0,
   },
-  toggleOn: { background: "#2563eb" },
+  toggleOn: {
+    background: "linear-gradient(135deg, #6366f1, #38bdf8)",
+    boxShadow: "0 0 14px rgba(99,102,241,0.45)",
+  },
   toggleThumb: {
     position: "absolute" as const, top: 3, left: 3,
-    width: 18, height: 18, borderRadius: 9,
-    background: "#64748b", transition: "left 0.2s, background 0.2s",
+    width: 20, height: 20, borderRadius: 999,
+    background: "#8b96b8", transition: "all 0.25s cubic-bezier(0.34,1.56,0.64,1)",
   },
-  toggleThumbOn: { left: 23, background: "#fff" },
+  toggleThumbOn: { left: 23, background: "#fff", boxShadow: "0 1px 6px rgba(0,0,0,0.35)" },
   /* Start button */
   startBtn: {
-    width: "100%", background: "linear-gradient(135deg, #1d4ed8, #2563eb)",
-    border: "none", borderRadius: 14,
-    padding: "18px 24px", color: "#fff",
+    width: "100%",
+    border: "none", borderRadius: 18,
+    padding: "19px 24px", color: "#fff",
     cursor: "pointer", display: "flex",
     flexDirection: "column" as const, alignItems: "center", gap: 5,
-    marginTop: 4, transition: "opacity 0.15s",
+    marginTop: 6, fontFamily: "inherit",
   },
   /* Quiz */
   quizHeader: {
     display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,
   },
   backBtn: {
-    background: "transparent", border: "1px solid #334155",
-    color: "#94a3b8", borderRadius: 8, padding: "6px 14px",
-    cursor: "pointer", fontSize: 13,
+    background: "rgba(148,163,255,0.05)", border: "1px solid rgba(148,163,255,0.18)",
+    color: "var(--muted)", borderRadius: 10, padding: "7px 15px",
+    cursor: "pointer", fontSize: 13, fontFamily: "inherit", fontWeight: 600,
   },
   sectionTag: {
-    fontSize: 13, color: "#60a5fa",
-    background: "#172554", padding: "4px 12px", borderRadius: 999,
+    fontSize: 13, color: "#a5b4fc", fontWeight: 700,
+    background: "rgba(99,102,241,0.14)", padding: "5px 14px", borderRadius: 999,
+    border: "1px solid rgba(129,140,248,0.25)",
   },
   progressWrap: { display: "flex", alignItems: "center", gap: 10, marginBottom: 18 },
-  progressBar: { flex: 1, height: 6, background: "#1e293b", borderRadius: 999, overflow: "hidden" },
-  progressFill: { height: "100%", background: "#3b82f6", borderRadius: 999, transition: "width 0.3s ease" },
-  progressText: { fontSize: 13, color: "#64748b", whiteSpace: "nowrap" as const },
+  progressBar: { flex: 1, height: 7, background: "rgba(148,163,255,0.1)", borderRadius: 999, overflow: "hidden" },
+  progressFill: { height: "100%", borderRadius: 999 },
+  progressText: { fontSize: 13, color: "var(--faint)", whiteSpace: "nowrap" as const, fontWeight: 700 },
   lectureBadge: {
     display: "inline-block", fontSize: 11,
-    background: "#0f172a", color: "#7dd3fc",
-    borderRadius: 6, padding: "3px 10px", marginBottom: 14,
-    fontWeight: 600, letterSpacing: 0.3,
+    background: "rgba(56,189,248,0.1)", color: "#7dd3fc",
+    border: "1px solid rgba(56,189,248,0.22)",
+    borderRadius: 999, padding: "4px 12px", marginBottom: 15,
+    fontWeight: 700, letterSpacing: 0.3,
   },
-  questionText: { fontSize: 17, lineHeight: 1.65, color: "#f1f5f9", margin: "0 0 20px" },
+  questionText: { fontSize: 17, lineHeight: 1.7, color: "#f1f5fd", margin: "0 0 20px", fontWeight: 600 },
   optionBtn: {
-    display: "flex", alignItems: "center", gap: 12,
-    padding: "12px 16px", borderRadius: 10,
+    display: "flex", alignItems: "center", gap: 13,
+    padding: "13px 16px", borderRadius: 14,
     cursor: "pointer", fontSize: 15, textAlign: "left" as const,
-    width: "100%", transition: "background 0.15s",
+    width: "100%", fontFamily: "inherit",
   },
   optionLetter: {
-    minWidth: 28, height: 28, background: "#0f172a",
-    borderRadius: 6, display: "flex", alignItems: "center",
-    justifyContent: "center", fontWeight: 700, fontSize: 13,
-    color: "#94a3b8", flexShrink: 0,
+    minWidth: 30, height: 30,
+    borderRadius: 9, display: "flex", alignItems: "center",
+    justifyContent: "center", fontWeight: 800, fontSize: 13,
+    flexShrink: 0,
   },
   explanationBox: {
-    marginTop: 20, background: "#172554",
-    border: "1.5px solid #1d4ed8", borderRadius: 12, padding: "14px 18px",
+    marginTop: 20, background: "rgba(99,102,241,0.08)",
+    border: "1px solid rgba(129,140,248,0.3)", borderRadius: 16, padding: "15px 19px",
+    backdropFilter: "blur(8px)",
   },
   explanationLabel: {
     display: "flex", justifyContent: "space-between",
-    marginBottom: 8, fontWeight: 700, fontSize: 14, color: "#93c5fd",
+    marginBottom: 9, fontWeight: 800, fontSize: 14, color: "#a5b4fc",
   },
   navRow: { display: "flex", justifyContent: "space-between", gap: 10 },
   navBtn: {
-    background: "#1e293b", border: "1px solid #334155",
-    color: "#e2e8f0", borderRadius: 10, padding: "10px 22px",
-    cursor: "pointer", fontSize: 14, fontWeight: 600,
+    background: "rgba(148,163,255,0.06)", border: "1px solid rgba(148,163,255,0.18)",
+    color: "var(--txt)", borderRadius: 12, padding: "11px 24px",
+    cursor: "pointer", fontSize: 14, fontWeight: 700, fontFamily: "inherit",
   },
-  navBtnPrimary: { background: "#1d4ed8", border: "1px solid #2563eb", color: "#fff" },
+  navBtnPrimary: {
+    background: "linear-gradient(135deg, #6366f1, #0ea5e9)", border: "1px solid rgba(129,140,248,0.4)",
+    color: "#fff", boxShadow: "0 0 18px rgba(99,102,241,0.35)",
+  },
   /* Score */
-  scoreBig: { fontSize: 72, fontWeight: 900, color: "#f1f5f9", lineHeight: 1, marginBottom: 4 },
   actionBtn: {
-    background: "#1d4ed8", border: "none", color: "#fff",
-    borderRadius: 10, padding: "11px 24px",
-    cursor: "pointer", fontSize: 15, fontWeight: 600,
+    background: "linear-gradient(135deg, #6366f1, #4f46e5)", border: "none", color: "#fff",
+    borderRadius: 12, padding: "12px 24px",
+    cursor: "pointer", fontSize: 15, fontWeight: 700, fontFamily: "inherit",
+    boxShadow: "0 4px 16px rgba(79,70,229,0.3)",
   },
 };
