@@ -455,6 +455,340 @@ const SECTION_LABELS: Record<Filter, { en: string; ar: string }> = {
 
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"] as const;
 
+/* ── Global CSS (injected once) ── */
+const GLOBAL_CSS = `
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --bg0: #060913;
+  --glass: rgba(148, 163, 255, 0.055);
+  --glass-border: rgba(148, 163, 255, 0.13);
+  --txt: #e7ecf8;
+  --muted: #8b96b8;
+  --faint: #5a6485;
+  --accent: #818cf8;
+  --accent2: #38bdf8;
+  --good: #34d399;
+  --bad: #fb7185;
+  --warn: #fbbf24;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg0);
+  font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ── Aurora background ── */
+.aurora {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+}
+.aurora::before, .aurora::after {
+  content: ""; position: absolute; border-radius: 50%;
+  filter: blur(110px); opacity: 0.55;
+}
+.aurora::before {
+  width: 60vw; height: 60vw; min-width: 480px; min-height: 480px;
+  background: radial-gradient(circle, #4338ca 0%, transparent 65%);
+  top: -22vw; right: -18vw;
+  animation: drift1 26s ease-in-out infinite alternate;
+}
+.aurora::after {
+  width: 55vw; height: 55vw; min-width: 420px; min-height: 420px;
+  background: radial-gradient(circle, #0e7490 0%, transparent 65%);
+  bottom: -20vw; left: -16vw;
+  animation: drift2 32s ease-in-out infinite alternate;
+}
+.aurora-mid {
+  position: absolute; width: 42vw; height: 42vw; min-width: 340px; min-height: 340px;
+  border-radius: 50%; filter: blur(120px); opacity: 0.32;
+  background: radial-gradient(circle, #7c3aed 0%, transparent 65%);
+  top: 35%; left: 30%;
+  animation: drift3 38s ease-in-out infinite alternate;
+}
+@keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(-9vw, 7vw) scale(1.15); } }
+@keyframes drift2 { from { transform: translate(0,0) scale(1.1); } to { transform: translate(8vw, -6vw) scale(0.95); } }
+@keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(10vw, -8vw); } }
+
+/* Grain overlay for texture */
+.grain {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Entrance animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.7); }
+  65% { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideOption {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 24px rgba(129,140,248,0.35), 0 0 60px rgba(56,189,248,0.12); }
+  50%      { box-shadow: 0 0 36px rgba(129,140,248,0.55), 0 0 90px rgba(56,189,248,0.22); }
+}
+@keyframes shimmerTxt {
+  to { background-position: 200% center; }
+}
+@keyframes correctFlash {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.025); }
+  100% { transform: scale(1); }
+}
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+@keyframes ringDraw { from { stroke-dashoffset: var(--ring-c); } }
+@keyframes barGrow { from { width: 0; } }
+@keyframes confettiFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
+.anim-fadeUp { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-pop { animation: popIn 0.55s cubic-bezier(0.34,1.56,0.64,1) both; }
+.stagger > * { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.stagger > *:nth-child(1) { animation-delay: 0.03s; }
+.stagger > *:nth-child(2) { animation-delay: 0.09s; }
+.stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger > *:nth-child(4) { animation-delay: 0.21s; }
+.stagger > *:nth-child(5) { animation-delay: 0.27s; }
+.stagger > *:nth-child(6) { animation-delay: 0.33s; }
+
+/* ── Glass card ── */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(2, 6, 23, 0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+/* ── Title shimmer ── */
+.shimmer-title {
+  background: linear-gradient(90deg, #c7d2fe 0%, #67e8f9 25%, #e0e7ff 50%, #a5b4fc 75%, #c7d2fe 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerTxt 5s linear infinite;
+}
+
+/* ── Buttons ── */
+.btn-base { transition: all 0.2s cubic-bezier(0.22,1,0.36,1); }
+.btn-base:hover:not(:disabled) { transform: translateY(-2px); }
+.btn-base:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+
+.tab-pill {
+  position: relative; overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.tab-pill:hover:not(.tab-on) { border-color: rgba(129,140,248,0.45) !important; color: #c7d2fe !important; transform: translateY(-2px); }
+.tab-on {
+  background: linear-gradient(135deg, rgba(99,102,241,0.28), rgba(56,189,248,0.18)) !important;
+  border-color: rgba(129,140,248,0.7) !important;
+  box-shadow: 0 0 22px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.chip {
+  transition: all 0.2s cubic-bezier(0.22,1,0.36,1);
+}
+.chip:hover:not(.chip-on) { border-color: rgba(129,140,248,0.5) !important; color: #c7d2fe !important; }
+.chip-on {
+  background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(56,189,248,0.16)) !important;
+  border-color: rgba(129,140,248,0.65) !important;
+  color: #c7d2fe !important;
+  box-shadow: 0 0 14px rgba(99,102,241,0.25);
+}
+
+.start-cta {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 45%, #0ea5e9 110%);
+  animation: glowPulse 3.2s ease-in-out infinite;
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), filter 0.22s;
+}
+.start-cta:hover:not(:disabled) { transform: translateY(-3px) scale(1.012); filter: brightness(1.12); }
+.start-cta:active:not(:disabled) { transform: scale(0.985); }
+.start-cta::after {
+  content: ""; position: absolute; top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: skewX(-20deg);
+  animation: ctaSheen 3.6s ease-in-out infinite;
+}
+@keyframes ctaSheen { 0%, 60% { left: -75%; } 100% { left: 130%; } }
+.start-cta:disabled { animation: none; box-shadow: none; }
+
+/* ── Options ── */
+.opt {
+  animation: slideOption 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  transition: all 0.22s cubic-bezier(0.22,1,0.36,1);
+  position: relative;
+}
+.opt:nth-child(1) { animation-delay: 0.05s; }
+.opt:nth-child(2) { animation-delay: 0.11s; }
+.opt:nth-child(3) { animation-delay: 0.17s; }
+.opt:nth-child(4) { animation-delay: 0.23s; }
+.opt:nth-child(5) { animation-delay: 0.29s; }
+.opt:hover:not(:disabled):not(.opt-locked) {
+  border-color: rgba(129,140,248,0.6) !important;
+  background: rgba(99,102,241,0.1) !important;
+  transform: translateX(4px);
+}
+.opt-correct { animation: correctFlash 0.5s ease both !important; }
+.opt-wrong { animation: wrongShake 0.45s ease both !important; }
+
+.expl-box { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* ── Slider ── */
+input[type="range"].lux-slider {
+  -webkit-appearance: none; appearance: none;
+  height: 8px; border-radius: 999px;
+  background: linear-gradient(90deg, #6366f1 var(--fill, 50%), rgba(148,163,255,0.14) var(--fill, 50%));
+  outline: none;
+}
+input[type="range"].lux-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: linear-gradient(135deg, #818cf8, #38bdf8);
+  border: 3px solid #0b1023;
+  box-shadow: 0 0 14px rgba(129,140,248,0.65);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+input[type="range"].lux-slider::-webkit-slider-thumb:hover { transform: scale(1.18); }
+input[type="range"].lux-slider::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, #818cf8, #38bdf8);
+  border: 3px solid #0b1023;
+  box-shadow: 0 0 14px rgba(129,140,248,0.65);
+  cursor: pointer;
+}
+
+/* ── Progress ── */
+.prog-fill {
+  background: linear-gradient(90deg, #6366f1, #38bdf8);
+  box-shadow: 0 0 12px rgba(99,102,241,0.55);
+  transition: width 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ── Score ring ── */
+.ring-anim { animation: ringDraw 1.4s cubic-bezier(0.22,1,0.36,1) both; }
+.bar-anim { animation: barGrow 0.9s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(129,140,248,0.25); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(129,140,248,0.45); }
+
+.confetti-piece {
+  position: fixed; top: 0; width: 10px; height: 14px; z-index: 50;
+  animation: confettiFall linear both; pointer-events: none; border-radius: 2px;
+}
+`;
+
+function CssInjector() {
+  useEffect(() => {
+    const tag = document.createElement("style");
+    tag.textContent = GLOBAL_CSS;
+    document.head.appendChild(tag);
+    return () => { document.head.removeChild(tag); };
+  }, []);
+  return null;
+}
+
+function Aurora() {
+  return (
+    <>
+      <div className="aurora"><div className="aurora-mid" /></div>
+      <div className="grain" />
+    </>
+  );
+}
+
+/* Animated count-up number */
+function CountUp({ to, duration = 1200, suffix = "" }: { to: number; duration?: number; suffix?: string }) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    let raf = 0;
+    const t0 = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min((t - t0) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setVal(Math.round(eased * to));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [to, duration]);
+  return <>{val}{suffix}</>;
+}
+
+/* SVG score ring */
+function ScoreRing({ pct, color }: { pct: number; color: string }) {
+  const R = 84, C = 2 * Math.PI * R;
+  const off = C - (pct / 100) * C;
+  return (
+    <div style={{ position: "relative", width: 208, height: 208, margin: "0 auto" }}>
+      <svg width="208" height="208" viewBox="0 0 208 208" style={{ transform: "rotate(-90deg)" }}>
+        <circle cx="104" cy="104" r={R} fill="none" stroke="rgba(148,163,255,0.1)" strokeWidth="13" />
+        <circle
+          className="ring-anim"
+          cx="104" cy="104" r={R} fill="none"
+          stroke={color} strokeWidth="13" strokeLinecap="round"
+          strokeDasharray={C} strokeDashoffset={off}
+          style={{ ["--ring-c" as any]: C, filter: `drop-shadow(0 0 10px ${color}88)` }}
+        />
+      </svg>
+      <div style={{
+        position: "absolute", inset: 0, display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center", gap: 0,
+      }}>
+        <span style={{ fontSize: 52, fontWeight: 900, color: "#f1f5fd", lineHeight: 1 }}>
+          <CountUp to={pct} suffix="%" />
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* Confetti burst for high scores */
+function Confetti() {
+  const pieces = useMemo(() => Array.from({ length: 60 }, (_, i) => ({
+    left: Math.random() * 100,
+    delay: Math.random() * 1.6,
+    dur: 2.4 + Math.random() * 2.2,
+    color: ["#818cf8", "#38bdf8", "#34d399", "#fbbf24", "#f472b6", "#c084fc"][i % 6],
+    w: 6 + Math.random() * 7,
+  })), []);
+  return (
+    <>
+      {pieces.map((p, i) => (
+        <div key={i} className="confetti-piece" style={{
+          left: `${p.left}vw`, background: p.color,
+          width: p.w, height: p.w * 1.4,
+          animationDuration: `${p.dur}s`, animationDelay: `${p.delay}s`,
+        }} />
+      ))}
+    </>
+  );
+}
+
 /* ── App ── */
 export default function App() {
   /* Screen */
@@ -584,175 +918,193 @@ export default function App() {
     }));
   }, [questions, answers]);
 
+  const shell = (children: React.ReactNode) => (
+    <div style={S.page}>
+      <CssInjector />
+      <Aurora />
+      <div style={S.container}>{children}</div>
+    </div>
+  );
+
   /* ── HOME ── */
   if (screen === "home") {
     const allSelected = selectedLectures.size >= allLectures.length;
     const canStart = effectivePool.length > 0 && selectedLectures.size > 0;
+    const fillPct = maxCount > 1 ? ((safeCount - 1) / (maxCount - 1)) * 100 : 0;
 
-    return (
-      <div style={S.page}>
-        <div style={S.container}>
-          {/* Header */}
-          <div style={{ textAlign: "center", marginBottom: 24 }}>
-            <div style={S.badge}>Pharmacology — PH45</div>
-            <h1 style={S.title}>Test Bank</h1>
-            <p style={S.subtitle}>بنك الأسئلة</p>
-          </div>
-
-          {/* About — collapsible */}
-          <div style={S.aboutBox}>
-            <button
-              style={S.aboutToggle}
-              onClick={() => setAboutOpen(v => !v)}
-            >
-              <span>ℹ️ عن الموقع</span>
-              <span style={{ fontSize: 12, color: "#475569", transition: "transform 0.2s", display: "inline-block", transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>
-            </button>
-            {aboutOpen && (
-              <div style={{ marginTop: 12, borderTop: "1px solid #334155", paddingTop: 12 }} dir="rtl">
-                <p style={{ margin: "0 0 10px", lineHeight: 1.8, color: "#94a3b8", fontSize: 13 }}>
-                  الموقع هو النسخة الإلكترونية من تيست بانك الفارما الأساسي — الأسئلة والخيارات والإجابات منقولة من الملف الأصلي مع تنقيح للأخطاء المطبعية، إضافة شروحات مفصّلة من السلايدات لكل سؤال، وتنظيم الأسئلة حسب المحاضرة. الموقع وملف التيست الأصلي — وجهان لعملة واحدة.
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  {[
-                    "٣٦٩ سؤال — ميد ١ · ميد ٢ · فاينل",
-                    "شرح مفصّل لكل سؤال من السلايدات",
-                    "اختبار بمحاضرة واحدة أو أكثر مع تحديد عدد الأسئلة",
-                    "تقييم الأداء بعد كل اختبار مع تفصيل لكل محاضرة",
-                    "حفظ الأسئلة المشاهدة لتجنب التكرار",
-                    "يعمل بدون إنترنت — احفظ الصفحة مرة واحدة وكفى",
-                  ].map((f, i) => (
-                    <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-                      <span style={{ color: "#3b82f6", flexShrink: 0, fontSize: 13 }}>✓</span>
-                      <span style={{ color: "#64748b", fontSize: 13, lineHeight: 1.6 }}>{f}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Section Tabs */}
-          <div style={S.card}>
-            <div style={S.sectionLabel}>القسم / Section</div>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              {(["mid1", "mid2", "final", "all"] as Filter[]).map(f => (
-                <button
-                  key={f}
-                  style={{ ...S.tabBtn, ...(filter === f ? S.tabBtnActive : {}) }}
-                  onClick={() => setFilter(f)}
-                >
-                  <span style={{ fontWeight: 700 }}>{SECTION_LABELS[f].ar}</span>
-                  <span style={{ fontSize: 11, color: filter === f ? "#93c5fd" : "#475569" }}>
-                    {getPool(f).length}q
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Lectures */}
-          <div style={S.card}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-              <div style={S.sectionLabel}>المحاضرات / Lectures</div>
-              <button
-                style={S.smallBtn}
-                onClick={() => setSelectedLectures(
-                  allSelected ? new Set() : new Set(allLectures)
-                )}
-              >
-                {allSelected ? "Deselect All" : "Select All"}
-              </button>
-            </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 7, maxHeight: 210, overflowY: "auto", paddingBottom: 4 }}>
-              {allLectures.map(lec => {
-                const active = selectedLectures.has(lec);
-                return (
-                  <button
-                    key={lec}
-                    style={{ ...S.lecChip, ...(active ? S.lecChipActive : {}) }}
-                    onClick={() => toggleLecture(lec)}
-                  >
-                    {active ? "✓ " : ""}{lec}
-                  </button>
-                );
-              })}
-            </div>
-            {selectedLectures.size === 0 && (
-              <div style={{ color: "#f87171", fontSize: 12, marginTop: 8 }}>
-                ⚠️ اختر محاضرة واحدة على الأقل
-              </div>
-            )}
-          </div>
-
-          {/* Settings */}
-          <div style={S.card}>
-            <div style={S.sectionLabel}>الإعدادات / Settings</div>
-
-            {/* Slider */}
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 6 }}>
-                <span style={{ color: "#94a3b8", fontSize: 14 }}>عدد الأسئلة</span>
-                <span style={{ color: "#60a5fa", fontWeight: 800, fontSize: 22 }}>{safeCount}</span>
-              </div>
-              <input
-                type="range"
-                min={1}
-                max={maxCount || 1}
-                value={safeCount}
-                onChange={e => setQuestionCount(Number(e.target.value))}
-                style={{ width: "100%", accentColor: "#3b82f6", cursor: "pointer" }}
-                disabled={maxCount === 0}
-              />
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#475569", marginTop: 4 }}>
-                <span>1</span>
-                <span style={{ color: "#64748b" }}>
-                  {effectivePool.length} متاح
-                  {hideSeen && ` (${unseenPool.length} غير مشاهد)`}
-                </span>
-                <span>{maxCount || 0}</span>
-              </div>
-            </div>
-
-            {/* Hide seen toggle */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-              <div>
-                <div style={{ color: "#e2e8f0", fontSize: 14, marginBottom: 2 }}>إخفاء الأسئلة المشاهدة</div>
-                <div style={{ color: "#475569", fontSize: 12 }}>
-                  Skip questions already seen
-                  {seenIds.size > 0 && (
-                    <span style={{ color: "#64748b" }}> ({seenIds.size} seen · </span>
-                  )}
-                  {seenIds.size > 0 && (
-                    <button
-                      style={{ background: "none", border: "none", color: "#f87171", fontSize: 12, cursor: "pointer", padding: 0 }}
-                      onClick={() => { setSeenIds(new Set()); saveSeen(new Set()); }}
-                    >reset</button>
-                  )}
-                  {seenIds.size > 0 && <span style={{ color: "#64748b" }}>)</span>}
-                </div>
-              </div>
-              <div
-                style={{ ...S.toggle, ...(hideSeen ? S.toggleOn : {}) }}
-                onClick={() => setHideSeen(v => !v)}
-              >
-                <div style={{ ...S.toggleThumb, ...(hideSeen ? S.toggleThumbOn : {}) }} />
-              </div>
-            </div>
-          </div>
-
-          {/* Start */}
-          <button
-            style={{ ...S.startBtn, opacity: canStart ? 1 : 0.4 }}
-            onClick={startQuiz}
-            disabled={!canStart}
-          >
-            <span style={{ fontSize: 19, fontWeight: 800 }}>ابدأ الاختبار</span>
-            <span style={{ fontSize: 13, color: "#bfdbfe" }}>
-              {safeCount} questions · {selectedLectures.size} lecture{selectedLectures.size !== 1 ? "s" : ""}
-            </span>
-          </button>
+    return shell(
+      <div className="stagger">
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: 28, paddingTop: 8 }}>
+          <div style={S.badge}>💊 Pharmacology — PH45</div>
+          <h1 className="shimmer-title" style={S.title}>Test Bank</h1>
+          <p style={S.subtitle}>بنك الأسئلة</p>
         </div>
+
+        {/* About — collapsible */}
+        <div className="glass" style={S.aboutBox}>
+          <button
+            className="btn-base"
+            style={S.aboutToggle}
+            onClick={() => setAboutOpen(v => !v)}
+          >
+            <span>ℹ️ عن الموقع</span>
+            <span style={{ fontSize: 12, color: "var(--faint)", transition: "transform 0.3s cubic-bezier(0.34,1.56,0.64,1)", display: "inline-block", transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>
+          </button>
+          {aboutOpen && (
+            <div className="anim-fadeUp" style={{ marginTop: 14, borderTop: "1px solid var(--glass-border)", paddingTop: 14 }} dir="rtl">
+              <p style={{ margin: "0 0 12px", lineHeight: 1.9, color: "var(--muted)", fontSize: 13.5 }}>
+                الموقع هو النسخة الإلكترونية من تيست بانك الفارما الأساسي — الأسئلة والخيارات والإجابات منقولة من الملف الأصلي مع تنقيح للأخطاء المطبعية، إضافة شروحات مفصّلة من السلايدات لكل سؤال، وتنظيم الأسئلة حسب المحاضرة. الموقع وملف التيست الأصلي — وجهان لعملة واحدة.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+                {[
+                  "٣٦٩ سؤال — ميد ١ · ميد ٢ · فاينل",
+                  "شرح مفصّل لكل سؤال من السلايدات",
+                  "اختبار بمحاضرة واحدة أو أكثر مع تحديد عدد الأسئلة",
+                  "تقييم الأداء بعد كل اختبار مع تفصيل لكل محاضرة",
+                  "حفظ الأسئلة المشاهدة لتجنب التكرار",
+                  "يعمل بدون إنترنت — احفظ الصفحة مرة واحدة وكفى",
+                ].map((f, i) => (
+                  <div key={i} style={{ display: "flex", gap: 9, alignItems: "flex-start" }}>
+                    <span style={{ color: "var(--accent2)", flexShrink: 0, fontSize: 13 }}>✦</span>
+                    <span style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.7 }}>{f}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Section Tabs */}
+        <div className="glass" style={S.card}>
+          <div style={S.sectionLabel}>القسم / Section</div>
+          <div style={{ display: "flex", gap: 9, flexWrap: "wrap" }}>
+            {(["mid1", "mid2", "final", "all"] as Filter[]).map(f => (
+              <button
+                key={f}
+                className={`tab-pill ${filter === f ? "tab-on" : ""}`}
+                style={{ ...S.tabBtn, ...(filter === f ? S.tabBtnActive : {}) }}
+                onClick={() => setFilter(f)}
+              >
+                <span style={{ fontWeight: 800 }}>{SECTION_LABELS[f].ar}</span>
+                <span style={{ fontSize: 11, color: filter === f ? "#a5b4fc" : "var(--faint)" }}>
+                  {getPool(f).length}q
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Lectures */}
+        <div className="glass" style={S.card}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 13 }}>
+            <div style={{ ...S.sectionLabel, marginBottom: 0 }}>المحاضرات / Lectures</div>
+            <button
+              className="btn-base"
+              style={S.smallBtn}
+              onClick={() => setSelectedLectures(
+                allSelected ? new Set() : new Set(allLectures)
+              )}
+            >
+              {allSelected ? "Deselect All" : "Select All"}
+            </button>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, maxHeight: 215, overflowY: "auto", paddingBottom: 4 }}>
+            {allLectures.map(lec => {
+              const active = selectedLectures.has(lec);
+              return (
+                <button
+                  key={lec}
+                  className={`chip ${active ? "chip-on" : ""}`}
+                  style={{ ...S.lecChip }}
+                  onClick={() => toggleLecture(lec)}
+                >
+                  {active ? "✓ " : ""}{lec}
+                </button>
+              );
+            })}
+          </div>
+          {selectedLectures.size === 0 && (
+            <div className="anim-fadeUp" style={{ color: "var(--bad)", fontSize: 12.5, marginTop: 10, fontWeight: 600 }}>
+              ⚠️ اختر محاضرة واحدة على الأقل
+            </div>
+          )}
+        </div>
+
+        {/* Settings */}
+        <div className="glass" style={S.card}>
+          <div style={S.sectionLabel}>الإعدادات / Settings</div>
+
+          {/* Slider */}
+          <div style={{ marginBottom: 22 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 8 }}>
+              <span style={{ color: "var(--muted)", fontSize: 14 }}>عدد الأسئلة</span>
+              <span style={{
+                fontWeight: 900, fontSize: 26,
+                background: "linear-gradient(135deg, #818cf8, #38bdf8)",
+                WebkitBackgroundClip: "text", backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}>{safeCount}</span>
+            </div>
+            <input
+              type="range"
+              className="lux-slider"
+              min={1}
+              max={maxCount || 1}
+              value={safeCount}
+              onChange={e => setQuestionCount(Number(e.target.value))}
+              style={{ width: "100%", cursor: "pointer", ["--fill" as any]: `${fillPct}%` }}
+              disabled={maxCount === 0}
+            />
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--faint)", marginTop: 6 }}>
+              <span>1</span>
+              <span style={{ color: "var(--muted)" }}>
+                {effectivePool.length} متاح
+                {hideSeen && ` (${unseenPool.length} غير مشاهد)`}
+              </span>
+              <span>{maxCount || 0}</span>
+            </div>
+          </div>
+
+          {/* Hide seen toggle */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+            <div>
+              <div style={{ color: "var(--txt)", fontSize: 14, marginBottom: 2, fontWeight: 600 }}>إخفاء الأسئلة المشاهدة</div>
+              <div style={{ color: "var(--faint)", fontSize: 12 }}>
+                Skip questions already seen
+                {seenIds.size > 0 && (
+                  <span style={{ color: "var(--muted)" }}> ({seenIds.size} seen · </span>
+                )}
+                {seenIds.size > 0 && (
+                  <button
+                    style={{ background: "none", border: "none", color: "var(--bad)", fontSize: 12, cursor: "pointer", padding: 0, fontFamily: "inherit" }}
+                    onClick={() => { setSeenIds(new Set()); saveSeen(new Set()); }}
+                  >reset</button>
+                )}
+                {seenIds.size > 0 && <span style={{ color: "var(--muted)" }}>)</span>}
+              </div>
+            </div>
+            <div
+              style={{ ...S.toggle, ...(hideSeen ? S.toggleOn : {}) }}
+              onClick={() => setHideSeen(v => !v)}
+            >
+              <div style={{ ...S.toggleThumb, ...(hideSeen ? S.toggleThumbOn : {}) }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Start */}
+        <button
+          className="start-cta"
+          style={{ ...S.startBtn, opacity: canStart ? 1 : 0.4 }}
+          onClick={startQuiz}
+          disabled={!canStart}
+        >
+          <span style={{ fontSize: 20, fontWeight: 900, position: "relative", zIndex: 1 }}>ابدأ الاختبار 🚀</span>
+          <span style={{ fontSize: 13, color: "#dbe6ff", position: "relative", zIndex: 1 }}>
+            {safeCount} questions · {selectedLectures.size} lecture{selectedLectures.size !== 1 ? "s" : ""}
+          </span>
+        </button>
       </div>
     );
   }
@@ -762,158 +1114,172 @@ export default function App() {
     const q = questions[current];
     const isAnswered = selected !== null;
 
-    return (
-      <div style={S.page}>
-        <div style={S.container}>
-          <div style={S.quizHeader}>
-            <button style={S.backBtn} onClick={() => setScreen("home")}>← Home</button>
-            <span style={S.sectionTag}>{SECTION_LABELS[activeFilter].en}</span>
-          </div>
-
-          <div style={S.progressWrap}>
-            <div style={S.progressBar}>
-              <div style={{ ...S.progressFill, width: `${((current + 1) / questions.length) * 100}%` }} />
-            </div>
-            <span style={S.progressText}>{current + 1} / {questions.length}</span>
-          </div>
-
-          <div style={S.card}>
-            <div style={S.lectureBadge}>{q.lecture}</div>
-            <p style={S.questionText} dir="ltr">{q.q}</p>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {q.options.map((opt, i) => {
-                let bg = "transparent";
-                let border = "1.5px solid #334155";
-                let color = "#e2e8f0";
-                if (isAnswered) {
-                  if (i === q.answer) { bg = "#14532d44"; border = "1.5px solid #22c55e"; color = "#86efac"; }
-                  else if (i === selected && i !== q.answer) { bg = "#7f1d1d44"; border = "1.5px solid #ef4444"; color = "#fca5a5"; }
-                }
-                return (
-                  <button
-                    key={i}
-                    style={{ ...S.optionBtn, background: bg, border, color }}
-                    onClick={() => handleSelect(i)}
-                    disabled={isAnswered}
-                    dir="ltr"
-                  >
-                    <span style={S.optionLetter}>{OPTION_LETTERS[i]}</span>
-                    <span>{stripHint(opt)}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {isAnswered && (
-              <div style={S.explanationBox}>
-                <div style={S.explanationLabel}>
-                  <span>Explanation</span>
-                  <span style={{ color: "#94a3b8", fontSize: 13 }}>الشرح</span>
-                </div>
-                <p style={{ margin: 0, lineHeight: 1.7, color: "#bfdbfe" }} dir="ltr">
-                  {q.explanation || "—"}
-                </p>
-              </div>
-            )}
-          </div>
-
-          <div style={S.navRow}>
-            <button
-              style={{ ...S.navBtn, opacity: current === 0 ? 0.35 : 1 }}
-              onClick={handlePrev}
-              disabled={current === 0}
-            >← Prev</button>
-            {isAnswered && (
-              <button style={{ ...S.navBtn, ...S.navBtnPrimary }} onClick={handleNext}>
-                {current + 1 === questions.length ? "Finish ✓" : "Next →"}
-              </button>
-            )}
-          </div>
+    return shell(
+      <>
+        <div className="anim-fadeUp" style={S.quizHeader}>
+          <button className="btn-base" style={S.backBtn} onClick={() => setScreen("home")}>← Home</button>
+          <span style={S.sectionTag}>{SECTION_LABELS[activeFilter].en}</span>
         </div>
-      </div>
+
+        <div className="anim-fadeUp" style={S.progressWrap}>
+          <div style={S.progressBar}>
+            <div className="prog-fill" style={{ ...S.progressFill, width: `${((current + 1) / questions.length) * 100}%` }} />
+          </div>
+          <span style={S.progressText}>{current + 1} / {questions.length}</span>
+        </div>
+
+        <div key={current} className="glass anim-fadeUp" style={S.card}>
+          <div style={S.lectureBadge}>{q.lecture}</div>
+          <p style={S.questionText} dir="ltr">{q.q}</p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
+            {q.options.map((opt, i) => {
+              let bg = "rgba(148,163,255,0.03)";
+              let border = "1.5px solid rgba(148,163,255,0.15)";
+              let color = "var(--txt)";
+              let cls = "opt";
+              let letterBg = "rgba(148,163,255,0.08)";
+              let letterColor = "var(--muted)";
+              if (isAnswered) {
+                cls += " opt-locked";
+                if (i === q.answer) {
+                  bg = "rgba(52,211,153,0.1)"; border = "1.5px solid rgba(52,211,153,0.65)"; color = "#a7f3d0";
+                  letterBg = "rgba(52,211,153,0.2)"; letterColor = "#6ee7b7";
+                  cls += " opt-correct";
+                } else if (i === selected && i !== q.answer) {
+                  bg = "rgba(251,113,133,0.1)"; border = "1.5px solid rgba(251,113,133,0.65)"; color = "#fecdd3";
+                  letterBg = "rgba(251,113,133,0.2)"; letterColor = "#fda4af";
+                  cls += " opt-wrong";
+                }
+              }
+              return (
+                <button
+                  key={i}
+                  className={cls}
+                  style={{ ...S.optionBtn, background: bg, border, color }}
+                  onClick={() => handleSelect(i)}
+                  disabled={isAnswered}
+                  dir="ltr"
+                >
+                  <span style={{ ...S.optionLetter, background: letterBg, color: letterColor }}>{OPTION_LETTERS[i]}</span>
+                  <span>{stripHint(opt)}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {isAnswered && (
+            <div className="expl-box" style={S.explanationBox}>
+              <div style={S.explanationLabel}>
+                <span>💡 Explanation</span>
+                <span style={{ color: "var(--muted)", fontSize: 13 }}>الشرح</span>
+              </div>
+              <p style={{ margin: 0, lineHeight: 1.75, color: "#c7d6f8" }} dir="ltr">
+                {q.explanation || "—"}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div style={S.navRow}>
+          <button
+            className="btn-base"
+            style={{ ...S.navBtn, opacity: current === 0 ? 0.35 : 1 }}
+            onClick={handlePrev}
+            disabled={current === 0}
+          >← Prev</button>
+          {isAnswered && (
+            <button className="btn-base anim-pop" style={{ ...S.navBtn, ...S.navBtnPrimary }} onClick={handleNext}>
+              {current + 1 === questions.length ? "Finish ✓" : "Next →"}
+            </button>
+          )}
+        </div>
+      </>
     );
   }
 
   /* ── SCORE ── */
   if (screen === "score") {
     const grade =
-      pct >= 90 ? { label: "Excellent!", emoji: "🏆", color: "#22c55e" } :
-      pct >= 75 ? { label: "Good",       emoji: "👍", color: "#3b82f6" } :
-      pct >= 60 ? { label: "Pass",       emoji: "✓",  color: "#f59e0b" } :
-                  { label: "Try Again",  emoji: "📚", color: "#ef4444" };
+      pct >= 90 ? { label: "Excellent!", emoji: "🏆", color: "#34d399" } :
+      pct >= 75 ? { label: "Good",       emoji: "👍", color: "#38bdf8" } :
+      pct >= 60 ? { label: "Pass",       emoji: "✓",  color: "#fbbf24" } :
+                  { label: "Try Again",  emoji: "📚", color: "#fb7185" };
 
     const weakLectures = [...lectureStats].sort((a, b) => a.pct - b.pct).filter(s => s.pct < 60).slice(0, 3);
 
-    return (
-      <div style={S.page}>
-        <div style={S.container}>
-          {/* Main score */}
-          <div style={{ ...S.card, textAlign: "center" }}>
-            <div style={{ fontSize: 52, marginBottom: 4 }}>{grade.emoji}</div>
-            <h2 style={{ margin: "0 0 2px", color: grade.color, fontSize: 26 }}>{grade.label}</h2>
-            <p style={{ color: "#64748b", margin: "0 0 18px", fontSize: 13 }}>{SECTION_LABELS[activeFilter].en}</p>
-            <div style={S.scoreBig}>{pct}%</div>
-            <p style={{ color: "#94a3b8", margin: "4px 0 18px" }}>{score} / {questions.length} correct</p>
+    return shell(
+      <div className="stagger">
+        {pct >= 90 && <Confetti />}
+        {/* Main score */}
+        <div className="glass" style={{ ...S.card, textAlign: "center", paddingTop: 28, paddingBottom: 28 }}>
+          <div className="anim-pop" style={{ fontSize: 50, marginBottom: 2 }}>{grade.emoji}</div>
+          <h2 style={{ margin: "0 0 2px", color: grade.color, fontSize: 27, fontWeight: 900 }}>{grade.label}</h2>
+          <p style={{ color: "var(--faint)", margin: "0 0 20px", fontSize: 13 }}>{SECTION_LABELS[activeFilter].en}</p>
 
-            {/* Score bar */}
-            <div style={{ background: "#0f172a", borderRadius: 8, height: 10, marginBottom: 24, overflow: "hidden" }}>
-              <div style={{ width: `${pct}%`, height: "100%", background: grade.color, borderRadius: 8, transition: "width 0.6s ease" }} />
-            </div>
+          <ScoreRing pct={pct} color={grade.color} />
+          <p style={{ color: "var(--muted)", margin: "14px 0 22px", fontSize: 15 }}>
+            <b style={{ color: grade.color }}>{score}</b> / {questions.length} correct
+          </p>
 
-            <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-              <button style={S.actionBtn} onClick={startQuiz}>Retry</button>
-              {wrongQuestions.length > 0 && (
-                <button
-                  style={{ ...S.actionBtn, background: "#1e40af" }}
-                  onClick={() => { setReviewIndex(0); setScreen("review"); }}
-                >
-                  Review Wrong ({wrongQuestions.length})
-                </button>
-              )}
-              <button style={{ ...S.actionBtn, background: "#1e293b" }} onClick={() => setScreen("home")}>Home</button>
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+            <button className="btn-base" style={S.actionBtn} onClick={startQuiz}>🔄 Retry</button>
+            {wrongQuestions.length > 0 && (
+              <button
+                className="btn-base"
+                style={{ ...S.actionBtn, background: "linear-gradient(135deg, rgba(251,113,133,0.85), rgba(225,29,72,0.85))" }}
+                onClick={() => { setReviewIndex(0); setScreen("review"); }}
+              >
+                Review Wrong ({wrongQuestions.length})
+              </button>
+            )}
+            <button className="btn-base" style={{ ...S.actionBtn, background: "rgba(148,163,255,0.1)", border: "1px solid var(--glass-border)" }} onClick={() => setScreen("home")}>Home</button>
+          </div>
+        </div>
+
+        {/* Lecture breakdown */}
+        {lectureStats.length > 0 && (
+          <div className="glass" style={S.card}>
+            <div style={S.sectionLabel}>تفصيل المحاضرات / Lecture Breakdown</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 13 }}>
+              {lectureStats.map(({ lec, correct, total, pct: lPct }, idx) => {
+                const barColor = lPct >= 75 ? "#34d399" : lPct >= 50 ? "#fbbf24" : "#fb7185";
+                return (
+                  <div key={lec}>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6, gap: 8 }}>
+                      <span style={{ fontSize: 13, color: "#cbd6ee", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{lec}</span>
+                      <span style={{ fontSize: 13, fontWeight: 800, color: barColor, flexShrink: 0 }}>
+                        {correct}/{total} · {lPct}%
+                      </span>
+                    </div>
+                    <div style={{ background: "rgba(148,163,255,0.08)", borderRadius: 999, height: 7, overflow: "hidden" }}>
+                      <div className="bar-anim" style={{
+                        width: `${lPct}%`, height: "100%",
+                        background: `linear-gradient(90deg, ${barColor}cc, ${barColor})`,
+                        borderRadius: 999, boxShadow: `0 0 8px ${barColor}66`,
+                        animationDelay: `${0.15 + idx * 0.08}s`,
+                      }} />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
+        )}
 
-          {/* Lecture breakdown */}
-          {lectureStats.length > 0 && (
-            <div style={S.card}>
-              <div style={S.sectionLabel}>تفصيل المحاضرات / Lecture Breakdown</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {lectureStats.map(({ lec, correct, total, pct: lPct }) => {
-                  const barColor = lPct >= 75 ? "#22c55e" : lPct >= 50 ? "#f59e0b" : "#ef4444";
-                  return (
-                    <div key={lec}>
-                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5, gap: 8 }}>
-                        <span style={{ fontSize: 13, color: "#cbd5e1", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{lec}</span>
-                        <span style={{ fontSize: 13, fontWeight: 700, color: barColor, flexShrink: 0 }}>
-                          {correct}/{total} · {lPct}%
-                        </span>
-                      </div>
-                      <div style={{ background: "#0f172a", borderRadius: 4, height: 6, overflow: "hidden" }}>
-                        <div style={{ width: `${lPct}%`, height: "100%", background: barColor, borderRadius: 4 }} />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+        {/* Weak lectures warning */}
+        {weakLectures.length > 0 && (
+          <div className="glass" style={{ ...S.card, background: "rgba(251,113,133,0.05)", border: "1px solid rgba(251,113,133,0.3)" }}>
+            <div style={{ ...S.sectionLabel, color: "#fda4af" }}>⚠️ تحتاج مراجعة / Needs Review</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+              {weakLectures.map(w => (
+                <div key={w.lec} style={{ color: "#fecdd3", fontSize: 13 }}>
+                  • {w.lec} — {w.correct}/{w.total} ({w.pct}%)
+                </div>
+              ))}
             </div>
-          )}
-
-          {/* Weak lectures warning */}
-          {weakLectures.length > 0 && (
-            <div style={{ ...S.card, background: "#160a0a", border: "1.5px solid #7f1d1d" }}>
-              <div style={{ ...S.sectionLabel, color: "#f87171" }}>⚠️ تحتاج مراجعة / Needs Review</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                {weakLectures.map(w => (
-                  <div key={w.lec} style={{ color: "#fca5a5", fontSize: 13 }}>
-                    • {w.lec} — {w.correct}/{w.total} ({w.pct}%)
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -923,62 +1289,76 @@ export default function App() {
     const q = wrongQuestions[reviewIndex];
     const userAnswer = answers[questions.indexOf(q)];
 
-    return (
-      <div style={S.page}>
-        <div style={S.container}>
-          <div style={S.quizHeader}>
-            <button style={S.backBtn} onClick={() => setScreen("score")}>← Score</button>
-            <span style={S.sectionTag}>Review Wrong Answers</span>
+    return shell(
+      <>
+        <div className="anim-fadeUp" style={S.quizHeader}>
+          <button className="btn-base" style={S.backBtn} onClick={() => setScreen("score")}>← Score</button>
+          <span style={{ ...S.sectionTag, color: "#fda4af", background: "rgba(251,113,133,0.12)" }}>Review Wrong Answers</span>
+        </div>
+
+        <div className="anim-fadeUp" style={S.progressWrap}>
+          <div style={S.progressBar}>
+            <div style={{
+              ...S.progressFill, width: `${((reviewIndex + 1) / wrongQuestions.length) * 100}%`,
+              background: "linear-gradient(90deg, #fb7185, #f43f5e)",
+              boxShadow: "0 0 12px rgba(251,113,133,0.5)",
+              transition: "width 0.45s cubic-bezier(0.22,1,0.36,1)",
+            }} />
+          </div>
+          <span style={S.progressText}>{reviewIndex + 1} / {wrongQuestions.length}</span>
+        </div>
+
+        <div key={reviewIndex} className="glass anim-fadeUp" style={S.card}>
+          <div style={S.lectureBadge}>{q.lecture}</div>
+          <p style={S.questionText} dir="ltr">{q.q}</p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
+            {q.options.map((opt, i) => {
+              let bg = "rgba(148,163,255,0.03)";
+              let border = "1.5px solid rgba(148,163,255,0.15)";
+              let color = "var(--txt)";
+              let letterBg = "rgba(148,163,255,0.08)";
+              let letterColor = "var(--muted)";
+              if (i === q.answer) {
+                bg = "rgba(52,211,153,0.1)"; border = "1.5px solid rgba(52,211,153,0.65)"; color = "#a7f3d0";
+                letterBg = "rgba(52,211,153,0.2)"; letterColor = "#6ee7b7";
+              } else if (i === userAnswer && i !== q.answer) {
+                bg = "rgba(251,113,133,0.1)"; border = "1.5px solid rgba(251,113,133,0.65)"; color = "#fecdd3";
+                letterBg = "rgba(251,113,133,0.2)"; letterColor = "#fda4af";
+              }
+              return (
+                <div key={i} className="opt opt-locked" style={{ ...S.optionBtn, background: bg, border, color, cursor: "default" }} dir="ltr">
+                  <span style={{ ...S.optionLetter, background: letterBg, color: letterColor }}>{OPTION_LETTERS[i]}</span>
+                  <span>{stripHint(opt)}</span>
+                </div>
+              );
+            })}
           </div>
 
-          <div style={S.progressWrap}>
-            <div style={S.progressBar}>
-              <div style={{ ...S.progressFill, width: `${((reviewIndex + 1) / wrongQuestions.length) * 100}%`, background: "#ef4444" }} />
+          <div className="expl-box" style={S.explanationBox}>
+            <div style={S.explanationLabel}>
+              <span>💡 Explanation</span>
+              <span style={{ color: "var(--muted)", fontSize: 13 }}>الشرح</span>
             </div>
-            <span style={S.progressText}>{reviewIndex + 1} / {wrongQuestions.length}</span>
-          </div>
-
-          <div style={S.card}>
-            <div style={S.lectureBadge}>{q.lecture}</div>
-            <p style={S.questionText} dir="ltr">{q.q}</p>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {q.options.map((opt, i) => {
-                let bg = "transparent"; let border = "1.5px solid #334155"; let color = "#e2e8f0";
-                if (i === q.answer) { bg = "#14532d44"; border = "1.5px solid #22c55e"; color = "#86efac"; }
-                else if (i === userAnswer && i !== q.answer) { bg = "#7f1d1d44"; border = "1.5px solid #ef4444"; color = "#fca5a5"; }
-                return (
-                  <div key={i} style={{ ...S.optionBtn, background: bg, border, color }} dir="ltr">
-                    <span style={S.optionLetter}>{OPTION_LETTERS[i]}</span>
-                    <span>{stripHint(opt)}</span>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div style={S.explanationBox}>
-              <div style={S.explanationLabel}>
-                <span>Explanation</span>
-                <span style={{ color: "#94a3b8", fontSize: 13 }}>الشرح</span>
-              </div>
-              <p style={{ margin: 0, lineHeight: 1.7, color: "#bfdbfe" }} dir="ltr">{q.explanation || "—"}</p>
-            </div>
-          </div>
-
-          <div style={S.navRow}>
-            <button
-              style={{ ...S.navBtn, opacity: reviewIndex === 0 ? 0.35 : 1 }}
-              onClick={() => setReviewIndex(i => i - 1)}
-              disabled={reviewIndex === 0}
-            >← Prev</button>
-            <button
-              style={{ ...S.navBtn, opacity: reviewIndex + 1 >= wrongQuestions.length ? 0.35 : 1 }}
-              onClick={() => setReviewIndex(i => i + 1)}
-              disabled={reviewIndex + 1 >= wrongQuestions.length}
-            >Next →</button>
+            <p style={{ margin: 0, lineHeight: 1.75, color: "#c7d6f8" }} dir="ltr">{q.explanation || "—"}</p>
           </div>
         </div>
-      </div>
+
+        <div style={S.navRow}>
+          <button
+            className="btn-base"
+            style={{ ...S.navBtn, opacity: reviewIndex === 0 ? 0.35 : 1 }}
+            onClick={() => setReviewIndex(i => i - 1)}
+            disabled={reviewIndex === 0}
+          >← Prev</button>
+          <button
+            className="btn-base"
+            style={{ ...S.navBtn, opacity: reviewIndex + 1 >= wrongQuestions.length ? 0.35 : 1 }}
+            onClick={() => setReviewIndex(i => i + 1)}
+            disabled={reviewIndex + 1 >= wrongQuestions.length}
+          >Next →</button>
+        </div>
+      </>
     );
   }
 
@@ -989,145 +1369,152 @@ export default function App() {
 const S: Record<string, React.CSSProperties> = {
   page: {
     minHeight: "100vh",
-    background: "#0f172a",
-    color: "#e2e8f0",
-    fontFamily: "'Segoe UI', system-ui, sans-serif",
-    padding: "24px 16px 48px",
+    background: "radial-gradient(ellipse at 20% -10%, #131a36 0%, #060913 55%), #060913",
+    color: "var(--txt)",
+    fontFamily: "'Cairo', 'Segoe UI', system-ui, sans-serif",
+    padding: "28px 16px 56px",
+    position: "relative" as const,
   },
-  container: { maxWidth: 720, margin: "0 auto" },
+  container: { maxWidth: 720, margin: "0 auto", position: "relative" as const, zIndex: 1 },
   badge: {
     display: "inline-block",
-    background: "#1e3a5f", color: "#60a5fa",
-    borderRadius: 999, padding: "4px 14px",
-    fontSize: 13, fontWeight: 600, letterSpacing: 0.5, marginBottom: 12,
+    background: "rgba(99,102,241,0.14)", color: "#a5b4fc",
+    border: "1px solid rgba(129,140,248,0.3)",
+    borderRadius: 999, padding: "5px 16px",
+    fontSize: 13, fontWeight: 700, letterSpacing: 0.5, marginBottom: 14,
+    boxShadow: "0 0 18px rgba(99,102,241,0.15)",
   },
-  title: { margin: 0, fontSize: 36, fontWeight: 800, color: "#f1f5f9" },
-  subtitle: { margin: "6px 0 0", fontSize: 16, color: "#94a3b8" },
+  title: { margin: 0, fontSize: 42, fontWeight: 900, letterSpacing: -0.5 },
+  subtitle: { margin: "6px 0 0", fontSize: 16, color: "var(--muted)" },
   aboutBox: {
-    background: "#1e293b", borderRadius: 12,
-    padding: "12px 16px", marginBottom: 14,
-    border: "1px solid #334155",
+    padding: "13px 18px", marginBottom: 14,
   },
   aboutToggle: {
     background: "none", border: "none",
-    color: "#64748b", cursor: "pointer",
+    color: "var(--muted)", cursor: "pointer",
     display: "flex", alignItems: "center",
     justifyContent: "space-between",
     width: "100%", padding: 0,
-    fontSize: 14, fontWeight: 600,
+    fontSize: 14, fontWeight: 700,
   },
   card: {
-    background: "#1e293b", borderRadius: 16, padding: "18px 20px", marginBottom: 14,
+    padding: "20px 22px", marginBottom: 14,
   },
   sectionLabel: {
-    fontSize: 12, fontWeight: 700, color: "#64748b",
-    textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 12,
+    fontSize: 11.5, fontWeight: 800, color: "var(--faint)",
+    textTransform: "uppercase" as const, letterSpacing: 1.2, marginBottom: 13,
   },
   /* Section tabs */
   tabBtn: {
-    background: "#0f172a", border: "1.5px solid #334155",
-    borderRadius: 10, padding: "10px 14px",
-    display: "flex", flexDirection: "column", alignItems: "center",
-    gap: 2, color: "#94a3b8", cursor: "pointer", flex: 1, minWidth: 60,
-    fontSize: 15,
+    background: "rgba(148,163,255,0.04)", border: "1.5px solid rgba(148,163,255,0.14)",
+    borderRadius: 13, padding: "11px 14px",
+    display: "flex", flexDirection: "column" as const, alignItems: "center",
+    gap: 2, color: "var(--muted)", cursor: "pointer", flex: 1, minWidth: 62,
+    fontSize: 15, fontFamily: "inherit",
   },
   tabBtnActive: {
-    background: "#172554", border: "1.5px solid #3b82f6", color: "#93c5fd",
+    color: "#c7d2fe",
   },
   /* Lecture chips */
   lecChip: {
-    background: "#0f172a", border: "1.5px solid #334155",
-    borderRadius: 8, padding: "6px 11px",
-    fontSize: 12, color: "#64748b", cursor: "pointer",
-    whiteSpace: "nowrap" as const,
-  },
-  lecChipActive: {
-    background: "#172554", border: "1.5px solid #3b82f6", color: "#93c5fd",
+    background: "rgba(148,163,255,0.04)", border: "1.5px solid rgba(148,163,255,0.14)",
+    borderRadius: 999, padding: "7px 13px",
+    fontSize: 12, color: "var(--muted)", cursor: "pointer",
+    whiteSpace: "nowrap" as const, fontFamily: "inherit", fontWeight: 600,
   },
   smallBtn: {
-    background: "transparent", border: "1px solid #334155",
-    borderRadius: 6, padding: "4px 10px",
-    fontSize: 12, color: "#94a3b8", cursor: "pointer",
+    background: "rgba(148,163,255,0.05)", border: "1px solid rgba(148,163,255,0.18)",
+    borderRadius: 8, padding: "5px 12px",
+    fontSize: 12, color: "var(--muted)", cursor: "pointer", fontFamily: "inherit", fontWeight: 600,
   },
   /* Toggle */
   toggle: {
-    width: 44, height: 24, borderRadius: 12,
-    background: "#334155", cursor: "pointer",
-    position: "relative" as const, transition: "background 0.2s",
+    width: 46, height: 26, borderRadius: 999,
+    background: "rgba(148,163,255,0.14)", cursor: "pointer",
+    position: "relative" as const, transition: "all 0.25s cubic-bezier(0.22,1,0.36,1)",
     display: "inline-block" as const, flexShrink: 0,
   },
-  toggleOn: { background: "#2563eb" },
+  toggleOn: {
+    background: "linear-gradient(135deg, #6366f1, #38bdf8)",
+    boxShadow: "0 0 14px rgba(99,102,241,0.45)",
+  },
   toggleThumb: {
     position: "absolute" as const, top: 3, left: 3,
-    width: 18, height: 18, borderRadius: 9,
-    background: "#64748b", transition: "left 0.2s, background 0.2s",
+    width: 20, height: 20, borderRadius: 999,
+    background: "#8b96b8", transition: "all 0.25s cubic-bezier(0.34,1.56,0.64,1)",
   },
-  toggleThumbOn: { left: 23, background: "#fff" },
+  toggleThumbOn: { left: 23, background: "#fff", boxShadow: "0 1px 6px rgba(0,0,0,0.35)" },
   /* Start button */
   startBtn: {
-    width: "100%", background: "linear-gradient(135deg, #1d4ed8, #2563eb)",
-    border: "none", borderRadius: 14,
-    padding: "18px 24px", color: "#fff",
+    width: "100%",
+    border: "none", borderRadius: 18,
+    padding: "19px 24px", color: "#fff",
     cursor: "pointer", display: "flex",
     flexDirection: "column" as const, alignItems: "center", gap: 5,
-    marginTop: 4, transition: "opacity 0.15s",
+    marginTop: 6, fontFamily: "inherit",
   },
   /* Quiz */
   quizHeader: {
     display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,
   },
   backBtn: {
-    background: "transparent", border: "1px solid #334155",
-    color: "#94a3b8", borderRadius: 8, padding: "6px 14px",
-    cursor: "pointer", fontSize: 13,
+    background: "rgba(148,163,255,0.05)", border: "1px solid rgba(148,163,255,0.18)",
+    color: "var(--muted)", borderRadius: 10, padding: "7px 15px",
+    cursor: "pointer", fontSize: 13, fontFamily: "inherit", fontWeight: 600,
   },
   sectionTag: {
-    fontSize: 13, color: "#60a5fa",
-    background: "#172554", padding: "4px 12px", borderRadius: 999,
+    fontSize: 13, color: "#a5b4fc", fontWeight: 700,
+    background: "rgba(99,102,241,0.14)", padding: "5px 14px", borderRadius: 999,
+    border: "1px solid rgba(129,140,248,0.25)",
   },
   progressWrap: { display: "flex", alignItems: "center", gap: 10, marginBottom: 18 },
-  progressBar: { flex: 1, height: 6, background: "#1e293b", borderRadius: 999, overflow: "hidden" },
-  progressFill: { height: "100%", background: "#3b82f6", borderRadius: 999, transition: "width 0.3s ease" },
-  progressText: { fontSize: 13, color: "#64748b", whiteSpace: "nowrap" as const },
+  progressBar: { flex: 1, height: 7, background: "rgba(148,163,255,0.1)", borderRadius: 999, overflow: "hidden" },
+  progressFill: { height: "100%", borderRadius: 999 },
+  progressText: { fontSize: 13, color: "var(--faint)", whiteSpace: "nowrap" as const, fontWeight: 700 },
   lectureBadge: {
     display: "inline-block", fontSize: 11,
-    background: "#0f172a", color: "#7dd3fc",
-    borderRadius: 6, padding: "3px 10px", marginBottom: 14,
-    fontWeight: 600, letterSpacing: 0.3,
+    background: "rgba(56,189,248,0.1)", color: "#7dd3fc",
+    border: "1px solid rgba(56,189,248,0.22)",
+    borderRadius: 999, padding: "4px 12px", marginBottom: 15,
+    fontWeight: 700, letterSpacing: 0.3,
   },
-  questionText: { fontSize: 17, lineHeight: 1.65, color: "#f1f5f9", margin: "0 0 20px" },
+  questionText: { fontSize: 17, lineHeight: 1.7, color: "#f1f5fd", margin: "0 0 20px", fontWeight: 600 },
   optionBtn: {
-    display: "flex", alignItems: "center", gap: 12,
-    padding: "12px 16px", borderRadius: 10,
+    display: "flex", alignItems: "center", gap: 13,
+    padding: "13px 16px", borderRadius: 14,
     cursor: "pointer", fontSize: 15, textAlign: "left" as const,
-    width: "100%", transition: "background 0.15s",
+    width: "100%", fontFamily: "inherit",
   },
   optionLetter: {
-    minWidth: 28, height: 28, background: "#0f172a",
-    borderRadius: 6, display: "flex", alignItems: "center",
-    justifyContent: "center", fontWeight: 700, fontSize: 13,
-    color: "#94a3b8", flexShrink: 0,
+    minWidth: 30, height: 30,
+    borderRadius: 9, display: "flex", alignItems: "center",
+    justifyContent: "center", fontWeight: 800, fontSize: 13,
+    flexShrink: 0,
   },
   explanationBox: {
-    marginTop: 20, background: "#172554",
-    border: "1.5px solid #1d4ed8", borderRadius: 12, padding: "14px 18px",
+    marginTop: 20, background: "rgba(99,102,241,0.08)",
+    border: "1px solid rgba(129,140,248,0.3)", borderRadius: 16, padding: "15px 19px",
+    backdropFilter: "blur(8px)",
   },
   explanationLabel: {
     display: "flex", justifyContent: "space-between",
-    marginBottom: 8, fontWeight: 700, fontSize: 14, color: "#93c5fd",
+    marginBottom: 9, fontWeight: 800, fontSize: 14, color: "#a5b4fc",
   },
   navRow: { display: "flex", justifyContent: "space-between", gap: 10 },
   navBtn: {
-    background: "#1e293b", border: "1px solid #334155",
-    color: "#e2e8f0", borderRadius: 10, padding: "10px 22px",
-    cursor: "pointer", fontSize: 14, fontWeight: 600,
+    background: "rgba(148,163,255,0.06)", border: "1px solid rgba(148,163,255,0.18)",
+    color: "var(--txt)", borderRadius: 12, padding: "11px 24px",
+    cursor: "pointer", fontSize: 14, fontWeight: 700, fontFamily: "inherit",
   },
-  navBtnPrimary: { background: "#1d4ed8", border: "1px solid #2563eb", color: "#fff" },
+  navBtnPrimary: {
+    background: "linear-gradient(135deg, #6366f1, #0ea5e9)", border: "1px solid rgba(129,140,248,0.4)",
+    color: "#fff", boxShadow: "0 0 18px rgba(99,102,241,0.35)",
+  },
   /* Score */
-  scoreBig: { fontSize: 72, fontWeight: 900, color: "#f1f5f9", lineHeight: 1, marginBottom: 4 },
   actionBtn: {
-    background: "#1d4ed8", border: "none", color: "#fff",
-    borderRadius: 10, padding: "11px 24px",
-    cursor: "pointer", fontSize: 15, fontWeight: 600,
+    background: "linear-gradient(135deg, #6366f1, #4f46e5)", border: "none", color: "#fff",
+    borderRadius: 12, padding: "12px 24px",
+    cursor: "pointer", fontSize: 15, fontWeight: 700, fontFamily: "inherit",
+    boxShadow: "0 4px 16px rgba(79,70,229,0.3)",
   },
 };

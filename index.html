@@ -6,11 +6,11 @@
 <title>Pharmacology PH45 — Test Bank</title>
 <style>
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;padding:0;background:#0f172a;}
+body{margin:0;padding:0;background:#060913;}
 button{font-family:inherit}
 </style>
 </head>
-<body style="margin:0;padding:0;background:#0f172a;">
+<body style="margin:0;padding:0;background:#060913;">
 <div id="root"></div>
 <script>(() => {
   var __create = Object.create;
@@ -22181,6 +22181,338 @@ button{font-family:inherit}
     final: { en: "Final", ar: "\u0641\u0627\u064A\u0646\u0644" }
   };
   var OPTION_LETTERS = ["A", "B", "C", "D", "E"];
+  var GLOBAL_CSS = `
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --bg0: #060913;
+  --glass: rgba(148, 163, 255, 0.055);
+  --glass-border: rgba(148, 163, 255, 0.13);
+  --txt: #e7ecf8;
+  --muted: #8b96b8;
+  --faint: #5a6485;
+  --accent: #818cf8;
+  --accent2: #38bdf8;
+  --good: #34d399;
+  --bad: #fb7185;
+  --warn: #fbbf24;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg0);
+  font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* \u2500\u2500 Aurora background \u2500\u2500 */
+.aurora {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+}
+.aurora::before, .aurora::after {
+  content: ""; position: absolute; border-radius: 50%;
+  filter: blur(110px); opacity: 0.55;
+}
+.aurora::before {
+  width: 60vw; height: 60vw; min-width: 480px; min-height: 480px;
+  background: radial-gradient(circle, #4338ca 0%, transparent 65%);
+  top: -22vw; right: -18vw;
+  animation: drift1 26s ease-in-out infinite alternate;
+}
+.aurora::after {
+  width: 55vw; height: 55vw; min-width: 420px; min-height: 420px;
+  background: radial-gradient(circle, #0e7490 0%, transparent 65%);
+  bottom: -20vw; left: -16vw;
+  animation: drift2 32s ease-in-out infinite alternate;
+}
+.aurora-mid {
+  position: absolute; width: 42vw; height: 42vw; min-width: 340px; min-height: 340px;
+  border-radius: 50%; filter: blur(120px); opacity: 0.32;
+  background: radial-gradient(circle, #7c3aed 0%, transparent 65%);
+  top: 35%; left: 30%;
+  animation: drift3 38s ease-in-out infinite alternate;
+}
+@keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(-9vw, 7vw) scale(1.15); } }
+@keyframes drift2 { from { transform: translate(0,0) scale(1.1); } to { transform: translate(8vw, -6vw) scale(0.95); } }
+@keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(10vw, -8vw); } }
+
+/* Grain overlay for texture */
+.grain {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* \u2500\u2500 Entrance animations \u2500\u2500 */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.7); }
+  65% { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideOption {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 24px rgba(129,140,248,0.35), 0 0 60px rgba(56,189,248,0.12); }
+  50%      { box-shadow: 0 0 36px rgba(129,140,248,0.55), 0 0 90px rgba(56,189,248,0.22); }
+}
+@keyframes shimmerTxt {
+  to { background-position: 200% center; }
+}
+@keyframes correctFlash {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.025); }
+  100% { transform: scale(1); }
+}
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+@keyframes ringDraw { from { stroke-dashoffset: var(--ring-c); } }
+@keyframes barGrow { from { width: 0; } }
+@keyframes confettiFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
+.anim-fadeUp { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-pop { animation: popIn 0.55s cubic-bezier(0.34,1.56,0.64,1) both; }
+.stagger > * { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+.stagger > *:nth-child(1) { animation-delay: 0.03s; }
+.stagger > *:nth-child(2) { animation-delay: 0.09s; }
+.stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger > *:nth-child(4) { animation-delay: 0.21s; }
+.stagger > *:nth-child(5) { animation-delay: 0.27s; }
+.stagger > *:nth-child(6) { animation-delay: 0.33s; }
+
+/* \u2500\u2500 Glass card \u2500\u2500 */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(2, 6, 23, 0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+/* \u2500\u2500 Title shimmer \u2500\u2500 */
+.shimmer-title {
+  background: linear-gradient(90deg, #c7d2fe 0%, #67e8f9 25%, #e0e7ff 50%, #a5b4fc 75%, #c7d2fe 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerTxt 5s linear infinite;
+}
+
+/* \u2500\u2500 Buttons \u2500\u2500 */
+.btn-base { transition: all 0.2s cubic-bezier(0.22,1,0.36,1); }
+.btn-base:hover:not(:disabled) { transform: translateY(-2px); }
+.btn-base:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+
+.tab-pill {
+  position: relative; overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.tab-pill:hover:not(.tab-on) { border-color: rgba(129,140,248,0.45) !important; color: #c7d2fe !important; transform: translateY(-2px); }
+.tab-on {
+  background: linear-gradient(135deg, rgba(99,102,241,0.28), rgba(56,189,248,0.18)) !important;
+  border-color: rgba(129,140,248,0.7) !important;
+  box-shadow: 0 0 22px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.chip {
+  transition: all 0.2s cubic-bezier(0.22,1,0.36,1);
+}
+.chip:hover:not(.chip-on) { border-color: rgba(129,140,248,0.5) !important; color: #c7d2fe !important; }
+.chip-on {
+  background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(56,189,248,0.16)) !important;
+  border-color: rgba(129,140,248,0.65) !important;
+  color: #c7d2fe !important;
+  box-shadow: 0 0 14px rgba(99,102,241,0.25);
+}
+
+.start-cta {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 45%, #0ea5e9 110%);
+  animation: glowPulse 3.2s ease-in-out infinite;
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), filter 0.22s;
+}
+.start-cta:hover:not(:disabled) { transform: translateY(-3px) scale(1.012); filter: brightness(1.12); }
+.start-cta:active:not(:disabled) { transform: scale(0.985); }
+.start-cta::after {
+  content: ""; position: absolute; top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: skewX(-20deg);
+  animation: ctaSheen 3.6s ease-in-out infinite;
+}
+@keyframes ctaSheen { 0%, 60% { left: -75%; } 100% { left: 130%; } }
+.start-cta:disabled { animation: none; box-shadow: none; }
+
+/* \u2500\u2500 Options \u2500\u2500 */
+.opt {
+  animation: slideOption 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  transition: all 0.22s cubic-bezier(0.22,1,0.36,1);
+  position: relative;
+}
+.opt:nth-child(1) { animation-delay: 0.05s; }
+.opt:nth-child(2) { animation-delay: 0.11s; }
+.opt:nth-child(3) { animation-delay: 0.17s; }
+.opt:nth-child(4) { animation-delay: 0.23s; }
+.opt:nth-child(5) { animation-delay: 0.29s; }
+.opt:hover:not(:disabled):not(.opt-locked) {
+  border-color: rgba(129,140,248,0.6) !important;
+  background: rgba(99,102,241,0.1) !important;
+  transform: translateX(4px);
+}
+.opt-correct { animation: correctFlash 0.5s ease both !important; }
+.opt-wrong { animation: wrongShake 0.45s ease both !important; }
+
+.expl-box { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* \u2500\u2500 Slider \u2500\u2500 */
+input[type="range"].lux-slider {
+  -webkit-appearance: none; appearance: none;
+  height: 8px; border-radius: 999px;
+  background: linear-gradient(90deg, #6366f1 var(--fill, 50%), rgba(148,163,255,0.14) var(--fill, 50%));
+  outline: none;
+}
+input[type="range"].lux-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: linear-gradient(135deg, #818cf8, #38bdf8);
+  border: 3px solid #0b1023;
+  box-shadow: 0 0 14px rgba(129,140,248,0.65);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+input[type="range"].lux-slider::-webkit-slider-thumb:hover { transform: scale(1.18); }
+input[type="range"].lux-slider::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, #818cf8, #38bdf8);
+  border: 3px solid #0b1023;
+  box-shadow: 0 0 14px rgba(129,140,248,0.65);
+  cursor: pointer;
+}
+
+/* \u2500\u2500 Progress \u2500\u2500 */
+.prog-fill {
+  background: linear-gradient(90deg, #6366f1, #38bdf8);
+  box-shadow: 0 0 12px rgba(99,102,241,0.55);
+  transition: width 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* \u2500\u2500 Score ring \u2500\u2500 */
+.ring-anim { animation: ringDraw 1.4s cubic-bezier(0.22,1,0.36,1) both; }
+.bar-anim { animation: barGrow 0.9s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(129,140,248,0.25); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(129,140,248,0.45); }
+
+.confetti-piece {
+  position: fixed; top: 0; width: 10px; height: 14px; z-index: 50;
+  animation: confettiFall linear both; pointer-events: none; border-radius: 2px;
+}
+`;
+  function CssInjector() {
+    (0, import_react.useEffect)(() => {
+      const tag = document.createElement("style");
+      tag.textContent = GLOBAL_CSS;
+      document.head.appendChild(tag);
+      return () => {
+        document.head.removeChild(tag);
+      };
+    }, []);
+    return null;
+  }
+  function Aurora() {
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "aurora", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "aurora-mid" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "grain" })
+    ] });
+  }
+  function CountUp({ to, duration = 1200, suffix = "" }) {
+    const [val, setVal] = (0, import_react.useState)(0);
+    (0, import_react.useEffect)(() => {
+      let raf = 0;
+      const t0 = performance.now();
+      const tick = (t) => {
+        const p = Math.min((t - t0) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setVal(Math.round(eased * to));
+        if (p < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, [to, duration]);
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+      val,
+      suffix
+    ] });
+  }
+  function ScoreRing({ pct, color }) {
+    const R = 84, C = 2 * Math.PI * R;
+    const off = C - pct / 100 * C;
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { position: "relative", width: 208, height: 208, margin: "0 auto" }, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", { width: "208", height: "208", viewBox: "0 0 208 208", style: { transform: "rotate(-90deg)" }, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "104", cy: "104", r: R, fill: "none", stroke: "rgba(148,163,255,0.1)", strokeWidth: "13" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+          "circle",
+          {
+            className: "ring-anim",
+            cx: "104",
+            cy: "104",
+            r: R,
+            fill: "none",
+            stroke: color,
+            strokeWidth: "13",
+            strokeLinecap: "round",
+            strokeDasharray: C,
+            strokeDashoffset: off,
+            style: { ["--ring-c"]: C, filter: `drop-shadow(0 0 10px ${color}88)` }
+          }
+        )
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: {
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 0
+      }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontSize: 52, fontWeight: 900, color: "#f1f5fd", lineHeight: 1 }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CountUp, { to: pct, suffix: "%" }) }) })
+    ] });
+  }
+  function Confetti() {
+    const pieces = (0, import_react.useMemo)(() => Array.from({ length: 60 }, (_, i) => ({
+      left: Math.random() * 100,
+      delay: Math.random() * 1.6,
+      dur: 2.4 + Math.random() * 2.2,
+      color: ["#818cf8", "#38bdf8", "#34d399", "#fbbf24", "#f472b6", "#c084fc"][i % 6],
+      w: 6 + Math.random() * 7
+    })), []);
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: pieces.map((p, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "confetti-piece", style: {
+      left: `${p.left}vw`,
+      background: p.color,
+      width: p.w,
+      height: p.w * 1.4,
+      animationDuration: `${p.dur}s`,
+      animationDelay: `${p.delay}s`
+    } }, i)) });
+  }
   function App() {
     const [screen, setScreen] = (0, import_react.useState)("home");
     const [filter, setFilter] = (0, import_react.useState)("mid1");
@@ -22292,422 +22624,480 @@ button{font-family:inherit}
         pct: Math.round(s.correct / s.total * 100)
       }));
     }, [questions, answers]);
+    const shell = (children) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.page, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CssInjector, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Aurora, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.container, children })
+    ] });
     if (screen === "home") {
       const allSelected = selectedLectures.size >= allLectures.length;
       const canStart = effectivePool.length > 0 && selectedLectures.size > 0;
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.page, children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.container, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { textAlign: "center", marginBottom: 24 }, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.badge, children: "Pharmacology \u2014 PH45" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { style: S.title, children: "Test Bank" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: S.subtitle, children: "\u0628\u0646\u0643 \u0627\u0644\u0623\u0633\u0626\u0644\u0629" })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.aboutBox, children: [
+      const fillPct = maxCount > 1 ? (safeCount - 1) / (maxCount - 1) * 100 : 0;
+      return shell(
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "stagger", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { textAlign: "center", marginBottom: 28, paddingTop: 8 }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.badge, children: "\u{1F48A} Pharmacology \u2014 PH45" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { className: "shimmer-title", style: S.title, children: "Test Bank" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: S.subtitle, children: "\u0628\u0646\u0643 \u0627\u0644\u0623\u0633\u0626\u0644\u0629" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "glass", style: S.aboutBox, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
+              "button",
+              {
+                className: "btn-base",
+                style: S.aboutToggle,
+                onClick: () => setAboutOpen((v) => !v),
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "\u2139\uFE0F \u0639\u0646 \u0627\u0644\u0645\u0648\u0642\u0639" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontSize: 12, color: "var(--faint)", transition: "transform 0.3s cubic-bezier(0.34,1.56,0.64,1)", display: "inline-block", transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)" }, children: "\u25BC" })
+                ]
+              }
+            ),
+            aboutOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "anim-fadeUp", style: { marginTop: 14, borderTop: "1px solid var(--glass-border)", paddingTop: 14 }, dir: "rtl", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { margin: "0 0 12px", lineHeight: 1.9, color: "var(--muted)", fontSize: 13.5 }, children: "\u0627\u0644\u0645\u0648\u0642\u0639 \u0647\u0648 \u0627\u0644\u0646\u0633\u062E\u0629 \u0627\u0644\u0625\u0644\u0643\u062A\u0631\u0648\u0646\u064A\u0629 \u0645\u0646 \u062A\u064A\u0633\u062A \u0628\u0627\u0646\u0643 \u0627\u0644\u0641\u0627\u0631\u0645\u0627 \u0627\u0644\u0623\u0633\u0627\u0633\u064A \u2014 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0648\u0627\u0644\u062E\u064A\u0627\u0631\u0627\u062A \u0648\u0627\u0644\u0625\u062C\u0627\u0628\u0627\u062A \u0645\u0646\u0642\u0648\u0644\u0629 \u0645\u0646 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0623\u0635\u0644\u064A \u0645\u0639 \u062A\u0646\u0642\u064A\u062D \u0644\u0644\u0623\u062E\u0637\u0627\u0621 \u0627\u0644\u0645\u0637\u0628\u0639\u064A\u0629\u060C \u0625\u0636\u0627\u0641\u0629 \u0634\u0631\u0648\u062D\u0627\u062A \u0645\u0641\u0635\u0651\u0644\u0629 \u0645\u0646 \u0627\u0644\u0633\u0644\u0627\u064A\u062F\u0627\u062A \u0644\u0643\u0644 \u0633\u0624\u0627\u0644\u060C \u0648\u062A\u0646\u0638\u064A\u0645 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u062D\u0633\u0628 \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0629. \u0627\u0644\u0645\u0648\u0642\u0639 \u0648\u0645\u0644\u0641 \u0627\u0644\u062A\u064A\u0633\u062A \u0627\u0644\u0623\u0635\u0644\u064A \u2014 \u0648\u062C\u0647\u0627\u0646 \u0644\u0639\u0645\u0644\u0629 \u0648\u0627\u062D\u062F\u0629." }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 7 }, children: [
+                "\u0663\u0666\u0669 \u0633\u0624\u0627\u0644 \u2014 \u0645\u064A\u062F \u0661 \xB7 \u0645\u064A\u062F \u0662 \xB7 \u0641\u0627\u064A\u0646\u0644",
+                "\u0634\u0631\u062D \u0645\u0641\u0635\u0651\u0644 \u0644\u0643\u0644 \u0633\u0624\u0627\u0644 \u0645\u0646 \u0627\u0644\u0633\u0644\u0627\u064A\u062F\u0627\u062A",
+                "\u0627\u062E\u062A\u0628\u0627\u0631 \u0628\u0645\u062D\u0627\u0636\u0631\u0629 \u0648\u0627\u062D\u062F\u0629 \u0623\u0648 \u0623\u0643\u062B\u0631 \u0645\u0639 \u062A\u062D\u062F\u064A\u062F \u0639\u062F\u062F \u0627\u0644\u0623\u0633\u0626\u0644\u0629",
+                "\u062A\u0642\u064A\u064A\u0645 \u0627\u0644\u0623\u062F\u0627\u0621 \u0628\u0639\u062F \u0643\u0644 \u0627\u062E\u062A\u0628\u0627\u0631 \u0645\u0639 \u062A\u0641\u0635\u064A\u0644 \u0644\u0643\u0644 \u0645\u062D\u0627\u0636\u0631\u0629",
+                "\u062D\u0641\u0638 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0645\u0634\u0627\u0647\u062F\u0629 \u0644\u062A\u062C\u0646\u0628 \u0627\u0644\u062A\u0643\u0631\u0627\u0631",
+                "\u064A\u0639\u0645\u0644 \u0628\u062F\u0648\u0646 \u0625\u0646\u062A\u0631\u0646\u062A \u2014 \u0627\u062D\u0641\u0638 \u0627\u0644\u0635\u0641\u062D\u0629 \u0645\u0631\u0629 \u0648\u0627\u062D\u062F\u0629 \u0648\u0643\u0641\u0649"
+              ].map((f, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 9, alignItems: "flex-start" }, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "var(--accent2)", flexShrink: 0, fontSize: 13 }, children: "\u2726" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "var(--muted)", fontSize: 13, lineHeight: 1.7 }, children: f })
+              ] }, i)) })
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "glass", style: S.card, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.sectionLabel, children: "\u0627\u0644\u0642\u0633\u0645 / Section" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", gap: 9, flexWrap: "wrap" }, children: ["mid1", "mid2", "final", "all"].map((f) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
+              "button",
+              {
+                className: `tab-pill ${filter === f ? "tab-on" : ""}`,
+                style: { ...S.tabBtn, ...filter === f ? S.tabBtnActive : {} },
+                onClick: () => setFilter(f),
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontWeight: 800 }, children: SECTION_LABELS[f].ar }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { fontSize: 11, color: filter === f ? "#a5b4fc" : "var(--faint)" }, children: [
+                    getPool(f).length,
+                    "q"
+                  ] })
+                ]
+              },
+              f
+            )) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "glass", style: S.card, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 13 }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { ...S.sectionLabel, marginBottom: 0 }, children: "\u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A / Lectures" }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+                "button",
+                {
+                  className: "btn-base",
+                  style: S.smallBtn,
+                  onClick: () => setSelectedLectures(
+                    allSelected ? /* @__PURE__ */ new Set() : new Set(allLectures)
+                  ),
+                  children: allSelected ? "Deselect All" : "Select All"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, maxHeight: 215, overflowY: "auto", paddingBottom: 4 }, children: allLectures.map((lec) => {
+              const active = selectedLectures.has(lec);
+              return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
+                "button",
+                {
+                  className: `chip ${active ? "chip-on" : ""}`,
+                  style: { ...S.lecChip },
+                  onClick: () => toggleLecture(lec),
+                  children: [
+                    active ? "\u2713 " : "",
+                    lec
+                  ]
+                },
+                lec
+              );
+            }) }),
+            selectedLectures.size === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "anim-fadeUp", style: { color: "var(--bad)", fontSize: 12.5, marginTop: 10, fontWeight: 600 }, children: "\u26A0\uFE0F \u0627\u062E\u062A\u0631 \u0645\u062D\u0627\u0636\u0631\u0629 \u0648\u0627\u062D\u062F\u0629 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "glass", style: S.card, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.sectionLabel, children: "\u0627\u0644\u0625\u0639\u062F\u0627\u062F\u0627\u062A / Settings" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { marginBottom: 22 }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 8 }, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "var(--muted)", fontSize: 14 }, children: "\u0639\u062F\u062F \u0627\u0644\u0623\u0633\u0626\u0644\u0629" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: {
+                  fontWeight: 900,
+                  fontSize: 26,
+                  background: "linear-gradient(135deg, #818cf8, #38bdf8)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  WebkitTextFillColor: "transparent"
+                }, children: safeCount })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+                "input",
+                {
+                  type: "range",
+                  className: "lux-slider",
+                  min: 1,
+                  max: maxCount || 1,
+                  value: safeCount,
+                  onChange: (e) => setQuestionCount(Number(e.target.value)),
+                  style: { width: "100%", cursor: "pointer", ["--fill"]: `${fillPct}%` },
+                  disabled: maxCount === 0
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--faint)", marginTop: 6 }, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "1" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { color: "var(--muted)" }, children: [
+                  effectivePool.length,
+                  " \u0645\u062A\u0627\u062D",
+                  hideSeen && ` (${unseenPool.length} \u063A\u064A\u0631 \u0645\u0634\u0627\u0647\u062F)`
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: maxCount || 0 })
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { color: "var(--txt)", fontSize: 14, marginBottom: 2, fontWeight: 600 }, children: "\u0625\u062E\u0641\u0627\u0621 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0645\u0634\u0627\u0647\u062F\u0629" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { color: "var(--faint)", fontSize: 12 }, children: [
+                  "Skip questions already seen",
+                  seenIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { color: "var(--muted)" }, children: [
+                    " (",
+                    seenIds.size,
+                    " seen \xB7 "
+                  ] }),
+                  seenIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+                    "button",
+                    {
+                      style: { background: "none", border: "none", color: "var(--bad)", fontSize: 12, cursor: "pointer", padding: 0, fontFamily: "inherit" },
+                      onClick: () => {
+                        setSeenIds(/* @__PURE__ */ new Set());
+                        saveSeen(/* @__PURE__ */ new Set());
+                      },
+                      children: "reset"
+                    }
+                  ),
+                  seenIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "var(--muted)" }, children: ")" })
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+                "div",
+                {
+                  style: { ...S.toggle, ...hideSeen ? S.toggleOn : {} },
+                  onClick: () => setHideSeen((v) => !v),
+                  children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { ...S.toggleThumb, ...hideSeen ? S.toggleThumbOn : {} } })
+                }
+              )
+            ] })
+          ] }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
             "button",
             {
-              style: S.aboutToggle,
-              onClick: () => setAboutOpen((v) => !v),
+              className: "start-cta",
+              style: { ...S.startBtn, opacity: canStart ? 1 : 0.4 },
+              onClick: startQuiz,
+              disabled: !canStart,
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "\u2139\uFE0F \u0639\u0646 \u0627\u0644\u0645\u0648\u0642\u0639" }),
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontSize: 12, color: "#475569", transition: "transform 0.2s", display: "inline-block", transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)" }, children: "\u25BC" })
-              ]
-            }
-          ),
-          aboutOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { marginTop: 12, borderTop: "1px solid #334155", paddingTop: 12 }, dir: "rtl", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { margin: "0 0 10px", lineHeight: 1.8, color: "#94a3b8", fontSize: 13 }, children: "\u0627\u0644\u0645\u0648\u0642\u0639 \u0647\u0648 \u0627\u0644\u0646\u0633\u062E\u0629 \u0627\u0644\u0625\u0644\u0643\u062A\u0631\u0648\u0646\u064A\u0629 \u0645\u0646 \u062A\u064A\u0633\u062A \u0628\u0627\u0646\u0643 \u0627\u0644\u0641\u0627\u0631\u0645\u0627 \u0627\u0644\u0623\u0633\u0627\u0633\u064A \u2014 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0648\u0627\u0644\u062E\u064A\u0627\u0631\u0627\u062A \u0648\u0627\u0644\u0625\u062C\u0627\u0628\u0627\u062A \u0645\u0646\u0642\u0648\u0644\u0629 \u0645\u0646 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0623\u0635\u0644\u064A \u0645\u0639 \u062A\u0646\u0642\u064A\u062D \u0644\u0644\u0623\u062E\u0637\u0627\u0621 \u0627\u0644\u0645\u0637\u0628\u0639\u064A\u0629\u060C \u0625\u0636\u0627\u0641\u0629 \u0634\u0631\u0648\u062D\u0627\u062A \u0645\u0641\u0635\u0651\u0644\u0629 \u0645\u0646 \u0627\u0644\u0633\u0644\u0627\u064A\u062F\u0627\u062A \u0644\u0643\u0644 \u0633\u0624\u0627\u0644\u060C \u0648\u062A\u0646\u0638\u064A\u0645 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u062D\u0633\u0628 \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0629. \u0627\u0644\u0645\u0648\u0642\u0639 \u0648\u0645\u0644\u0641 \u0627\u0644\u062A\u064A\u0633\u062A \u0627\u0644\u0623\u0635\u0644\u064A \u2014 \u0648\u062C\u0647\u0627\u0646 \u0644\u0639\u0645\u0644\u0629 \u0648\u0627\u062D\u062F\u0629." }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: [
-              "\u0663\u0666\u0669 \u0633\u0624\u0627\u0644 \u2014 \u0645\u064A\u062F \u0661 \xB7 \u0645\u064A\u062F \u0662 \xB7 \u0641\u0627\u064A\u0646\u0644",
-              "\u0634\u0631\u062D \u0645\u0641\u0635\u0651\u0644 \u0644\u0643\u0644 \u0633\u0624\u0627\u0644 \u0645\u0646 \u0627\u0644\u0633\u0644\u0627\u064A\u062F\u0627\u062A",
-              "\u0627\u062E\u062A\u0628\u0627\u0631 \u0628\u0645\u062D\u0627\u0636\u0631\u0629 \u0648\u0627\u062D\u062F\u0629 \u0623\u0648 \u0623\u0643\u062B\u0631 \u0645\u0639 \u062A\u062D\u062F\u064A\u062F \u0639\u062F\u062F \u0627\u0644\u0623\u0633\u0626\u0644\u0629",
-              "\u062A\u0642\u064A\u064A\u0645 \u0627\u0644\u0623\u062F\u0627\u0621 \u0628\u0639\u062F \u0643\u0644 \u0627\u062E\u062A\u0628\u0627\u0631 \u0645\u0639 \u062A\u0641\u0635\u064A\u0644 \u0644\u0643\u0644 \u0645\u062D\u0627\u0636\u0631\u0629",
-              "\u062D\u0641\u0638 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0645\u0634\u0627\u0647\u062F\u0629 \u0644\u062A\u062C\u0646\u0628 \u0627\u0644\u062A\u0643\u0631\u0627\u0631",
-              "\u064A\u0639\u0645\u0644 \u0628\u062F\u0648\u0646 \u0625\u0646\u062A\u0631\u0646\u062A \u2014 \u0627\u062D\u0641\u0638 \u0627\u0644\u0635\u0641\u062D\u0629 \u0645\u0631\u0629 \u0648\u0627\u062D\u062F\u0629 \u0648\u0643\u0641\u0649"
-            ].map((f, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 8, alignItems: "flex-start" }, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#3b82f6", flexShrink: 0, fontSize: 13 }, children: "\u2713" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#64748b", fontSize: 13, lineHeight: 1.6 }, children: f })
-            ] }, i)) })
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.card, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.sectionLabel, children: "\u0627\u0644\u0642\u0633\u0645 / Section" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", gap: 8, flexWrap: "wrap" }, children: ["mid1", "mid2", "final", "all"].map((f) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
-            "button",
-            {
-              style: { ...S.tabBtn, ...filter === f ? S.tabBtnActive : {} },
-              onClick: () => setFilter(f),
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontWeight: 700 }, children: SECTION_LABELS[f].ar }),
-                /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { fontSize: 11, color: filter === f ? "#93c5fd" : "#475569" }, children: [
-                  getPool(f).length,
-                  "q"
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontSize: 20, fontWeight: 900, position: "relative", zIndex: 1 }, children: "\u0627\u0628\u062F\u0623 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631 \u{1F680}" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { fontSize: 13, color: "#dbe6ff", position: "relative", zIndex: 1 }, children: [
+                  safeCount,
+                  " questions \xB7 ",
+                  selectedLectures.size,
+                  " lecture",
+                  selectedLectures.size !== 1 ? "s" : ""
                 ] })
               ]
-            },
-            f
-          )) })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.card, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.sectionLabel, children: "\u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A / Lectures" }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-              "button",
-              {
-                style: S.smallBtn,
-                onClick: () => setSelectedLectures(
-                  allSelected ? /* @__PURE__ */ new Set() : new Set(allLectures)
-                ),
-                children: allSelected ? "Deselect All" : "Select All"
-              }
-            )
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexWrap: "wrap", gap: 7, maxHeight: 210, overflowY: "auto", paddingBottom: 4 }, children: allLectures.map((lec) => {
-            const active = selectedLectures.has(lec);
-            return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
-              "button",
-              {
-                style: { ...S.lecChip, ...active ? S.lecChipActive : {} },
-                onClick: () => toggleLecture(lec),
-                children: [
-                  active ? "\u2713 " : "",
-                  lec
-                ]
-              },
-              lec
-            );
-          }) }),
-          selectedLectures.size === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { color: "#f87171", fontSize: 12, marginTop: 8 }, children: "\u26A0\uFE0F \u0627\u062E\u062A\u0631 \u0645\u062D\u0627\u0636\u0631\u0629 \u0648\u0627\u062D\u062F\u0629 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644" })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.card, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.sectionLabel, children: "\u0627\u0644\u0625\u0639\u062F\u0627\u062F\u0627\u062A / Settings" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { marginBottom: 20 }, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 6 }, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#94a3b8", fontSize: 14 }, children: "\u0639\u062F\u062F \u0627\u0644\u0623\u0633\u0626\u0644\u0629" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#60a5fa", fontWeight: 800, fontSize: 22 }, children: safeCount })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-              "input",
-              {
-                type: "range",
-                min: 1,
-                max: maxCount || 1,
-                value: safeCount,
-                onChange: (e) => setQuestionCount(Number(e.target.value)),
-                style: { width: "100%", accentColor: "#3b82f6", cursor: "pointer" },
-                disabled: maxCount === 0
-              }
-            ),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 11, color: "#475569", marginTop: 4 }, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "1" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { color: "#64748b" }, children: [
-                effectivePool.length,
-                " \u0645\u062A\u0627\u062D",
-                hideSeen && ` (${unseenPool.length} \u063A\u064A\u0631 \u0645\u0634\u0627\u0647\u062F)`
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: maxCount || 0 })
-            ] })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { color: "#e2e8f0", fontSize: 14, marginBottom: 2 }, children: "\u0625\u062E\u0641\u0627\u0621 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0645\u0634\u0627\u0647\u062F\u0629" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { color: "#475569", fontSize: 12 }, children: [
-                "Skip questions already seen",
-                seenIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { color: "#64748b" }, children: [
-                  " (",
-                  seenIds.size,
-                  " seen \xB7 "
-                ] }),
-                seenIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-                  "button",
-                  {
-                    style: { background: "none", border: "none", color: "#f87171", fontSize: 12, cursor: "pointer", padding: 0 },
-                    onClick: () => {
-                      setSeenIds(/* @__PURE__ */ new Set());
-                      saveSeen(/* @__PURE__ */ new Set());
-                    },
-                    children: "reset"
-                  }
-                ),
-                seenIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#64748b" }, children: ")" })
-              ] })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-              "div",
-              {
-                style: { ...S.toggle, ...hideSeen ? S.toggleOn : {} },
-                onClick: () => setHideSeen((v) => !v),
-                children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { ...S.toggleThumb, ...hideSeen ? S.toggleThumbOn : {} } })
-              }
-            )
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
-          "button",
-          {
-            style: { ...S.startBtn, opacity: canStart ? 1 : 0.4 },
-            onClick: startQuiz,
-            disabled: !canStart,
-            children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontSize: 19, fontWeight: 800 }, children: "\u0627\u0628\u062F\u0623 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { fontSize: 13, color: "#bfdbfe" }, children: [
-                safeCount,
-                " questions \xB7 ",
-                selectedLectures.size,
-                " lecture",
-                selectedLectures.size !== 1 ? "s" : ""
-              ] })
-            ]
-          }
-        )
-      ] }) });
+            }
+          )
+        ] })
+      );
     }
     if (screen === "quiz") {
       const q = questions[current];
       const isAnswered = selected !== null;
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.page, children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.container, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.quizHeader, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { style: S.backBtn, onClick: () => setScreen("home"), children: "\u2190 Home" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: S.sectionTag, children: SECTION_LABELS[activeFilter].en })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.progressWrap, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.progressBar, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { ...S.progressFill, width: `${(current + 1) / questions.length * 100}%` } }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: S.progressText, children: [
-            current + 1,
-            " / ",
-            questions.length
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.card, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.lectureBadge, children: q.lecture }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: S.questionText, dir: "ltr", children: q.q }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 10 }, children: q.options.map((opt, i) => {
-            let bg = "transparent";
-            let border = "1.5px solid #334155";
-            let color = "#e2e8f0";
-            if (isAnswered) {
-              if (i === q.answer) {
-                bg = "#14532d44";
-                border = "1.5px solid #22c55e";
-                color = "#86efac";
-              } else if (i === selected && i !== q.answer) {
-                bg = "#7f1d1d44";
-                border = "1.5px solid #ef4444";
-                color = "#fca5a5";
+      return shell(
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "anim-fadeUp", style: S.quizHeader, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { className: "btn-base", style: S.backBtn, onClick: () => setScreen("home"), children: "\u2190 Home" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: S.sectionTag, children: SECTION_LABELS[activeFilter].en })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "anim-fadeUp", style: S.progressWrap, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.progressBar, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "prog-fill", style: { ...S.progressFill, width: `${(current + 1) / questions.length * 100}%` } }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: S.progressText, children: [
+              current + 1,
+              " / ",
+              questions.length
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "glass anim-fadeUp", style: S.card, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.lectureBadge, children: q.lecture }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: S.questionText, dir: "ltr", children: q.q }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 11 }, children: q.options.map((opt, i) => {
+              let bg = "rgba(148,163,255,0.03)";
+              let border = "1.5px solid rgba(148,163,255,0.15)";
+              let color = "var(--txt)";
+              let cls = "opt";
+              let letterBg = "rgba(148,163,255,0.08)";
+              let letterColor = "var(--muted)";
+              if (isAnswered) {
+                cls += " opt-locked";
+                if (i === q.answer) {
+                  bg = "rgba(52,211,153,0.1)";
+                  border = "1.5px solid rgba(52,211,153,0.65)";
+                  color = "#a7f3d0";
+                  letterBg = "rgba(52,211,153,0.2)";
+                  letterColor = "#6ee7b7";
+                  cls += " opt-correct";
+                } else if (i === selected && i !== q.answer) {
+                  bg = "rgba(251,113,133,0.1)";
+                  border = "1.5px solid rgba(251,113,133,0.65)";
+                  color = "#fecdd3";
+                  letterBg = "rgba(251,113,133,0.2)";
+                  letterColor = "#fda4af";
+                  cls += " opt-wrong";
+                }
               }
-            }
-            return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
-              "button",
-              {
-                style: { ...S.optionBtn, background: bg, border, color },
-                onClick: () => handleSelect(i),
-                disabled: isAnswered,
-                dir: "ltr",
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: S.optionLetter, children: OPTION_LETTERS[i] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: stripHint(opt) })
-                ]
-              },
-              i
-            );
-          }) }),
-          isAnswered && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.explanationBox, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.explanationLabel, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Explanation" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#94a3b8", fontSize: 13 }, children: "\u0627\u0644\u0634\u0631\u062D" })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { margin: 0, lineHeight: 1.7, color: "#bfdbfe" }, dir: "ltr", children: q.explanation || "\u2014" })
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.navRow, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-            "button",
-            {
-              style: { ...S.navBtn, opacity: current === 0 ? 0.35 : 1 },
-              onClick: handlePrev,
-              disabled: current === 0,
-              children: "\u2190 Prev"
-            }
-          ),
-          isAnswered && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { style: { ...S.navBtn, ...S.navBtnPrimary }, onClick: handleNext, children: current + 1 === questions.length ? "Finish \u2713" : "Next \u2192" })
-        ] })
-      ] }) });
-    }
-    if (screen === "score") {
-      const grade = pct >= 90 ? { label: "Excellent!", emoji: "\u{1F3C6}", color: "#22c55e" } : pct >= 75 ? { label: "Good", emoji: "\u{1F44D}", color: "#3b82f6" } : pct >= 60 ? { label: "Pass", emoji: "\u2713", color: "#f59e0b" } : { label: "Try Again", emoji: "\u{1F4DA}", color: "#ef4444" };
-      const weakLectures = [...lectureStats].sort((a, b) => a.pct - b.pct).filter((s) => s.pct < 60).slice(0, 3);
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.page, children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.container, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { ...S.card, textAlign: "center" }, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { fontSize: 52, marginBottom: 4 }, children: grade.emoji }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { style: { margin: "0 0 2px", color: grade.color, fontSize: 26 }, children: grade.label }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { color: "#64748b", margin: "0 0 18px", fontSize: 13 }, children: SECTION_LABELS[activeFilter].en }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.scoreBig, children: [
-            pct,
-            "%"
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { style: { color: "#94a3b8", margin: "4px 0 18px" }, children: [
-            score,
-            " / ",
-            questions.length,
-            " correct"
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { background: "#0f172a", borderRadius: 8, height: 10, marginBottom: 24, overflow: "hidden" }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { width: `${pct}%`, height: "100%", background: grade.color, borderRadius: 8, transition: "width 0.6s ease" } }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { style: S.actionBtn, onClick: startQuiz, children: "Retry" }),
-            wrongQuestions.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
-              "button",
-              {
-                style: { ...S.actionBtn, background: "#1e40af" },
-                onClick: () => {
-                  setReviewIndex(0);
-                  setScreen("review");
+              return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
+                "button",
+                {
+                  className: cls,
+                  style: { ...S.optionBtn, background: bg, border, color },
+                  onClick: () => handleSelect(i),
+                  disabled: isAnswered,
+                  dir: "ltr",
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { ...S.optionLetter, background: letterBg, color: letterColor }, children: OPTION_LETTERS[i] }),
+                    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: stripHint(opt) })
+                  ]
                 },
-                children: [
-                  "Review Wrong (",
-                  wrongQuestions.length,
-                  ")"
-                ]
+                i
+              );
+            }) }),
+            isAnswered && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "expl-box", style: S.explanationBox, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.explanationLabel, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "\u{1F4A1} Explanation" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "var(--muted)", fontSize: 13 }, children: "\u0627\u0644\u0634\u0631\u062D" })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { margin: 0, lineHeight: 1.75, color: "#c7d6f8" }, dir: "ltr", children: q.explanation || "\u2014" })
+            ] })
+          ] }, current),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.navRow, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+              "button",
+              {
+                className: "btn-base",
+                style: { ...S.navBtn, opacity: current === 0 ? 0.35 : 1 },
+                onClick: handlePrev,
+                disabled: current === 0,
+                children: "\u2190 Prev"
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { style: { ...S.actionBtn, background: "#1e293b" }, onClick: () => setScreen("home"), children: "Home" })
+            isAnswered && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { className: "btn-base anim-pop", style: { ...S.navBtn, ...S.navBtnPrimary }, onClick: handleNext, children: current + 1 === questions.length ? "Finish \u2713" : "Next \u2192" })
           ] })
-        ] }),
-        lectureStats.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.card, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.sectionLabel, children: "\u062A\u0641\u0635\u064A\u0644 \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A / Lecture Breakdown" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 12 }, children: lectureStats.map(({ lec, correct, total, pct: lPct }) => {
-            const barColor = lPct >= 75 ? "#22c55e" : lPct >= 50 ? "#f59e0b" : "#ef4444";
-            return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "space-between", marginBottom: 5, gap: 8 }, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontSize: 13, color: "#cbd5e1", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }, children: lec }),
-                /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { fontSize: 13, fontWeight: 700, color: barColor, flexShrink: 0 }, children: [
-                  correct,
-                  "/",
-                  total,
-                  " \xB7 ",
-                  lPct,
-                  "%"
-                ] })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { background: "#0f172a", borderRadius: 4, height: 6, overflow: "hidden" }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { width: `${lPct}%`, height: "100%", background: barColor, borderRadius: 4 } }) })
-            ] }, lec);
-          }) })
-        ] }),
-        weakLectures.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { ...S.card, background: "#160a0a", border: "1.5px solid #7f1d1d" }, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { ...S.sectionLabel, color: "#f87171" }, children: "\u26A0\uFE0F \u062A\u062D\u062A\u0627\u062C \u0645\u0631\u0627\u062C\u0639\u0629 / Needs Review" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: weakLectures.map((w) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { color: "#fca5a5", fontSize: 13 }, children: [
-            "\u2022 ",
-            w.lec,
-            " \u2014 ",
-            w.correct,
-            "/",
-            w.total,
-            " (",
-            w.pct,
-            "%)"
-          ] }, w.lec)) })
         ] })
-      ] }) });
+      );
+    }
+    if (screen === "score") {
+      const grade = pct >= 90 ? { label: "Excellent!", emoji: "\u{1F3C6}", color: "#34d399" } : pct >= 75 ? { label: "Good", emoji: "\u{1F44D}", color: "#38bdf8" } : pct >= 60 ? { label: "Pass", emoji: "\u2713", color: "#fbbf24" } : { label: "Try Again", emoji: "\u{1F4DA}", color: "#fb7185" };
+      const weakLectures = [...lectureStats].sort((a, b) => a.pct - b.pct).filter((s) => s.pct < 60).slice(0, 3);
+      return shell(
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "stagger", children: [
+          pct >= 90 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Confetti, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "glass", style: { ...S.card, textAlign: "center", paddingTop: 28, paddingBottom: 28 }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "anim-pop", style: { fontSize: 50, marginBottom: 2 }, children: grade.emoji }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { style: { margin: "0 0 2px", color: grade.color, fontSize: 27, fontWeight: 900 }, children: grade.label }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { color: "var(--faint)", margin: "0 0 20px", fontSize: 13 }, children: SECTION_LABELS[activeFilter].en }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScoreRing, { pct, color: grade.color }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { style: { color: "var(--muted)", margin: "14px 0 22px", fontSize: 15 }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { style: { color: grade.color }, children: score }),
+              " / ",
+              questions.length,
+              " correct"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { className: "btn-base", style: S.actionBtn, onClick: startQuiz, children: "\u{1F504} Retry" }),
+              wrongQuestions.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
+                "button",
+                {
+                  className: "btn-base",
+                  style: { ...S.actionBtn, background: "linear-gradient(135deg, rgba(251,113,133,0.85), rgba(225,29,72,0.85))" },
+                  onClick: () => {
+                    setReviewIndex(0);
+                    setScreen("review");
+                  },
+                  children: [
+                    "Review Wrong (",
+                    wrongQuestions.length,
+                    ")"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { className: "btn-base", style: { ...S.actionBtn, background: "rgba(148,163,255,0.1)", border: "1px solid var(--glass-border)" }, onClick: () => setScreen("home"), children: "Home" })
+            ] })
+          ] }),
+          lectureStats.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "glass", style: S.card, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.sectionLabel, children: "\u062A\u0641\u0635\u064A\u0644 \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A / Lecture Breakdown" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 13 }, children: lectureStats.map(({ lec, correct, total, pct: lPct }, idx) => {
+              const barColor = lPct >= 75 ? "#34d399" : lPct >= 50 ? "#fbbf24" : "#fb7185";
+              return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "space-between", marginBottom: 6, gap: 8 }, children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { fontSize: 13, color: "#cbd6ee", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }, children: lec }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: { fontSize: 13, fontWeight: 800, color: barColor, flexShrink: 0 }, children: [
+                    correct,
+                    "/",
+                    total,
+                    " \xB7 ",
+                    lPct,
+                    "%"
+                  ] })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { background: "rgba(148,163,255,0.08)", borderRadius: 999, height: 7, overflow: "hidden" }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bar-anim", style: {
+                  width: `${lPct}%`,
+                  height: "100%",
+                  background: `linear-gradient(90deg, ${barColor}cc, ${barColor})`,
+                  borderRadius: 999,
+                  boxShadow: `0 0 8px ${barColor}66`,
+                  animationDelay: `${0.15 + idx * 0.08}s`
+                } }) })
+              ] }, lec);
+            }) })
+          ] }),
+          weakLectures.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "glass", style: { ...S.card, background: "rgba(251,113,133,0.05)", border: "1px solid rgba(251,113,133,0.3)" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { ...S.sectionLabel, color: "#fda4af" }, children: "\u26A0\uFE0F \u062A\u062D\u062A\u0627\u062C \u0645\u0631\u0627\u062C\u0639\u0629 / Needs Review" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 7 }, children: weakLectures.map((w) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { color: "#fecdd3", fontSize: 13 }, children: [
+              "\u2022 ",
+              w.lec,
+              " \u2014 ",
+              w.correct,
+              "/",
+              w.total,
+              " (",
+              w.pct,
+              "%)"
+            ] }, w.lec)) })
+          ] })
+        ] })
+      );
     }
     if (screen === "review") {
       const q = wrongQuestions[reviewIndex];
       const userAnswer = answers[questions.indexOf(q)];
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.page, children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.container, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.quizHeader, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { style: S.backBtn, onClick: () => setScreen("score"), children: "\u2190 Score" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: S.sectionTag, children: "Review Wrong Answers" })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.progressWrap, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.progressBar, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { ...S.progressFill, width: `${(reviewIndex + 1) / wrongQuestions.length * 100}%`, background: "#ef4444" } }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: S.progressText, children: [
-            reviewIndex + 1,
-            " / ",
-            wrongQuestions.length
+      return shell(
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "anim-fadeUp", style: S.quizHeader, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", { className: "btn-base", style: S.backBtn, onClick: () => setScreen("score"), children: "\u2190 Score" }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { ...S.sectionTag, color: "#fda4af", background: "rgba(251,113,133,0.12)" }, children: "Review Wrong Answers" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "anim-fadeUp", style: S.progressWrap, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.progressBar, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: {
+              ...S.progressFill,
+              width: `${(reviewIndex + 1) / wrongQuestions.length * 100}%`,
+              background: "linear-gradient(90deg, #fb7185, #f43f5e)",
+              boxShadow: "0 0 12px rgba(251,113,133,0.5)",
+              transition: "width 0.45s cubic-bezier(0.22,1,0.36,1)"
+            } }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { style: S.progressText, children: [
+              reviewIndex + 1,
+              " / ",
+              wrongQuestions.length
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "glass anim-fadeUp", style: S.card, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.lectureBadge, children: q.lecture }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: S.questionText, dir: "ltr", children: q.q }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 11 }, children: q.options.map((opt, i) => {
+              let bg = "rgba(148,163,255,0.03)";
+              let border = "1.5px solid rgba(148,163,255,0.15)";
+              let color = "var(--txt)";
+              let letterBg = "rgba(148,163,255,0.08)";
+              let letterColor = "var(--muted)";
+              if (i === q.answer) {
+                bg = "rgba(52,211,153,0.1)";
+                border = "1.5px solid rgba(52,211,153,0.65)";
+                color = "#a7f3d0";
+                letterBg = "rgba(52,211,153,0.2)";
+                letterColor = "#6ee7b7";
+              } else if (i === userAnswer && i !== q.answer) {
+                bg = "rgba(251,113,133,0.1)";
+                border = "1.5px solid rgba(251,113,133,0.65)";
+                color = "#fecdd3";
+                letterBg = "rgba(251,113,133,0.2)";
+                letterColor = "#fda4af";
+              }
+              return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "opt opt-locked", style: { ...S.optionBtn, background: bg, border, color, cursor: "default" }, dir: "ltr", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { ...S.optionLetter, background: letterBg, color: letterColor }, children: OPTION_LETTERS[i] }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: stripHint(opt) })
+              ] }, i);
+            }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "expl-box", style: S.explanationBox, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.explanationLabel, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "\u{1F4A1} Explanation" }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "var(--muted)", fontSize: 13 }, children: "\u0627\u0644\u0634\u0631\u062D" })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { margin: 0, lineHeight: 1.75, color: "#c7d6f8" }, dir: "ltr", children: q.explanation || "\u2014" })
+            ] })
+          ] }, reviewIndex),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.navRow, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+              "button",
+              {
+                className: "btn-base",
+                style: { ...S.navBtn, opacity: reviewIndex === 0 ? 0.35 : 1 },
+                onClick: () => setReviewIndex((i) => i - 1),
+                disabled: reviewIndex === 0,
+                children: "\u2190 Prev"
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+              "button",
+              {
+                className: "btn-base",
+                style: { ...S.navBtn, opacity: reviewIndex + 1 >= wrongQuestions.length ? 0.35 : 1 },
+                onClick: () => setReviewIndex((i) => i + 1),
+                disabled: reviewIndex + 1 >= wrongQuestions.length,
+                children: "Next \u2192"
+              }
+            )
           ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.card, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: S.lectureBadge, children: q.lecture }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: S.questionText, dir: "ltr", children: q.q }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: 10 }, children: q.options.map((opt, i) => {
-            let bg = "transparent";
-            let border = "1.5px solid #334155";
-            let color = "#e2e8f0";
-            if (i === q.answer) {
-              bg = "#14532d44";
-              border = "1.5px solid #22c55e";
-              color = "#86efac";
-            } else if (i === userAnswer && i !== q.answer) {
-              bg = "#7f1d1d44";
-              border = "1.5px solid #ef4444";
-              color = "#fca5a5";
-            }
-            return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { ...S.optionBtn, background: bg, border, color }, dir: "ltr", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: S.optionLetter, children: OPTION_LETTERS[i] }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: stripHint(opt) })
-            ] }, i);
-          }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.explanationBox, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.explanationLabel, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Explanation" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#94a3b8", fontSize: 13 }, children: "\u0627\u0644\u0634\u0631\u062D" })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { margin: 0, lineHeight: 1.7, color: "#bfdbfe" }, dir: "ltr", children: q.explanation || "\u2014" })
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: S.navRow, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-            "button",
-            {
-              style: { ...S.navBtn, opacity: reviewIndex === 0 ? 0.35 : 1 },
-              onClick: () => setReviewIndex((i) => i - 1),
-              disabled: reviewIndex === 0,
-              children: "\u2190 Prev"
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-            "button",
-            {
-              style: { ...S.navBtn, opacity: reviewIndex + 1 >= wrongQuestions.length ? 0.35 : 1 },
-              onClick: () => setReviewIndex((i) => i + 1),
-              disabled: reviewIndex + 1 >= wrongQuestions.length,
-              children: "Next \u2192"
-            }
-          )
         ] })
-      ] }) });
+      );
     }
     return null;
   }
   var S = {
     page: {
       minHeight: "100vh",
-      background: "#0f172a",
-      color: "#e2e8f0",
-      fontFamily: "'Segoe UI', system-ui, sans-serif",
-      padding: "24px 16px 48px"
+      background: "radial-gradient(ellipse at 20% -10%, #131a36 0%, #060913 55%), #060913",
+      color: "var(--txt)",
+      fontFamily: "'Cairo', 'Segoe UI', system-ui, sans-serif",
+      padding: "28px 16px 56px",
+      position: "relative"
     },
-    container: { maxWidth: 720, margin: "0 auto" },
+    container: { maxWidth: 720, margin: "0 auto", position: "relative", zIndex: 1 },
     badge: {
       display: "inline-block",
-      background: "#1e3a5f",
-      color: "#60a5fa",
+      background: "rgba(99,102,241,0.14)",
+      color: "#a5b4fc",
+      border: "1px solid rgba(129,140,248,0.3)",
       borderRadius: 999,
-      padding: "4px 14px",
+      padding: "5px 16px",
       fontSize: 13,
-      fontWeight: 600,
+      fontWeight: 700,
       letterSpacing: 0.5,
-      marginBottom: 12
-    },
-    title: { margin: 0, fontSize: 36, fontWeight: 800, color: "#f1f5f9" },
-    subtitle: { margin: "6px 0 0", fontSize: 16, color: "#94a3b8" },
-    aboutBox: {
-      background: "#1e293b",
-      borderRadius: 12,
-      padding: "12px 16px",
       marginBottom: 14,
-      border: "1px solid #334155"
+      boxShadow: "0 0 18px rgba(99,102,241,0.15)"
+    },
+    title: { margin: 0, fontSize: 42, fontWeight: 900, letterSpacing: -0.5 },
+    subtitle: { margin: "6px 0 0", fontSize: 16, color: "var(--muted)" },
+    aboutBox: {
+      padding: "13px 18px",
+      marginBottom: 14
     },
     aboutToggle: {
       background: "none",
       border: "none",
-      color: "#64748b",
+      color: "var(--muted)",
       cursor: "pointer",
       display: "flex",
       alignItems: "center",
@@ -22715,107 +23105,105 @@ button{font-family:inherit}
       width: "100%",
       padding: 0,
       fontSize: 14,
-      fontWeight: 600
+      fontWeight: 700
     },
     card: {
-      background: "#1e293b",
-      borderRadius: 16,
-      padding: "18px 20px",
+      padding: "20px 22px",
       marginBottom: 14
     },
     sectionLabel: {
-      fontSize: 12,
-      fontWeight: 700,
-      color: "#64748b",
+      fontSize: 11.5,
+      fontWeight: 800,
+      color: "var(--faint)",
       textTransform: "uppercase",
-      letterSpacing: 0.8,
-      marginBottom: 12
+      letterSpacing: 1.2,
+      marginBottom: 13
     },
     /* Section tabs */
     tabBtn: {
-      background: "#0f172a",
-      border: "1.5px solid #334155",
-      borderRadius: 10,
-      padding: "10px 14px",
+      background: "rgba(148,163,255,0.04)",
+      border: "1.5px solid rgba(148,163,255,0.14)",
+      borderRadius: 13,
+      padding: "11px 14px",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       gap: 2,
-      color: "#94a3b8",
+      color: "var(--muted)",
       cursor: "pointer",
       flex: 1,
-      minWidth: 60,
-      fontSize: 15
+      minWidth: 62,
+      fontSize: 15,
+      fontFamily: "inherit"
     },
     tabBtnActive: {
-      background: "#172554",
-      border: "1.5px solid #3b82f6",
-      color: "#93c5fd"
+      color: "#c7d2fe"
     },
     /* Lecture chips */
     lecChip: {
-      background: "#0f172a",
-      border: "1.5px solid #334155",
-      borderRadius: 8,
-      padding: "6px 11px",
+      background: "rgba(148,163,255,0.04)",
+      border: "1.5px solid rgba(148,163,255,0.14)",
+      borderRadius: 999,
+      padding: "7px 13px",
       fontSize: 12,
-      color: "#64748b",
+      color: "var(--muted)",
       cursor: "pointer",
-      whiteSpace: "nowrap"
-    },
-    lecChipActive: {
-      background: "#172554",
-      border: "1.5px solid #3b82f6",
-      color: "#93c5fd"
+      whiteSpace: "nowrap",
+      fontFamily: "inherit",
+      fontWeight: 600
     },
     smallBtn: {
-      background: "transparent",
-      border: "1px solid #334155",
-      borderRadius: 6,
-      padding: "4px 10px",
+      background: "rgba(148,163,255,0.05)",
+      border: "1px solid rgba(148,163,255,0.18)",
+      borderRadius: 8,
+      padding: "5px 12px",
       fontSize: 12,
-      color: "#94a3b8",
-      cursor: "pointer"
+      color: "var(--muted)",
+      cursor: "pointer",
+      fontFamily: "inherit",
+      fontWeight: 600
     },
     /* Toggle */
     toggle: {
-      width: 44,
-      height: 24,
-      borderRadius: 12,
-      background: "#334155",
+      width: 46,
+      height: 26,
+      borderRadius: 999,
+      background: "rgba(148,163,255,0.14)",
       cursor: "pointer",
       position: "relative",
-      transition: "background 0.2s",
+      transition: "all 0.25s cubic-bezier(0.22,1,0.36,1)",
       display: "inline-block",
       flexShrink: 0
     },
-    toggleOn: { background: "#2563eb" },
+    toggleOn: {
+      background: "linear-gradient(135deg, #6366f1, #38bdf8)",
+      boxShadow: "0 0 14px rgba(99,102,241,0.45)"
+    },
     toggleThumb: {
       position: "absolute",
       top: 3,
       left: 3,
-      width: 18,
-      height: 18,
-      borderRadius: 9,
-      background: "#64748b",
-      transition: "left 0.2s, background 0.2s"
+      width: 20,
+      height: 20,
+      borderRadius: 999,
+      background: "#8b96b8",
+      transition: "all 0.25s cubic-bezier(0.34,1.56,0.64,1)"
     },
-    toggleThumbOn: { left: 23, background: "#fff" },
+    toggleThumbOn: { left: 23, background: "#fff", boxShadow: "0 1px 6px rgba(0,0,0,0.35)" },
     /* Start button */
     startBtn: {
       width: "100%",
-      background: "linear-gradient(135deg, #1d4ed8, #2563eb)",
       border: "none",
-      borderRadius: 14,
-      padding: "18px 24px",
+      borderRadius: 18,
+      padding: "19px 24px",
       color: "#fff",
       cursor: "pointer",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       gap: 5,
-      marginTop: 4,
-      transition: "opacity 0.15s"
+      marginTop: 6,
+      fontFamily: "inherit"
     },
     /* Quiz */
     quizHeader: {
@@ -22825,100 +23213,111 @@ button{font-family:inherit}
       marginBottom: 16
     },
     backBtn: {
-      background: "transparent",
-      border: "1px solid #334155",
-      color: "#94a3b8",
-      borderRadius: 8,
-      padding: "6px 14px",
+      background: "rgba(148,163,255,0.05)",
+      border: "1px solid rgba(148,163,255,0.18)",
+      color: "var(--muted)",
+      borderRadius: 10,
+      padding: "7px 15px",
       cursor: "pointer",
-      fontSize: 13
+      fontSize: 13,
+      fontFamily: "inherit",
+      fontWeight: 600
     },
     sectionTag: {
       fontSize: 13,
-      color: "#60a5fa",
-      background: "#172554",
-      padding: "4px 12px",
-      borderRadius: 999
+      color: "#a5b4fc",
+      fontWeight: 700,
+      background: "rgba(99,102,241,0.14)",
+      padding: "5px 14px",
+      borderRadius: 999,
+      border: "1px solid rgba(129,140,248,0.25)"
     },
     progressWrap: { display: "flex", alignItems: "center", gap: 10, marginBottom: 18 },
-    progressBar: { flex: 1, height: 6, background: "#1e293b", borderRadius: 999, overflow: "hidden" },
-    progressFill: { height: "100%", background: "#3b82f6", borderRadius: 999, transition: "width 0.3s ease" },
-    progressText: { fontSize: 13, color: "#64748b", whiteSpace: "nowrap" },
+    progressBar: { flex: 1, height: 7, background: "rgba(148,163,255,0.1)", borderRadius: 999, overflow: "hidden" },
+    progressFill: { height: "100%", borderRadius: 999 },
+    progressText: { fontSize: 13, color: "var(--faint)", whiteSpace: "nowrap", fontWeight: 700 },
     lectureBadge: {
       display: "inline-block",
       fontSize: 11,
-      background: "#0f172a",
+      background: "rgba(56,189,248,0.1)",
       color: "#7dd3fc",
-      borderRadius: 6,
-      padding: "3px 10px",
-      marginBottom: 14,
-      fontWeight: 600,
+      border: "1px solid rgba(56,189,248,0.22)",
+      borderRadius: 999,
+      padding: "4px 12px",
+      marginBottom: 15,
+      fontWeight: 700,
       letterSpacing: 0.3
     },
-    questionText: { fontSize: 17, lineHeight: 1.65, color: "#f1f5f9", margin: "0 0 20px" },
+    questionText: { fontSize: 17, lineHeight: 1.7, color: "#f1f5fd", margin: "0 0 20px", fontWeight: 600 },
     optionBtn: {
       display: "flex",
       alignItems: "center",
-      gap: 12,
-      padding: "12px 16px",
-      borderRadius: 10,
+      gap: 13,
+      padding: "13px 16px",
+      borderRadius: 14,
       cursor: "pointer",
       fontSize: 15,
       textAlign: "left",
       width: "100%",
-      transition: "background 0.15s"
+      fontFamily: "inherit"
     },
     optionLetter: {
-      minWidth: 28,
-      height: 28,
-      background: "#0f172a",
-      borderRadius: 6,
+      minWidth: 30,
+      height: 30,
+      borderRadius: 9,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      fontWeight: 700,
+      fontWeight: 800,
       fontSize: 13,
-      color: "#94a3b8",
       flexShrink: 0
     },
     explanationBox: {
       marginTop: 20,
-      background: "#172554",
-      border: "1.5px solid #1d4ed8",
-      borderRadius: 12,
-      padding: "14px 18px"
+      background: "rgba(99,102,241,0.08)",
+      border: "1px solid rgba(129,140,248,0.3)",
+      borderRadius: 16,
+      padding: "15px 19px",
+      backdropFilter: "blur(8px)"
     },
     explanationLabel: {
       display: "flex",
       justifyContent: "space-between",
-      marginBottom: 8,
-      fontWeight: 700,
+      marginBottom: 9,
+      fontWeight: 800,
       fontSize: 14,
-      color: "#93c5fd"
+      color: "#a5b4fc"
     },
     navRow: { display: "flex", justifyContent: "space-between", gap: 10 },
     navBtn: {
-      background: "#1e293b",
-      border: "1px solid #334155",
-      color: "#e2e8f0",
-      borderRadius: 10,
-      padding: "10px 22px",
-      cursor: "pointer",
-      fontSize: 14,
-      fontWeight: 600
-    },
-    navBtnPrimary: { background: "#1d4ed8", border: "1px solid #2563eb", color: "#fff" },
-    /* Score */
-    scoreBig: { fontSize: 72, fontWeight: 900, color: "#f1f5f9", lineHeight: 1, marginBottom: 4 },
-    actionBtn: {
-      background: "#1d4ed8",
-      border: "none",
-      color: "#fff",
-      borderRadius: 10,
+      background: "rgba(148,163,255,0.06)",
+      border: "1px solid rgba(148,163,255,0.18)",
+      color: "var(--txt)",
+      borderRadius: 12,
       padding: "11px 24px",
       cursor: "pointer",
+      fontSize: 14,
+      fontWeight: 700,
+      fontFamily: "inherit"
+    },
+    navBtnPrimary: {
+      background: "linear-gradient(135deg, #6366f1, #0ea5e9)",
+      border: "1px solid rgba(129,140,248,0.4)",
+      color: "#fff",
+      boxShadow: "0 0 18px rgba(99,102,241,0.35)"
+    },
+    /* Score */
+    actionBtn: {
+      background: "linear-gradient(135deg, #6366f1, #4f46e5)",
+      border: "none",
+      color: "#fff",
+      borderRadius: 12,
+      padding: "12px 24px",
+      cursor: "pointer",
       fontSize: 15,
-      fontWeight: 600
+      fontWeight: 700,
+      fontFamily: "inherit",
+      boxShadow: "0 4px 16px rgba(79,70,229,0.3)"
     }
   };
 
