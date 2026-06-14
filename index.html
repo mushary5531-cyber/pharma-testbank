@@ -4,6 +4,14 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Pharmacology PH45 — Test Bank</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1T3RGFJWMQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1T3RGFJWMQ', { send_page_view: true });
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;padding:0;background:#060913;}
@@ -22723,6 +22731,17 @@ input[type="range"].lux-slider::-moz-range-thumb {
     (0, import_react.useEffect)(() => {
       setSelectedLectures(new Set(getLectures(getPool(filter))));
     }, [filter]);
+    const _gaFirstRender = (0, import_react.useRef)(true);
+    (0, import_react.useEffect)(() => {
+      if (_gaFirstRender.current) { _gaFirstRender.current = false; return; }
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "page_view", {
+          page_title: screen.charAt(0).toUpperCase() + screen.slice(1) + " — Pharmacology PH45 Test Bank",
+          page_path: "/" + screen,
+          send_to: "G-1T3RGFJWMQ"
+        });
+      }
+    }, [screen]);
     const filteredPool = (0, import_react.useMemo)(() => {
       if (selectedLectures.size === 0) return [];
       const pool = getPool(filter);

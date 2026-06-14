@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 
 type ExamType = "mid1" | "mid2" | "final";
 type Filter = "all" | "mid1" | "mid2" | "final";
@@ -1010,6 +1010,19 @@ export default function App() {
   useEffect(() => {
     setSelectedLectures(new Set(getLectures(getPool(filter))));
   }, [filter]);
+
+  // GA4 virtual page view tracking for SPA navigation
+  const _gaFirstRender = useRef(true);
+  useEffect(() => {
+    if (_gaFirstRender.current) { _gaFirstRender.current = false; return; }
+    if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "page_view", {
+        page_title: `${screen.charAt(0).toUpperCase() + screen.slice(1)} — Pharmacology PH45 Test Bank`,
+        page_path: `/${screen}`,
+        send_to: "G-1T3RGFJWMQ",
+      });
+    }
+  }, [screen]);
 
   const filteredPool = useMemo(() => {
     if (selectedLectures.size === 0) return [];
