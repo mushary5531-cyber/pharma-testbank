@@ -1046,7 +1046,7 @@ export default function App() {
     return pool;
   }, [hideSeen, unseenPool, filteredPool, strictMode, filter]);
 
-  const maxCount = Math.min(effectivePool.length, 100);
+  const maxCount = effectivePool.length;
   const safeCount = Math.min(questionCount, Math.max(1, maxCount));
 
   /* Actions */
