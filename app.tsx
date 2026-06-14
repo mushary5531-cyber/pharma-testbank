@@ -980,6 +980,9 @@ function Confetti() {
   );
 }
 
+/* ── Curriculum-confirmed Final exam question IDs (verified against lecture slides) ── */
+const CONFIRMED_FINAL_IDS = new Set(["final1","final2","final3","final4","final5","final6","final7","final8","final9","final11","final12","final13","final14","final15","final16","final17","final18","final19","final20","final22","final24","final25","final26","final27","final28","final29","final30","final31","final32","final33","final34","final35","final36","final37","final38","final39","final40","final41","final42","final43","final44","final45","final46","final47","final48","final49","final50","final51","final53","final54","final55","final57","final58","final59","final60","final61","final62","final63","final64","final65","final66","final67","final68","final69","final70","final71","final72","final73","final74","final75","final76","final77","final78","final79","final80","final81","final82","final83","final84","final85","final86","final87","final88","final89","final90","final91","final92","final93","final94","final95","final96","final97","final98","final99","final100","final101","final102","final103","final104","final105","final106","final107","final108","final109","final110","final111","final112","final113","final114","final115","final116","final117","final118","final119","final120","final121","final122","final123","final124","final125","final126","final127","final128","final129","final130","final131","final132","final133","final134","final135","final136","final137","final138","final139","final140","final141","final143","final144","final145","final146","final148","final149","final150","final151","final152","final153","final154","final155","final156","final157","final158","final159","final160","final161","final163","final165","final166","final167","final168","final169","final170","final171","final172","final173","final175","final176","final177","final178","final179","final180","final181","final182","final183","final184","final185","final186","final187","final188","final189","final190","final193","final194","final196","final198","final199","final200","final201","final202","final203","final204","final205","final206","final208","final209","final210","final211","final212","final214","final215","final216","final217","final218","final220","final221","final222","final223","final224","final225","final226","final227","final228","final230","final231","final232","final233","final235","final236","final237","final238","final239","final240","final242","final243","final244","final245","final246","final247","final248","final249","final250","final251","final252","final253","final254","final255","final256","final257","final258","final259","final260","final261","final262","final263","final264","final265","final266","final267","final268","final269","final270","final271","final272","final274","final275","final276","final277","final278","final279","final280","final282","final283","final284","final286","final287","final288","final289","final290","final291","final293","final294","final295","final296","final297","final299","final300","final301","final302","final303","final304","final305","final306","final308","final309","final310","final311","final312"]);
+
 /* ── App ── */
 export default function App() {
   /* Screen */
@@ -990,6 +993,7 @@ export default function App() {
   const [selectedLectures, setSelectedLectures] = useState<Set<string>>(new Set());
   const [questionCount, setQuestionCount] = useState(20);
   const [hideSeen, setHideSeen] = useState(false);
+  const [strictMode, setStrictMode] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
 
   /* Quiz state */
@@ -1036,10 +1040,11 @@ export default function App() {
     [filteredPool, seenIds]
   );
 
-  const effectivePool = useMemo(
-    () => (hideSeen && unseenPool.length > 0 ? unseenPool : filteredPool),
-    [hideSeen, unseenPool, filteredPool]
-  );
+  const effectivePool = useMemo(() => {
+    let pool = hideSeen && unseenPool.length > 0 ? unseenPool : filteredPool;
+    if (strictMode && filter === "final") pool = pool.filter(q => CONFIRMED_FINAL_IDS.has(q.id));
+    return pool;
+  }, [hideSeen, unseenPool, filteredPool, strictMode, filter]);
 
   const maxCount = Math.min(effectivePool.length, 100);
   const safeCount = Math.min(questionCount, Math.max(1, maxCount));
